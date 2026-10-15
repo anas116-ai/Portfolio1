@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V7 Hero Exact — Mock Replica</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070807;color:#F4F5EF;font-family:Outfit,'Segoe UI',system-ui,sans-serif}
+.hero{position:relative;min-height:100vh;overflow:hidden}
+.photo{position:absolute;inset:0}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:center 58%}
+.shade{position:absolute;inset:0;background:
+linear-gradient(180deg,rgba(7,8,7,.88) 0%,rgba(7,8,7,.55) 30%,rgba(7,8,7,.08) 55%,transparent 70%),
+linear-gradient(0deg,rgba(7,8,7,.35) 0%,transparent 25%)}
+#fx{position:absolute;inset:0}
+nav{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:18px 44px;font-size:13px}
+nav b{letter-spacing:.24em}.links{display:flex;gap:28px;color:#d8d8d8}
+.grid{position:relative;z-index:3;display:grid;grid-template-columns:1.12fr .88fr;gap:16px;max-width:1360px;margin:5vh auto 0;padding:0 44px;align-items:end}
+.eyebrow{font-family:monospace;font-size:11px;letter-spacing:.3em;color:#C5AA7A}
+h1{margin-top:20px;font-size:clamp(54px,7.4vw,118px);font-weight:800;letter-spacing:.045em;line-height:.95;color:#D9FF00;text-shadow:0 3px 24px rgba(0,0,0,.75)}
+.rule{margin-top:20px;display:flex;gap:10px;align-items:center;font-size:15px;font-weight:600}
+.rule::before{content:'';width:24px;height:2px;background:#D9FF00}
+.desc{margin-top:16px;color:#D5D6D0;font-size:14.5px;line-height:1.8;max-width:56ch;text-shadow:0 1px 10px #000}
+.cta{margin-top:24px;display:flex;gap:12px}
+.cta button{border-radius:6px;padding:12px 22px;font-size:12.5px;font-weight:600;background:rgba(10,10,10,.55);border:1px solid rgba(217,255,0,.5);color:#fff;backdrop-filter:blur(8px)}
+.avail{margin-top:24px;font-size:12.5px;color:#e2e2e2;text-shadow:0 1px 8px #000}.avail b{color:#E8FF45}
+.stage{position:relative;height:560px}
+.man{position:absolute;right:14%;bottom:0;width:230px;height:470px;background:linear-gradient(#33465e,#151b24 70%);border-radius:115px 115px 22px 22px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.man::before{content:'';position:absolute;top:30px;left:50%;transform:translateX(-50%);width:110px;height:130px;background:linear-gradient(#cf9a72,#9c6647);border-radius:55px}
+.lap{position:absolute;right:22%;bottom:215px;width:145px;height:92px;background:#0d1117;border:1px solid rgba(244,245,239,.3);border-radius:6px;transform:rotate(-8deg)}
+.badge{position:absolute;font-family:monospace;font-size:10px;letter-spacing:.1em;border:1px solid rgba(217,255,0,.45);padding:5px 10px;border-radius:6px;color:#d8d8d8;background:rgba(7,8,7,.72)}
+.hud{position:fixed;left:16px;bottom:14px;z-index:9;font-family:monospace;font-size:11px;color:#9a9a9a;background:rgba(0,0,0,.6);padding:6px 10px;border-radius:3px}
+@media(max-width:900px){.grid{grid-template-columns:1fr;padding:0 20px}.stage{height:360px}.man{height:300px;width:165px}}
+</style></head>
+<body>
+<div class="hero">
+<div class="photo"><img src="./assets/ref-dandelion.png"></div>
+<div class="shade"></div>
+<canvas id="fx"></canvas>
+<nav><b><span style="color:#D9FF00">●</span> MASTAN VALI</b><div class="links"><span>About</span><span>Experience</span><span>Disciplines</span><span>Work</span><span>Contact</span></div></nav>
+<div class="grid"><div>
+<div class="eyebrow">— // PORTFOLIO · ENTERPRISE DATA · PRODUCTS</div>
+<h1>MASTAN VALI</h1>
+<div class="rule">Data & Technology Professional</div>
+<p class="desc">Experienced in SAP BODS development, ETL processes, and enterprise production support, with a portfolio of digital applications spanning pharmacy management, workflow automation, and AI-powered document verification, built using LLMs and AI coding agents.</p>
+<div class="cta"><button>Explore Work ↓</button><button>Contact Me</button></div>
+<div class="avail">Immediate joiner&nbsp;&nbsp;/&nbsp;&nbsp;Open to relocation&nbsp;&nbsp;/&nbsp;&nbsp;<b>● Available for hire</b></div>
+</div><div class="stage"><div class="man"></div><div class="lap"></div>
+<div class="badge" style="left:2%;top:44%">SAP BODS</div><div class="badge" style="right:2%;top:24%">RAG</div></div></div>
+</div>
+<div class="hud">V7 HERO-EXACT · full-photo composite · mock replica</div>
+<script>
+const c=document.getElementById('fx'),x=c.getContext('2d');let W,H;function rs(){W=c.width=innerWidth;H=c.height=innerHeight*.999}rs();addEventListener('resize',rs);
+function hair(px,py,r,rot,col,a){x.save();x.globalAlpha=Math.max(0,Math.min(1,a));x.translate(px,py);x.rotate(rot);x.lineWidth=.8;
+for(let k=0;k<15;k++){const an=(k/14-.5)*2.35,len=r*(2.1+Math.sin(k*2.3)*.35);x.strokeStyle=col.replace('A',(0.45+0.5*Math.abs(Math.sin(k*1.7+rot))).toFixed(2)+')');
+x.beginPath();x.moveTo(0,0);x.quadraticCurveTo(Math.sin(an)*len*.55,-len*.6,Math.sin(an)*len,-len);x.stroke();}
+x.strokeStyle='rgba(196,158,108,.95)';x.beginPath();x.moveTo(0,0);x.lineTo(1.5,r*2.6);x.stroke();x.restore();}
+const COLS=['rgba(255,255,255,A)','rgba(243,183,205,A)','rgba(214,178,106,A)'];
+const S=Array.from({length:42},()=>({x:Math.random(),y:Math.random(),r:4+Math.random()*7,rot:Math.random()*7,ph:Math.random()*7,col:COLS[Math.floor(Math.random()*3)]}));
+const F=Array.from({length:16},()=>({x:Math.random(),y:.4+Math.random()*.55,ph:Math.random()*10,sp:.4+Math.random()*.8,col:[[255,240,170],[255,200,120],[210,255,160],[255,190,210]][Math.floor(Math.random()*4)]}));
+let t=0;(function loop(){t+=.016;x.clearRect(0,0,W,H);
+for(const s of S){s.y-=.0009;if(s.y<-.05){s.y=1.04;s.x=Math.random();}s.rot+=.004;
+hair(s.x*W+Math.sin(t+s.ph)*40,s.y*H,s.r,s.rot,s.col,.42+.4*Math.abs(Math.sin(t+s.ph)));}
+for(const f of F){const px=f.x*W+Math.sin(t*.5+f.ph)*22,py=f.y*H;
+const gl=.3+.32*(.5+.5*Math.sin(t*f.sp+f.ph));
+const g=x.createRadialGradient(px,py,0,px,py,9);g.addColorStop(0,`rgba(${f.col[0]},${f.col[1]},${f.col[2]},${(.8*gl).toFixed(2)})`);g.addColorStop(1,'rgba(0,0,0,0)');
+x.fillStyle=g;x.beginPath();x.arc(px,py,9,0,7);x.fill();}
+requestAnimationFrame(loop)})();</script></body></html>

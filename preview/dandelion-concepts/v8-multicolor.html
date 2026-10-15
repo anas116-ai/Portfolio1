@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V8 Multicolor Dandelion — Twinkle Sparks + Few Fireflies</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070807;color:#F4F5EF;font-family:Outfit,'Segoe UI',system-ui,sans-serif}
+.hero{position:relative;min-height:100vh;overflow:hidden}
+.photo{position:absolute;inset:0}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:center 58%}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,8,7,.9) 0%,rgba(7,8,7,.55) 32%,rgba(7,8,7,.1) 58%,transparent 72%)}
+.poolB{position:absolute;left:-6%;top:6%;width:44vw;height:60vh;background:radial-gradient(ellipse,rgba(80,140,255,.12),transparent 70%)}
+.poolV{position:absolute;right:-4%;top:22%;width:40vw;height:56vh;background:radial-gradient(ellipse,rgba(150,100,255,.12),transparent 70%)}
+.poolM{position:absolute;left:30%;bottom:0;width:44vw;height:40vh;background:radial-gradient(ellipse,rgba(255,110,190,.07),transparent 70%)}
+#fx{position:absolute;inset:0}
+nav{position:relative;z-index:3;display:flex;justify-content:space-between;padding:18px 44px;font-size:13px}
+nav b{letter-spacing:.24em}.links{display:flex;gap:28px;color:#d8d8d8}
+.grid{position:relative;z-index:3;display:grid;grid-template-columns:1.12fr .88fr;max-width:1360px;margin:5vh auto 0;padding:0 44px;align-items:end}
+.eyebrow{font-family:monospace;font-size:11px;letter-spacing:.3em;color:#C5AA7A}
+h1{margin-top:20px;font-size:clamp(54px,7.4vw,118px);font-weight:800;letter-spacing:.045em;line-height:.95;color:#D9FF00;text-shadow:0 3px 24px rgba(0,0,0,.75)}
+.rule{margin-top:20px;display:flex;gap:10px;align-items:center;font-size:15px;font-weight:600}
+.rule::before{content:'';width:24px;height:2px;background:#D9FF00}
+.desc{margin-top:16px;color:#D5D6D0;font-size:14.5px;line-height:1.8;max-width:56ch}
+.cta{margin-top:24px;display:flex;gap:12px}
+.cta button{border-radius:6px;padding:12px 22px;font-size:12.5px;background:rgba(10,10,10,.55);border:1px solid rgba(217,255,0,.5);color:#fff}
+.avail{margin-top:24px;font-size:12.5px}.avail b{color:#E8FF45}
+.stage{position:relative;height:560px}
+.man{position:absolute;right:14%;bottom:0;width:230px;height:470px;background:linear-gradient(#33465e,#151b24 70%);border-radius:115px 115px 22px 22px}
+.hud{position:fixed;left:16px;bottom:14px;z-index:9;font-family:monospace;font-size:11px;color:#9a9a9a;background:rgba(0,0,0,.6);padding:6px 10px;border-radius:3px}
+@media(max-width:900px){.grid{grid-template-columns:1fr;padding:0 20px}.stage{height:360px}}
+</style></head>
+<body>
+<div class="hero">
+<div class="photo"><img src="./assets/ref-dandelion.png"></div>
+<div class="shade"></div><div class="poolB"></div><div class="poolV"></div><div class="poolM"></div>
+<canvas id="fx"></canvas>
+<nav><b><span style="color:#D9FF00">●</span> MASTAN VALI</b><div class="links"><span>About</span><span>Work</span><span>Contact</span></div></nav>
+<div class="grid"><div>
+<div class="eyebrow">— // V8 MULTICOLOR — attached refs inside</div>
+<h1>MASTAN VALI</h1>
+<div class="rule">Data & Technology Professional</div>
+<p class="desc">White + pink + gold + ice-blue + violet seeds · twinkle sparks · few realistic fireflies. Blue/violet/magenta light pools like your refs.</p>
+<div class="cta"><button>Explore Work ↓</button><button>Contact Me</button></div>
+<div class="avail">Immediate joiner / Open to relocation / <b>● Available for hire</b></div>
+</div><div class="stage"><div class="man"></div></div></div>
+</div>
+<div class="hud">V8 · 5 seed colors · sparks · 9 fireflies · blue/violet pools</div>
+<script>
+const c=document.getElementById('fx'),x=c.getContext('2d');let W,H;function rs(){W=c.width=innerWidth;H=c.height=innerHeight}rs();addEventListener('resize',rs);
+// detailed seed: white umbrella + long thin stem + golden-brown seed (ref img 4)
+function seed(px,py,r,rot,col,a,fl){x.save();x.globalAlpha=Math.max(0,Math.min(1,a));x.translate(px,py);x.rotate(rot);x.lineWidth=.75;
+const N=15+fl;for(let k=0;k<N;k++){const an=(k/(N-1)-.5)*2.3,len=r*(2.2+Math.sin(k*2.3)*.3);
+x.strokeStyle=col.replace('A',(0.4+0.55*Math.abs(Math.sin(k*1.7+rot))).toFixed(2)+')');
+x.beginPath();x.moveTo(0,0);x.quadraticCurveTo(Math.sin(an)*len*.55,-len*.62,Math.sin(an)*len,-len);x.stroke();
+x.strokeStyle=col.replace('A','0.45)');x.beginPath();x.moveTo(Math.sin(an)*len,-len);x.lineTo(Math.sin(an)*len-1.3,-len-1.5);x.moveTo(Math.sin(an)*len,-len);x.lineTo(Math.sin(an)*len+1.3,-len-1.5);x.stroke();}
+x.strokeStyle='rgba(196,158,108,.95)';x.lineWidth=1;x.beginPath();x.moveTo(0,0);x.lineTo(1.5,r*3.1);x.stroke();
+x.fillStyle='rgba(150,100,55,.95)';x.beginPath();x.ellipse(1.5,r*3.4,1.3,3,0,0,7);x.fill();x.restore();}
+const COLS=['rgba(255,255,255,A)','rgba(243,183,205,A)','rgba(214,178,106,A)','rgba(170,210,255,A)','rgba(200,170,255,A)'];
+const S=Array.from({length:40},()=>({x:Math.random(),y:Math.random(),r:4+Math.random()*7,rot:Math.random()*7,ph:Math.random()*7,fl:Math.floor(Math.random()*6),col:COLS[Math.floor(Math.random()*5)],dep:.35+Math.random()*.65}));
+// twinkle sparks: star glints, brief flare, mostly invisible (ref img 3)
+const K=Array.from({length:26},()=>({x:Math.random(),y:Math.random()*.8,ph:Math.random()*10,sp:1+Math.random()*2,col:['255,255,255','243,183,205','170,210,255','214,178,106'][Math.floor(Math.random()*4)]}));
+// few realistic fireflies: 9 only, tiny, slow, soft
+const F=Array.from({length:9},()=>({x:Math.random(),y:.45+Math.random()*.5,ph:Math.random()*10,sp:.35+Math.random()*.5,col:[[255,240,170],[255,200,120],[210,255,160],[255,190,210],[170,210,255]][Math.floor(Math.random()*5)]}));
+let t=0;(function loop(){t+=.016;x.clearRect(0,0,W,H);
+for(const s of S){s.y-=.0009;if(s.y<-.05){s.y=1.04;s.x=Math.random();}s.rot+=.004;
+seed(s.x*W+Math.sin(t+s.ph)*40*s.dep,s.y*H,s.r,s.rot,s.col,(.4+.42*Math.abs(Math.sin(t+s.ph)))*(.5+.5*s.dep),s.fl);}
+for(const k of K){const b=Math.pow(Math.max(0,Math.sin(t*k.sp+k.ph)),24);if(b<.02)continue;
+const px=k.x*W,py=k.y*H;x.save();x.globalAlpha=Math.min(1,b*1.4);
+x.strokeStyle=`rgba(${k.col},.9)`;x.lineWidth=1;const L=3+b*7;
+x.beginPath();x.moveTo(px-L,py);x.lineTo(px+L,py);x.moveTo(px,py-L);x.lineTo(px,py+L);x.stroke();
+x.fillStyle=`rgba(255,255,255,${Math.min(1,b+.3)})`;x.beginPath();x.arc(px,py,1.2,0,7);x.fill();x.restore();}
+for(const f of F){const px=f.x*W+Math.sin(t*.45+f.ph)*20,py=f.y*H+Math.cos(t*.4+f.ph)*16;
+const gl=.28+.3*(.5+.5*Math.sin(t*f.sp+f.ph));
+const g=x.createRadialGradient(px,py,0,px,py,8);g.addColorStop(0,`rgba(${f.col[0]},${f.col[1]},${f.col[2]},${(.8*gl).toFixed(2)})`);g.addColorStop(1,'rgba(0,0,0,0)');
+x.fillStyle=g;x.beginPath();x.arc(px,py,8,0,7);x.fill();
+x.fillStyle=`rgba(255,255,250,${(.45+.5*gl).toFixed(2)})`;x.beginPath();x.arc(px,py,.9,0,7);x.fill();}
+requestAnimationFrame(loop)})();</script></body></html>

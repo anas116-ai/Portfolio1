@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V3-C Full Page — Cinematic Dim Real Meadow</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:#070807;color:#F4F5EF;font-family:Outfit,'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
+.fixed-bg{position:fixed;inset:-3%;z-index:0;transform-origin:50% 100%;animation:breathe 14s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:scale(1) translate(0,0)}to{transform:scale(1.024) translate(6px,-8px)}}
+.fixed-bg img{width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:brightness(.6) saturate(.9) contrast(1.04)}
+.scrim{position:fixed;inset:0;z-index:1;background:radial-gradient(95% 72% at 50% 40%,transparent 42%,rgba(7,8,7,.6) 100%),linear-gradient(180deg,rgba(7,8,7,.5),rgba(7,8,7,.35) 40%,rgba(7,8,7,.55))}
+#seeds,#flies{position:fixed;inset:0;z-index:2;pointer-events:none}#flies{z-index:3}
+.content{position:relative;z-index:5}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;padding:16px 44px;font-size:12px;letter-spacing:.22em;background:rgba(7,8,7,.7);border-bottom:1px solid rgba(244,245,239,.1);backdrop-filter:blur(24px)}
+section{max-width:1020px;margin:0 auto;padding:76px 28px}
+.hero{max-width:780px;margin:0 auto;text-align:center;padding:120px 26px 80px}
+.pill{display:inline-block;font-family:monospace;font-size:11px;letter-spacing:.22em;color:#E8FF45;border:1px solid rgba(217,255,0,.4);padding:9px 18px;border-radius:100px;background:rgba(7,8,7,.6)}
+h1{margin-top:22px;font-size:clamp(44px,6.8vw,84px);font-weight:280;letter-spacing:-.035em;line-height:1;text-shadow:0 4px 44px #000}
+h1 b{font-weight:650;color:#D9FF00}
+.sub{margin:20px auto 0;max-width:54ch;color:#d9dad4;font-size:15.5px;line-height:1.8;text-shadow:0 2px 16px #000}
+.cta{margin-top:30px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.b1{background:#D9FF00;border:0;border-radius:3px;padding:15px 34px;font-weight:800;font-size:12px;letter-spacing:.12em}
+.b2{border:1px solid rgba(244,245,239,.25);color:#fff;background:rgba(7,8,7,.55);border-radius:3px;padding:15px 34px;font-size:12px;backdrop-filter:blur(20px)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.card{background:rgba(18,22,17,.62);border:1px solid rgba(244,245,239,.11);border-radius:20px;padding:26px;backdrop-filter:blur(54px)}
+.card small{font-family:monospace;font-size:10px;letter-spacing:.2em;color:#C5AA7A}
+.card h3{margin-top:10px;font-size:19px}.card p{margin-top:10px;font-size:13.5px;color:#B6B9B0;line-height:1.7}
+h2{font-size:clamp(26px,3.4vw,40px);font-weight:550;text-shadow:0 2px 24px #000}
+.eyebrow{font-family:monospace;font-size:11px;letter-spacing:.22em;color:#C5AA7A;margin-bottom:12px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+footer{border-top:1px solid rgba(244,245,239,.1);background:rgba(7,8,7,.82);text-align:center;padding:60px 24px;color:#B6B9B0;font-size:13px}
+.tag{position:fixed;left:18px;bottom:14px;z-index:9;font-family:monospace;font-size:11px;letter-spacing:.18em;background:rgba(0,0,0,.55);padding:6px 10px;border-radius:3px;color:#B6B9B0}
+@media(max-width:860px){.grid3,.row{grid-template-columns:1fr}}
+</style></head>
+<body>
+<div class="fixed-bg"><img src="./assets/ref-dandelion.png"></div>
+<div class="scrim"></div><canvas id="seeds"></canvas><canvas id="flies"></canvas>
+<div class="content">
+<nav><b>MASTAN VALI</b><div>WORK&nbsp;&nbsp;ABOUT&nbsp;&nbsp;CONTACT</div></nav>
+<div class="hero">
+<div class="pill">V3-C FULL PAGE — CINEMATIC DIM · CALMEST</div>
+<h1>Float softly.<br><b>Shine luxury.</b></h1>
+<p class="sub">Same real meadow dimmed for zero disturbance. Meadow sways 14s. 56 glowing pappus + 26 fireflies with trails and bokeh. Scroll full page — background stays fixed like a living wallpaper.</p>
+<div class="cta"><button class="b1">VIEW SELECTED WORK</button><button class="b2">GET IN TOUCH</button></div>
+</div>
+<section><div class="eyebrow">// 01 — CAPABILITIES</div><h2>Readable over living seeds.</h2>
+<div class="grid3"><div class="card"><small>DATA</small><h3>SAP + S3 pipelines</h3><p>Cards at 0.62 tint + 54px blur, seeds pass behind.</p></div><div class="card"><small>AGENTS</small><h3>LLM orchestration</h3><p>Firefly glow refracts softly, never competes.</p></div><div class="card"><small>UI</small><h3>Obsidian glass</h3><p>One lemon accent, bone text, AA contrast held.</p></div></div></section>
+<section><div class="eyebrow">// 02 — EXPERIENCE</div><h2>Enterprise proof.</h2>
+<div class="row"><div class="card"><small>VHS CONSULTING</small><h3>Data Engineer</h3><p>Production ETL, lakes, autonomous agents.</p></div><div class="card"><small>CONTACT</small><h3>Available for hire</h3><p>Immediate joiner, open to relocation.</p></div></div></section>
+<footer>Full page over one fixed real meadow · V3-C<br><br>© 2026 Mastan Vali</footer>
+</div>
+<div class="tag">V3-C FULL PAGE · SCROLL · MOUSE = BREEZE · CLICK = BURST</div>
+<script>
+const sc=document.getElementById('seeds'),sx=sc.getContext('2d');
+const fc=document.getElementById('flies'),fx=fc.getContext('2d');
+let W,H,mx=.5,gust=0;function rs(){W=sc.width=fc.width=innerWidth;H=sc.height=fc.height=innerHeight}rs();addEventListener('resize',rs);
+addEventListener('mousemove',e=>{mx=e.clientX/W;gust=Math.min(1,gust+.05)});
+addEventListener('click',e=>{for(let i=0;i<14;i++)spawn(true,e.clientX/W,e.clientY/H);gust=1;});
+const EMIT=[{x:.565,y:.5,pink:false},{x:.365,y:.3,pink:true},{x:.875,y:.42,gold:true},{x:.15,y:.35,pink:false}];
+const seeds=[];function spawn(b,bx,by){const e=b?{x:bx,y:by,pink:Math.random()<.3}:{...EMIT[Math.floor(Math.random()*EMIT.length)]};
+seeds.push({x:e.x+(Math.random()-.5)*.02,y:e.y,vy:-.0004-Math.random()*.001,vx:(Math.random()-.5)*.0005,r:2.6+Math.random()*3.6,rot:Math.random()*7,vr:(Math.random()-.5)*.025,ph:Math.random()*7,life:1,pink:!!e.pink,gold:!!e.gold});}
+for(let i=0;i<56;i++){spawn(false);seeds[i].x=Math.random();seeds[i].y=Math.random();}
+function drawSeed(px,py,r,rot,pink,gold,a){sx.save();sx.globalAlpha=a;sx.translate(px,py);sx.rotate(rot);
+const col=pink?'rgba(242,190,210,':gold?'rgba(228,190,100,':'rgba(255,255,255,';
+sx.strokeStyle=col+'0.92)';sx.lineWidth=1;const N=12;
+for(let k=0;k<N;k++){const an=(k/(N-1)-.5)*2.2;sx.beginPath();sx.moveTo(0,0);sx.quadraticCurveTo(Math.sin(an)*r*1.7,-r*1.2,Math.sin(an)*r*2.7,-r*2.2);sx.stroke();}
+sx.strokeStyle='rgba(146,106,62,.95)';sx.lineWidth=1.2;sx.beginPath();sx.moveTo(0,0);sx.lineTo(2,r*3.5);sx.stroke();
+sx.fillStyle='rgba(107,74,38,.95)';sx.beginPath();sx.ellipse(2,r*3.8,1.7,3.4,0,0,7);sx.fill();sx.restore();}
+const flies=Array.from({length:26},()=>({x:Math.random(),y:.35+Math.random()*.62,d:.3+Math.random()*.7,ph:Math.random()*10,sp:.5+Math.random()*1.5,wx:0,wy:0,px:0,py:0,f:true}));
+let t=0;(function loop(){t+=.016;gust*=.986;sx.clearRect(0,0,W,H);fx.clearRect(0,0,W,H);
+const br=(mx-.5)*140+gust*70;
+for(let i=seeds.length-1;i>=0;i--){const s=seeds[i];
+s.x+=s.vx+(mx-.5)*.0011+Math.sin(t+s.ph)*.0003;s.y+=s.vy;s.rot+=s.vr*.016;s.life-=.0001;
+if(s.y<-.06||s.life<=0){seeds.splice(i,1);spawn(false);continue;}
+drawSeed(s.x*W+Math.sin(t*1.1+s.ph)*52+br*s.y,s.y*H+Math.cos(t+s.ph)*12,s.r,s.rot,s.pink,s.gold,.5+.4*Math.abs(Math.sin(t*1.3+s.ph)));}
+for(const f of flies){f.wx+=(Math.random()-.5)*.022;f.wy+=(Math.random()-.5)*.022;f.wx*=.994;f.wy*=.994;
+f.x+=f.wx*.0016*f.d;f.y+=f.wy*.0012*f.d;if(f.x<0||f.x>1)f.wx*=-1;if(f.y<.3||f.y>1)f.wy*=-1;
+const px=f.x*W+Math.sin(t*.5+f.ph)*26,py=f.y*H+Math.cos(t*.4+f.ph)*20;
+const b=Math.min(1,Math.pow(Math.max(0,Math.sin(t*f.sp+f.ph)),14)+.6*Math.pow(Math.max(0,Math.sin(t*f.sp+f.ph+1.1)),18)+.04);
+const R=2.2+f.d*3.6;if(f.f){f.px=px;f.py=py;f.f=false;}
+fx.strokeStyle=`rgba(217,255,0,${.28*b})`;fx.beginPath();fx.moveTo(f.px,f.py);fx.lineTo(px,py);fx.stroke();f.px=px;f.py=py;
+const g=fx.createRadialGradient(px,py,0,px,py,R*9);g.addColorStop(0,`rgba(255,240,160,${.8*b})`);g.addColorStop(.3,`rgba(217,255,0,${.42*b})`);g.addColorStop(1,'rgba(217,255,0,0)');
+fx.fillStyle=g;fx.beginPath();fx.arc(px,py,R*9,0,7);fx.fill();
+if(f.d>.7){const bk=fx.createRadialGradient(px,py,0,px,py,R*17);bk.addColorStop(0,`rgba(217,255,0,${.12*b})`);bk.addColorStop(1,'transparent');fx.fillStyle=bk;fx.beginPath();fx.arc(px,py,R*17,0,7);fx.fill();}
+fx.fillStyle=`rgba(255,252,220,${.35+.65*b})`;fx.beginPath();fx.arc(px,py,1.1+f.d*1.2,0,7);fx.fill();}
+requestAnimationFrame(loop)})();</script></body></html>

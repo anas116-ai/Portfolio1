@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V2-B Split Luxury Real Dandelion</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070807;color:#F4F5EF;font-family:Outfit,'Segoe UI',system-ui,sans-serif;height:100vh;overflow:hidden}
+.wrap{display:grid;grid-template-columns:480px 1fr;height:100vh}
+.left{position:relative;z-index:3;background:rgba(7,8,7,.88);border-right:1px solid rgba(244,245,239,.1);padding:28px 40px;display:flex;flex-direction:column;justify-content:center}
+.right{position:relative;overflow:hidden}
+.right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%}
+.right::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,8,7,.85),transparent 22%),linear-gradient(0deg,rgba(7,8,7,.4),transparent 40%)}
+#fx{position:absolute;inset:0;pointer-events:none}
+.eyebrow{font-family:monospace;font-size:11px;letter-spacing:.24em;color:#C5AA7A}
+h1{margin-top:16px;font-size:clamp(38px,4vw,58px);font-weight:600;line-height:1.02;letter-spacing:-.03em}
+h1 span{color:#D9FF00}
+.sub{margin-top:16px;color:#B6B9B0;font-size:14px;line-height:1.75}
+.cta{margin-top:24px;display:flex;gap:10px}
+.b1{background:#D9FF00;border:0;border-radius:3px;padding:13px 24px;font-weight:800;font-size:12px;letter-spacing:.1em}
+.b2{background:transparent;color:#fff;border:1px solid rgba(244,245,239,.22);border-radius:3px;padding:13px 24px;font-size:12px}
+.meta{margin-top:26px;font-family:monospace;font-size:11px;color:#7D8178;letter-spacing:.14em;line-height:2}
+.tag{position:fixed;left:20px;bottom:14px;z-index:9;font-family:monospace;font-size:11px;letter-spacing:.18em;color:#B6B9B0}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}.right{min-height:44vh;order:-1}.left{padding:24px}}
+</style></head>
+<body>
+<div class="wrap">
+<div class="left">
+<div class="eyebrow">// V2-B SPLIT — TEXT 100% SAFE</div>
+<h1>Real meadow.<br><span>Clear message.</span></h1>
+<p class="sub">Left panel solid obsidian so text never fights flowers. Right shows your exact photo — central white head releasing seeds, pink + golden heads, buds, rocks, rays, fireflies — full clarity, zero dimming.</p>
+<div class="cta"><button class="b1">VIEW WORK</button><button class="b2">CONTACT</button></div>
+<div class="meta">FLOWERS: 8 REAL HEADS<br>SEEDS: 34 LIVE + PHOTO SEEDS<br>FIREFLIES: 8 + PHOTO GLOW</div>
+</div>
+<div class="right"><img src="./assets/ref-dandelion.png" alt="real dandelion"><canvas id="fx"></canvas></div>
+</div>
+<div class="tag">V2-B / SPLIT LUXURY — REAL PHOTO RIGHT, TEXT LEFT</div>
+<script>
+const c=document.getElementById('fx'),x=c.getContext('2d');let W,H;
+function rs(){const r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height}rs();addEventListener('resize',rs);
+const S=Array.from({length:34},()=>({x:Math.random(),y:Math.random(),r:1+Math.random()*2,ph:Math.random()*7,sp:.0005+Math.random()*.001,pink:Math.random()<.32}));let t=0;
+(function l(){t+=.016;x.clearRect(0,0,W,H);
+for(const s of S){s.y-=s.sp;if(s.y<0){s.y=1;s.x=Math.random()}
+const px=s.x*W+Math.sin(t+s.ph)*40,py=s.y*H;
+x.save();x.globalAlpha=.55+.35*Math.sin(t+s.ph);x.strokeStyle=s.pink?'rgba(240,185,205,.95)':'rgba(255,255,255,.95)';
+for(let k=0;k<7;k++){const a=k/7*6.283+t*.3;x.beginPath();x.moveTo(px,py);x.lineTo(px+Math.cos(a)*s.r*5,py+Math.sin(a)*s.r*5);x.stroke()}
+x.strokeStyle='rgba(150,110,70,.9)';x.beginPath();x.moveTo(px,py);x.lineTo(px-6,py+13);x.stroke();x.restore()}
+requestAnimationFrame(l)})();
+</script></body></html>

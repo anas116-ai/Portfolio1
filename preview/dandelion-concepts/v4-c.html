@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V4-C Airborne Only Hero Accurate</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070807;color:#F4F5EF;font-family:Outfit,'Segoe UI',system-ui,sans-serif;height:100vh;overflow:hidden}
+#air,#flies{position:fixed;inset:0;pointer-events:none}#air{z-index:2}#flies{z-index:3}
+nav{position:relative;z-index:6;display:flex;justify-content:space-between;padding:18px 40px;font-size:13px}
+nav b{letter-spacing:.24em}.nav-links{display:flex;gap:28px;color:#d8d8d8}
+.hero{position:relative;z-index:6;display:grid;grid-template-columns:1.15fr .85fr;max-width:1340px;margin:5vh auto 0;padding:0 40px;align-items:center}
+.eyebrow{font-family:monospace;font-size:11px;letter-spacing:.3em;color:#C5AA7A}
+h1{margin-top:22px;font-size:clamp(52px,7.2vw,116px);font-weight:800;letter-spacing:.04em;color:#D9FF00;line-height:.95}
+.sub1{margin-top:22px;font-size:15px;font-weight:600}.desc{margin-top:18px;color:#C8CAC2;font-size:14.5px;line-height:1.8;max-width:56ch}
+.cta{margin-top:26px;display:flex;gap:12px}.b1,.b2{border-radius:6px;padding:12px 22px;font-size:12.5px;border:1px solid rgba(217,255,0,.55);background:transparent;color:#fff}
+.avail{margin-top:26px;font-size:12.5px}.avail b{color:#E8FF45}
+.stage{position:relative;height:540px}.glow{position:absolute;right:6%;top:8%;width:420px;height:500px;background:radial-gradient(circle,rgba(217,255,0,.1),transparent 65%)}
+.person{position:absolute;right:10%;bottom:0;width:240px;height:470px;background:linear-gradient(#2b3a4a,#141a22);border-radius:120px 120px 24px 24px;opacity:.94}
+.tag{position:fixed;left:16px;bottom:14px;z-index:7;font-family:monospace;font-size:10.5px;color:#9a9a9a;background:rgba(0,0,0,.55);padding:5px 9px;border-radius:3px}
+.frames{position:fixed;right:16px;bottom:14px;z-index:7;font-family:monospace;font-size:10.5px;color:#566000}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+</style></head>
+<body>
+<canvas id="air"></canvas><canvas id="flies"></canvas>
+<nav><b><span style="color:#D9FF00">●</span> MASTAN VALI</b><div class="nav-links"><span>About</span><span>Experience</span><span>Disciplines</span><span>Work</span><span>Contact</span></div></nav>
+<div class="hero"><div>
+<div class="eyebrow">— // PORTFOLIO · ENTERPRISE DATA · PRODUCTS</div>
+<h1>MASTAN VALI</h1>
+<div class="sub1">— Data & Technology Professional</div>
+<p class="desc">Experienced in SAP BODS development, ETL processes, and enterprise production support, with a portfolio of digital applications spanning pharmacy management, workflow automation, and AI-powered document verification, built using LLMs and AI coding agents.</p>
+<div class="cta"><button class="b1">Explore Work ↓</button><button class="b2">Contact Me</button></div>
+<div class="avail">Immediate joiner / Open to relocation / <b>● Available for hire</b></div>
+</div><div class="stage"><div class="glow"></div><div class="person"></div></div></div>
+<div class="tag">V4-C AIRBORNE ONLY · NO HEADS IN HERO · 56 THIN PAPPUS + 30 MULTICOLOR FLIES</div>
+<div class="frames">FRAME 1/3 LIVE — IMAGINE VIDEO LOOP</div>
+<script>
+const air=document.getElementById('air'),ax=air.getContext('2d');
+const fl=document.getElementById('flies'),fx=fl.getContext('2d');
+let W,H,mx=.5,gust=0;function rs(){W=air.width=fl.width=innerWidth;H=air.height=fl.height=innerHeight}rs();addEventListener('resize',rs);
+addEventListener('mousemove',e=>{mx=e.clientX/W;gust=Math.min(1,gust+.08)});
+addEventListener('click',e=>{for(let i=0;i<10;i++){const s=S[Math.floor(Math.random()*S.length)];s.vx+=(Math.random()-.5)*.004;s.vy+=(Math.random()-.5)*.004;}gust=1;});
+function hair(c,px,py,r,rot,col,a,tb){c.save();c.globalAlpha=a;c.translate(px,py);c.rotate(rot);c.scale(Math.cos(tb)*.45+.55,1);c.lineWidth=.55;c.lineCap='round';
+for(let k=0;k<19;k++){const an=(k/18-.5)*2.4,len=r*(2.2+Math.sin(k*2.1)*.4);
+c.strokeStyle=col.replace('A',(0.25+0.6*Math.abs(Math.sin(k*1.6+rot))).toFixed(2)+')');
+c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(Math.sin(an)*len*.5,-len*.62,Math.sin(an)*len,-len);c.stroke();
+c.strokeStyle=col.replace('A','0.45)');c.beginPath();c.moveTo(Math.sin(an)*len,-len);c.lineTo(Math.sin(an)*len-1.5,-len-1.7);c.moveTo(Math.sin(an)*len,-len);c.lineTo(Math.sin(an)*len+1.5,-len-1.7);c.stroke();}
+c.strokeStyle='rgba(140,100,60,.9)';c.lineWidth=.85;c.beginPath();c.moveTo(0,0);c.lineTo(1.5,r*2.7);c.stroke();
+c.fillStyle='rgba(96,64,32,.95)';c.beginPath();c.ellipse(1.5,r*3,1.1,2.5,0,0,7);c.fill();c.restore();}
+const COLS=['rgba(255,255,255,A)','rgba(243,183,205,A)','rgba(214,178,106,A)'];
+const S=Array.from({length:56},()=>({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.0004,vy:-.00035-Math.random()*.0009,r:3.5+Math.random()*6.5,rot:Math.random()*7,vr:(Math.random()-.5)*.035,ph:Math.random()*7,col:COLS[Math.random()<.4?0:Math.random()<.55?1:2],dep:.3+Math.random()*.7}));
+const F=Array.from({length:30},()=>{const pal=['#E8FF45','#E8FF45','#FFC86B','#C6FF7A','#FFB8D0','#9BE8FF'];const col=pal[Math.floor(Math.random()*pal.length)];
+return{x:Math.random(),y:.25+Math.random()*.7,d:.3+Math.random()*.7,ph:Math.random()*10,sp:.45+Math.random()*1.7,col,wx:0,wy:0,px:0,py:0,f:true}});
+let t=0;(function loop(){t+=.016;gust*=.984;ax.clearRect(0,0,W,H);fx.clearRect(0,0,W,H);const br=(mx-.5)*140+gust*80;
+for(const s of S){s.x+=s.vx+(mx-.5)*.0012;s.y+=s.vy+Math.cos(t*.6+s.ph)*.0001;s.rot+=s.vr*.016;
+if(s.y<-.06){s.y=1.04;s.x=Math.random();}if(s.x<-.03)s.x=1.03;if(s.x>1.03)s.x=-.03;
+hair(ax,s.x*W+Math.sin(t*1.1+s.ph)*55*s.dep+br*s.y,s.y*H+Math.cos(t*.8+s.ph)*13,s.r,s.rot,s.col,(.28+.45*Math.abs(Math.sin(t*1.2+s.ph)))*(.45+.55*s.dep),t*.8+s.ph);}
+for(const f of F){f.wx+=(Math.random()-.5)*.024;f.wy+=(Math.random()-.5)*.024;f.wx*=.993;f.wy*=.993;f.x+=f.wx*.0017*f.d;f.y+=f.wy*.0012*f.d;
+if(f.x<0||f.x>1)f.wx*=-1;if(f.y<.2||f.y>1)f.wy*=-1;const px=f.x*W+Math.sin(t*.5+f.ph)*28,py=f.y*H+Math.cos(t*.42+f.ph)*22;
+const b=Math.min(1,Math.pow(Math.max(0,Math.sin(t*f.sp+f.ph)),12)+.55*Math.pow(Math.max(0,Math.sin(t*f.sp+f.ph+1.25)),16)+.03);
+const R=2+f.d*3.2;if(f.f){f.px=px;f.py=py;f.f=false;}
+fx.strokeStyle=f.col+'40';fx.beginPath();fx.moveTo(f.px,f.py);fx.lineTo(px,py);fx.stroke();f.px=px;f.py=py;
+const g=fx.createRadialGradient(px,py,0,px,py,R*8);g.addColorStop(0,`rgba(255,255,240,${.82*b})`);g.addColorStop(.35,f.col+'88');g.addColorStop(1,'rgba(0,0,0,0)');
+fx.fillStyle=g;fx.beginPath();fx.arc(px,py,R*8,0,7);fx.fill();
+fx.fillStyle=`rgba(255,255,255,${.4+.6*b})`;fx.beginPath();fx.arc(px,py,.9+f.d,0,7);fx.fill();}
+requestAnimationFrame(loop)})();</script></body></html>

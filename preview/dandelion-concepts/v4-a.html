@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V4-A Edge Meadow Hero Accurate</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070807;color:#F4F5EF;font-family:Outfit,'Segoe UI',system-ui,sans-serif;height:100vh;overflow:hidden}
+#air,#ground,#flies{position:fixed;inset:0;pointer-events:none}
+#air{z-index:2}#ground{z-index:2}#flies{z-index:3}
+.vig{position:fixed;inset:0;z-index:4;pointer-events:none;background:radial-gradient(130% 110% at 50% 42%,transparent 60%,rgba(0,0,0,.55))}
+nav{position:relative;z-index:6;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;font-size:13px}
+nav b{letter-spacing:.24em;font-size:14px}.nav-links{display:flex;gap:28px;color:#d8d8d8;font-size:13px}
+.hero{position:relative;z-index:6;display:grid;grid-template-columns:1.15fr .85fr;gap:20px;max-width:1340px;margin:4vh auto 0;padding:0 40px;align-items:center}
+.eyebrow{font-family:monospace;font-size:11px;letter-spacing:.3em;color:#C5AA7A}
+h1{margin-top:22px;font-size:clamp(52px,7.2vw,116px);font-weight:800;letter-spacing:.04em;line-height:.95;color:#D9FF00;text-shadow:0 3px 26px rgba(0,0,0,.7);filter:url(#rough)}
+.sub1{margin-top:22px;display:flex;gap:10px;align-items:center;font-size:15px;font-weight:600}
+.sub1::before{content:'';width:24px;height:2px;background:#D9FF00}
+.desc{margin-top:18px;color:#C8CAC2;font-size:14.5px;line-height:1.8;max-width:56ch}
+.cta{margin-top:26px;display:flex;gap:12px}
+.b1,.b2{border-radius:6px;padding:12px 22px;font-size:12.5px;font-weight:600;letter-spacing:.04em}
+.b1{background:transparent;border:1px solid rgba(217,255,0,.6);color:#F4F5EF}
+.b2{background:transparent;border:1px solid rgba(217,255,0,.35);color:#F4F5EF}
+.avail{margin-top:26px;font-size:12.5px;color:#d8d8d8}.avail b{color:#E8FF45;font-weight:700}
+.stage{position:relative;height:560px}
+.glow{position:absolute;right:6%;top:8%;width:420px;height:520px;background:radial-gradient(circle,rgba(217,255,0,.1),transparent 65%);pointer-events:none}
+.person{position:absolute;right:10%;bottom:0;width:240px;height:480px;background:linear-gradient(180deg,#2b3a4a 0%,#1c2632 45%,#141a22 100%);border-radius:120px 120px 24px 24px;opacity:.92}
+.person::before{content:'';position:absolute;top:26px;left:50%;transform:translateX(-50%);width:120px;height:140px;background:linear-gradient(#c98f6b,#a06a48);border-radius:60px}
+.laptop{position:absolute;right:16%;bottom:220px;width:150px;height:96px;background:#101418;border:1px solid rgba(244,245,239,.25);border-radius:6px;transform:rotate(-8deg)}
+.badge{position:absolute;font-family:monospace;font-size:10px;letter-spacing:.12em;border:1px solid rgba(217,255,0,.4);padding:5px 10px;border-radius:6px;color:#B6B9B0;background:rgba(7,8,7,.7)}
+.scroll{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:6;font-family:monospace;font-size:10px;letter-spacing:.4em;color:#6A6A66}
+.tag{position:fixed;left:16px;bottom:14px;z-index:7;font-family:monospace;font-size:10.5px;letter-spacing:.16em;color:#9a9a9a;background:rgba(0,0,0,.55);padding:5px 9px;border-radius:3px}
+.safe{position:fixed;z-index:5;left:50%;top:16%;width:min(680px,60vw);height:62%;transform:translateX(-50%);border:1px dashed rgba(217,255,0,.35);border-radius:8px;pointer-events:none}
+.safe span{position:absolute;top:-18px;left:12px;font-family:monospace;font-size:10px;color:#E8FF45;letter-spacing:.18em}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding:0 20px}.stage{height:340px}.person{height:300px;width:170px}.safe{display:none}}
+</style></head>
+<body>
+<svg width="0" height="0"><filter id="rough"><feTurbulence baseFrequency="0.9" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.6"/></filter></svg>
+<canvas id="air"></canvas><canvas id="ground"></canvas><canvas id="flies"></canvas>
+<div class="vig"></div>
+<nav><b><span style="color:#D9FF00">●</span> MASTAN VALI</b><div class="nav-links"><span>About</span><span>Experience</span><span>Disciplines</span><span>Work</span><span>Contact</span></div></nav>
+<div class="hero">
+<div>
+<div class="eyebrow">— // PORTFOLIO · ENTERPRISE DATA · PRODUCTS</div>
+<h1>MASTAN VALI</h1>
+<div class="sub1">Data & Technology Professional</div>
+<p class="desc">Experienced in SAP BODS development, ETL processes, and enterprise production support, with a portfolio of digital applications spanning pharmacy management, workflow automation, and AI-powered document verification, built using LLMs and AI coding agents.</p>
+<div class="cta"><button class="b1">Explore Work ↓</button><button class="b2">Contact Me</button></div>
+<div class="avail">Immediate joiner / Open to relocation / <b>● Available for hire</b></div>
+</div>
+<div class="stage"><div class="glow"></div><div class="person"></div><div class="laptop"></div>
+<div class="badge" style="left:0;top:44%">LSMW</div><div class="badge" style="right:0;top:22%">RAG</div></div>
+</div>
+<div class="safe"><span>TEXT + CHARACTER SAFE ZONE — NO FLOWER HEADS HERE</span></div>
+<div class="scroll">SCROLL —</div>
+<div class="tag">V4-A EDGE MEADOW · HEADS ONLY ON EDGES · 3-SEED COLORS · MULTICOLOR FLIES</div>
+<script>
+const air=document.getElementById('air'),ax=air.getContext('2d');
+const gr=document.getElementById('ground'),gx=gr.getContext('2d');
+const fl=document.getElementById('flies'),fx=fl.getContext('2d');
+let W,H,mx=.5,gust=0;function rs(){W=air.width=gr.width=fl.width=innerWidth;H=air.height=gr.height=fl.height=innerHeight}rs();addEventListener('resize',rs);
+addEventListener('mousemove',e=>{mx=e.clientX/W;gust=Math.min(1,gust+.07)});
+function hairSeed(c,px,py,r,rot,color,alpha,tumble){
+c.save();c.globalAlpha=alpha;c.translate(px,py);c.rotate(rot);c.scale(Math.cos(tumble)*.4+.6,1);
+c.lineWidth=.6;c.lineCap='round';
+const N=17;
+for(let k=0;k<N;k++){const a=(k/(N-1)-.5)*2.35;
+const len=r*(2.1+Math.sin(k*2.3)*.35);
+c.strokeStyle=color.replace('A',(0.28+0.6*Math.abs(Math.sin(k*1.7+rot))).toFixed(2)+')');
+c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(Math.sin(a)*len*.55,-len*.6,Math.sin(a)*len,-len);c.stroke();
+// fork tip: two micro hairs
+c.strokeStyle=color.replace('A','0.5)');c.beginPath();
+c.moveTo(Math.sin(a)*len,-len);c.lineTo(Math.sin(a)*len-1.4,-len-1.6);c.moveTo(Math.sin(a)*len,-len);c.lineTo(Math.sin(a)*len+1.4,-len-1.6);c.stroke();}
+c.strokeStyle='rgba(140,100,60,0.9)';c.lineWidth=.9;c.beginPath();c.moveTo(0,0);c.lineTo(1.5,r*2.6);c.stroke();
+c.fillStyle='rgba(96,64,32,0.95)';c.beginPath();c.ellipse(1.5,r*2.9,1.2,2.6,0,0,7);c.fill();c.restore();}
+// airborne: only side corridors + top, never center safe zone
+const COLS=['rgba(255,255,255,A)','rgba(243,183,205,A)','rgba(214,178,106,A)'];
+const airS=Array.from({length:44},()=>{let x=Math.random();if(x>.24&&x<.76)x=x<.5?.06+Math.random()*.14:.8+Math.random()*.14;
+return{x,y:Math.random(),vx:(Math.random()-.5)*.0004,vy:-.0004-Math.random()*.001,r:4+Math.random()*7,rot:Math.random()*7,vr:(Math.random()-.5)*.03,ph:Math.random()*7,col:COLS[Math.random()<.45?0:Math.random()<.55?1:2],dep:.35+Math.random()*.65}});
+// ground fallen: bottom band sliding sideways
+const gndS=Array.from({length:26},()=>({x:Math.random(),y:.86+Math.random()*.13,vx:(.0002+Math.random()*.0006)*(Math.random()<.5?-1:1),r:3+Math.random()*5,rot:Math.random()*7,ph:Math.random()*7,col:COLS[Math.floor(Math.random()*3)]}));
+const flies=Array.from({length:24},()=>{const pal=['#E8FF45','#FFC86B','#C6FF7A','#FFB8D0'];const col=pal[Math.random()<.5?0:Math.random()<.6?1:Math.random()<.75?2:3];
+return{x:Math.random(),y:.3+Math.random()*.65,d:.3+Math.random()*.7,ph:Math.random()*10,sp:.5+Math.random()*1.6,col,wx:0,wy:0,px:0,py:0,f:true}});
+let t=0;(function loop(){t+=.016;gust*=.985;ax.clearRect(0,0,W,H);gx.clearRect(0,0,W,H);fx.clearRect(0,0,W,H);
+const br=(mx-.5)*120+gust*70;
+for(const s of airS){s.x+=s.vx+(mx-.5)*.001;s.y+=s.vy;if(s.y<-.06){s.y=1.04;let x=Math.random();if(x>.24&&x<.76)x=x<.5?.06+Math.random()*.14:.8+Math.random()*.14;s.x=x;}
+s.rot+=s.vr*.016;const px=s.x*W+Math.sin(t*.9+s.ph)*44*s.dep+br*s.y*s.dep,py=s.y*H+Math.cos(t*.7+s.ph)*12;
+const tw=.45+.4*Math.sin(t*1.2+s.ph);
+hairSeed(ax,px,py,s.r,s.rot,s.col,(.3+.45*tw)*(.5+.5*s.dep),t*.7+s.ph);}
+for(const s of gndS){s.x+=s.vx+Math.sin(t*.5+s.ph)*.0002;if(s.x<-.02)s.x=1.02;if(s.x>1.02)s.x=-.02;
+hairSeed(gx,s.x*W,s.y*H+Math.sin(t*.8+s.ph)*3,s.r,s.rot+Math.sin(t*.4+s.ph)*.2,s.col,.5+0.25*Math.sin(t+s.ph),s.ph);}
+for(const f of flies){f.wx+=(Math.random()-.5)*.024;f.wy+=(Math.random()-.5)*.024;f.wx*=.993;f.wy*=.993;
+f.x+=f.wx*.0016*f.d;f.y+=f.wy*.0011*f.d;if(f.x<0||f.x>1)f.wx*=-1;if(f.y<.25||f.y>1)f.wy*=-1;
+const px=f.x*W+Math.sin(t*.5+f.ph)*26,py=f.y*H+Math.cos(t*.4+f.ph)*20;
+const b=Math.min(1,Math.pow(Math.max(0,Math.sin(t*f.sp+f.ph)),12)+.55*Math.pow(Math.max(0,Math.sin(t*f.sp+f.ph+1.2)),16)+.03);
+const R=2+f.d*3.4;if(f.f){f.px=px;f.py=py;f.f=false;}
+fx.strokeStyle=f.col+'44';fx.lineWidth=1;fx.beginPath();fx.moveTo(f.px,f.py);fx.lineTo(px,py);fx.stroke();f.px=px;f.py=py;
+const g=fx.createRadialGradient(px,py,0,px,py,R*8);g.addColorStop(0,`rgba(255,255,240,${.8*b})`);g.addColorStop(.3,f.col+Math.round(b*120).toString(16).padStart(2,'0'));g.addColorStop(1,'rgba(0,0,0,0)');
+fx.fillStyle=g;fx.beginPath();fx.arc(px,py,R*8,0,7);fx.fill();
+fx.fillStyle=`rgba(255,255,255,${.4+.6*b})`;fx.beginPath();fx.arc(px,py,1+f.d,0,7);fx.fill();}
+requestAnimationFrame(loop)})();</script></body></html>

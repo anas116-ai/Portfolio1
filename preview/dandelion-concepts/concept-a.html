@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept A — Corner Grove Luxury</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070807;color:#F4F5EF;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;height:100vh}
+.bg{position:fixed;inset:0;background:radial-gradient(90% 70% at 50% 0%,rgba(244,245,239,.09),transparent 60%),radial-gradient(60% 50% at 50% 100%,rgba(217,255,0,.05),transparent 65%),#070807}
+#seeds{position:fixed;inset:0;pointer-events:none}
+.rays{position:fixed;inset:0;pointer-events:none;background:conic-gradient(from 180deg at 50% -10%,transparent 44%,rgba(244,245,239,.06) 47%,transparent 50%,rgba(244,245,239,.05) 53%,transparent 56%);filter:blur(6px)}
+nav{position:relative;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:22px 48px;font-size:13px;letter-spacing:.18em}
+nav b{letter-spacing:.28em;font-size:14px}
+nav span{opacity:.7;margin-left:26px}
+.hero{position:relative;z-index:5;max-width:760px;margin:9vh auto 0;text-align:center;padding:0 24px}
+.eyebrow{font-family:monospace;font-size:11px;letter-spacing:.22em;color:#C5AA7A;margin-bottom:18px}
+h1{font-size:clamp(38px,6vw,72px);font-weight:300;letter-spacing:-.03em;line-height:1.02}
+h1 em{font-style:normal;color:#D9FF00}
+.sub{margin:20px auto 0;max-width:52ch;color:#B6B9B0;font-size:16px;line-height:1.7}
+.cta{margin-top:30px;display:flex;gap:14px;justify-content:center}
+.btn1{background:#D9FF00;color:#10130F;border:0;border-radius:3px;padding:14px 30px;font-weight:700;font-size:13px;letter-spacing:.12em}
+.btn2{background:rgba(18,22,17,.6);color:#F4F5EF;border:1px solid rgba(244,245,239,.16);border-radius:3px;padding:14px 30px;font-size:13px;letter-spacing:.12em;backdrop-filter:blur(32px)}
+.glass{margin:34px auto 0;max-width:560px;background:rgba(18,22,17,.6);border:1px solid rgba(244,245,239,.1);border-top:1px solid rgba(244,245,239,.22);border-radius:18px;padding:20px 26px;backdrop-filter:blur(54px);font-size:13px;color:#B6B9B0;letter-spacing:.06em}
+.flower{position:fixed;bottom:-20px;z-index:2;transform-origin:bottom center;animation:sway 7s ease-in-out infinite alternate;pointer-events:none}
+@keyframes sway{from{transform:rotate(-3.2deg)}to{transform:rotate(3.2deg)}}
+.stem{width:5px;margin:0 auto;background:linear-gradient(#8a9a5b,#3d4a2a);border-radius:4px}
+.head{border-radius:50%;margin:0 auto;position:relative;filter:saturate(.85)}
+.head::after{content:'';position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 65%)}
+.f1{left:4%}.f1 .stem{height:340px}.f1 .head{width:150px;height:150px;background:radial-gradient(circle at 50% 42%,#fff 0%,#e8e6da 34%,rgba(232,230,218,.55) 58%,transparent 72%);box-shadow:0 0 60px rgba(255,255,255,.14)}
+.f2{left:13%;animation-delay:-2s;animation-duration:8.5s}.f2 .stem{height:250px;background:linear-gradient(#7a6a4a,#3a3222)}.f2 .head{width:105px;height:105px;background:radial-gradient(circle at 50% 42%,#f3d9e4 0%,#d8a8bd 40%,rgba(216,168,189,.4) 60%,transparent 73%)}
+.f3{right:5%;animation-delay:-1s}.f3 .stem{height:320px}.f3 .head{width:140px;height:140px;background:radial-gradient(circle at 50% 42%,#fff 0%,#eee 35%,rgba(238,238,238,.5) 60%,transparent 72%);box-shadow:0 0 60px rgba(255,255,255,.14)}
+.f4{right:14%;animation-delay:-3.5s;animation-duration:9s}.f4 .stem{height:230px;background:linear-gradient(#9a8a55,#4a4020)}.f4 .head{width:100px;height:100px;background:radial-gradient(circle at 50% 42%,#ffe9a8 0%,#d8a93c 45%,rgba(216,169,60,.35) 65%,transparent 74%)}
+.f5{left:24%;animation-delay:-5s;animation-duration:10s;opacity:.9}.f5 .stem{height:170px}.f5 .head{width:74px;height:74px;background:radial-gradient(circle at 50% 42%,#f3d9e4 0%,#c998ad 45%,transparent 72%)}
+.vignette{position:fixed;inset:0;z-index:4;pointer-events:none;background:radial-gradient(150% 118% at 50% 38%,transparent 62%,rgba(0,0,0,.62) 100%)}
+.tag{position:fixed;z-index:6;left:24px;bottom:20px;font-family:monospace;font-size:11px;letter-spacing:.2em;color:#7D8178}
+.hint{position:fixed;z-index:6;right:24px;bottom:20px;font-family:monospace;font-size:11px;letter-spacing:.14em;color:#566000}
+@media(max-width:700px){.f2,.f5{display:none}nav{padding:18px 20px}.hero{margin-top:7vh}}
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="rays"></div><canvas id="seeds"></canvas>
+<div class="flower f1"><div class="head"></div><div class="stem"></div></div>
+<div class="flower f2"><div class="head"></div><div class="stem"></div></div>
+<div class="flower f3"><div class="head"></div><div class="stem"></div></div>
+<div class="flower f4"><div class="head"></div><div class="stem"></div></div>
+<div class="flower f5"><div class="head"></div><div class="stem"></div></div>
+<nav><b>MASTAN VALI</b><div><span>WORK</span><span>ABOUT</span><span>CONTACT</span></div></nav>
+<div class="hero">
+<div class="eyebrow">// FULL STACK ENGINEER</div>
+<h1>Calm code, <em>luxury</em> feel.</h1>
+<p class="sub">Concept A — Corner Grove. Flowers only in corners, center 60% fully clear. Text contrast ~18:1. Seeds drift top to bottom continuously.</p>
+<div class="cta"><button class="btn1">VIEW SELECTED WORK</button><button class="btn2">GET IN TOUCH</button></div>
+<div class="glass">● live particle field — 45 seeds + 10 fireflies — mouse moves the breeze</div>
+</div>
+<div class="vignette"></div>
+<div class="tag">CONCEPT A / 01 — CORNER GROVE</div><div class="hint">1920 × 1080 · MOBILE SAFE</div>
+<script>
+const c=document.getElementById('seeds'),x=c.getContext('2d');let W,H,mx=.5,my=.5;
+function rs(){W=c.width=innerWidth;H=c.height=innerHeight}rs();addEventListener('resize',rs);
+addEventListener('mousemove',e=>{mx=e.clientX/W;my=e.clientY/H});
+const seeds=Array.from({length:45},()=>({x:Math.random(),y:Math.random(),r:1+Math.random()*2.2,ph:Math.random()*7,sp:.0006+Math.random()*.0014,sw:20+Math.random()*60,pink:Math.random()<.25}));
+const flies=Array.from({length:10},()=>({x:Math.random(),y:.4+Math.random()*.6,ph:Math.random()*7}));
+let t=0;
+(function loop(){t+=.016;x.clearRect(0,0,W,H);
+const breeze=(mx-.5)*120;
+// seeds
+for(const s of seeds){s.y-=s.sp;s.x+=Math.sin(t*.7+s.ph)*.0006+(mx-.5)*.0012;if(s.y<-.05){s.y=1.05;s.x=Math.random()}
+const px=s.x*W+Math.sin(t*1.2+s.ph)*s.sw+breeze*s.y, py=s.y*H+Math.cos(t*.9+s.ph)*14;
+x.save();x.globalAlpha=.28+.5*Math.abs(Math.sin(t+s.ph));x.strokeStyle=s.pink?'rgba(232,180,200,.85)':'rgba(244,245,239,.85)';x.lineWidth=1;
+// seed star
+for(let k=0;k<7;k++){const a=k/7*Math.PI*2+t*.4;x.beginPath();x.moveTo(px,py);x.lineTo(px+Math.cos(a)*s.r*5,py+Math.sin(a)*s.r*5);x.stroke()}
+x.fillStyle=s.pink?'#e8b4c8':'#fff';x.beginPath();x.arc(px,py,1.4,0,7);x.fill();
+// tail
+x.strokeStyle='rgba(180,170,140,.5)';x.beginPath();x.moveTo(px,py);x.lineTo(px-8,py+14);x.stroke();x.restore()}
+// fireflies
+for(const f of flies){const px=f.x*W+Math.sin(t*.5+f.ph)*40,py=f.y*H+Math.cos(t*.4+f.ph)*26;
+const g=x.createRadialGradient(px,py,0,px,py,22);const tw=.5+.5*Math.sin(t*2+f.ph);
+g.addColorStop(0,`rgba(217,255,0,${.5*tw+.2})`);g.addColorStop(1,'transparent');x.fillStyle=g;x.beginPath();x.arc(px,py,22,0,7);x.fill();
+x.fillStyle='#E8FF45';x.beginPath();x.arc(px,py,1.8,0,7);x.fill()}
+requestAnimationFrame(loop)})();
+</script>
+</body>
+</html>

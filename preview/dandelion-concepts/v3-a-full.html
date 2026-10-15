@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V3-A Full Page — Ground Frame Real Meadow</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#070807;color:#F4F5EF;font-family:Outfit,'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
+.fixed-bg{position:fixed;inset:-3%;z-index:0;pointer-events:none;transform-origin:50% 100%;animation:breathe 12s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:scale(1) translate(0,0) rotate(-.22deg)}to{transform:scale(1.028) translate(-7px,-9px) rotate(.22deg)}}
+.fixed-bg img{width:100%;height:100%;object-fit:cover;object-position:center 66%}
+.scrim{position:fixed;inset:0;z-index:1;pointer-events:none;background:
+linear-gradient(180deg,rgba(7,8,7,.86) 0%,rgba(7,8,7,.62) 22%,rgba(7,8,7,.18) 46%,transparent 62%),
+linear-gradient(0deg,rgba(7,8,7,.72) 0%,rgba(7,8,7,.35) 30%,transparent 55%)}
+.rays{position:fixed;inset:0;z-index:1;pointer-events:none;background:conic-gradient(from 180deg at 52% -8%,transparent 44%,rgba(244,245,239,.07) 47%,transparent 50%,rgba(244,245,239,.05) 53%,transparent 56%);filter:blur(7px);animation:shimmer 8s ease-in-out infinite alternate}
+@keyframes shimmer{from{opacity:.55}to{opacity:1}}
+#seeds,#flies{position:fixed;inset:0;z-index:2;pointer-events:none}
+#flies{z-index:3}
+.content{position:relative;z-index:5}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;padding:16px 44px;font-size:12px;letter-spacing:.22em;background:rgba(7,8,7,.72);border-bottom:1px solid rgba(244,245,239,.1);backdrop-filter:blur(24px)}
+section{max-width:1080px;margin:0 auto;padding:72px 28px}
+.hero{text-align:center;padding:110px 28px 70px}
+.eyebrow{font-family:monospace;font-size:11px;letter-spacing:.24em;color:#E8FF45;background:rgba(7,8,7,.6);display:inline-block;padding:8px 16px;border:1px solid rgba(217,255,0,.3);border-radius:3px}
+h1{margin-top:20px;font-size:clamp(42px,6.6vw,82px);font-weight:650;letter-spacing:-.032em;line-height:1;text-shadow:0 3px 34px rgba(0,0,0,.85)}
+h1 span{color:#D9FF00}
+.sub{margin:18px auto 0;max-width:58ch;color:#ECEDE6;font-size:15.5px;line-height:1.75;text-shadow:0 2px 14px #000}
+.cta{margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.b1{background:#D9FF00;border:0;border-radius:3px;padding:15px 32px;font-weight:800;font-size:12px;letter-spacing:.12em;color:#10130F}
+.b2{background:rgba(18,22,17,.7);color:#fff;border:1px solid rgba(244,245,239,.2);border-radius:3px;padding:15px 32px;font-size:12px;letter-spacing:.12em;backdrop-filter:blur(20px)}
+.marquee{border-top:1px solid rgba(244,245,239,.1);border-bottom:1px solid rgba(244,245,239,.1);background:rgba(7,8,7,.55);overflow:hidden;white-space:nowrap;padding:14px 0;font-family:monospace;font-size:12px;letter-spacing:.24em;color:#B6B9B0}
+.marquee span{margin:0 28px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.card{background:rgba(18,22,17,.68);border:1px solid rgba(244,245,239,.11);border-top:1px solid rgba(244,245,239,.22);border-radius:20px;padding:26px;backdrop-filter:blur(54px)}
+.card small{font-family:monospace;font-size:10px;letter-spacing:.2em;color:#C5AA7A}
+.card h3{margin-top:10px;font-size:19px;font-weight:550}
+.card p{margin-top:10px;font-size:13.5px;color:#B6B9B0;line-height:1.7}
+h2{font-size:clamp(26px,3.4vw,40px);font-weight:550;letter-spacing:-.02em;text-shadow:0 2px 22px rgba(0,0,0,.8)}
+.sec-eyebrow{font-family:monospace;font-size:11px;letter-spacing:.22em;color:#C5AA7A;margin-bottom:12px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+footer{border-top:1px solid rgba(244,245,239,.1);background:rgba(7,8,7,.8);text-align:center;padding:60px 24px;font-size:13px;color:#B6B9B0}
+.tag{position:fixed;left:18px;bottom:14px;z-index:9;font-family:monospace;font-size:11px;letter-spacing:.18em;color:#B6B9B0;background:rgba(0,0,0,.55);padding:6px 10px;border-radius:3px}
+@media(max-width:860px){.grid3,.row{grid-template-columns:1fr}nav{padding:14px 18px}section{padding:52px 18px}}
+</style></head>
+<body>
+<div class="fixed-bg"><img src="./assets/ref-dandelion.png" alt="real dandelion meadow"></div>
+<div class="scrim"></div><div class="rays"></div>
+<canvas id="seeds"></canvas><canvas id="flies"></canvas>
+<div class="content">
+<nav><b>MASTAN VALI</b><div>WORK&nbsp;&nbsp;ABOUT&nbsp;&nbsp;CONTACT</div></nav>
+<div class="hero">
+<div class="eyebrow">V3-A FULL PAGE — REAL MEADOW + SMOOTH SWAY</div>
+<h1>Calm code, <span>wild seeds.</span></h1>
+<p class="sub">Full portfolio over your exact photo. Meadow breathes ±0.22deg / 12s. 46 pappus seeds detach from the 3 real heads and drift top→bottom. 22 fireflies with real double-blink. Move mouse for breeze, click a flower zone for burst.</p>
+<div class="cta"><button class="b1">VIEW SELECTED WORK</button><button class="b2">GET IN TOUCH</button></div>
+</div>
+<div class="marquee"><span>REACT</span><span>THREE.JS</span><span>SAP BODS</span><span>AWS S3</span><span>LLM AGENTS</span><span>MOTION</span><span>REACT</span><span>THREE.JS</span><span>SAP BODS</span><span>AWS S3</span></div>
+<section><div class="sec-eyebrow">// 01 ABOUT</div><h2>Three live ponds, one calm page.</h2>
+<div class="grid3"><div class="card"><small>PIPELINES</small><h3>SAP ETL that holds shape</h3><p>Mission-critical BODS 4.3 flows, S3 lakes, reload-safe under load.</p></div><div class="card"><small>AGENTS</small><h3>Autonomous LLM systems</h3><p>Tool-using agents with guardrails, evals and fallbacks.</p></div><div class="card"><small>FRONTEND</small><h3>Liquid glass interfaces</h3><p>Obsidian glass, single lemon accent, motion 0.165 to 1.1s.</p></div></div></section>
+<section><div class="sec-eyebrow">// 02 EXPERIENCE</div><h2>Verified enterprise work.</h2>
+<div class="row"><div class="card"><small>VHS CONSULTING · INDIA</small><h3>Software Engineer, Data</h3><p>Production SAP + cloud pipelines, on-call, client-facing delivery.</p></div><div class="card"><small>PROOF</small><h3>Printed sheet record</h3><p>Role, company, client, pipeline stages on one hanging leaf.</p></div></div></section>
+<section><div class="sec-eyebrow">// 03 SELECTED WORK</div><h2>Work over the meadow.</h2>
+<div class="row"><div class="card"><small>PROJECT 01</small><h3>Agent orchestration board</h3><p>Glass cards stay readable over seeds by 0.68 tint + 54px blur.</p></div><div class="card"><small>PROJECT 02</small><h3>Night conduce viewer</h3><p>Firefly glow refracts behind frost, text contrast stays AA.</p></div></div></section>
+<footer>SHOWN: hero + marquee + about + experience + work + footer over one fixed meadow · scroll to feel parallax<br><br>© 2026 Mastan Vali</footer>
+</div>
+<div class="tag">V3-A FULL PAGE · SCROLL · MOVE MOUSE · CLICK FLOWERS</div>
+<script>
+// ---- realistic pappus seeds, emitted from the 3 real heads in the photo ----
+const sc=document.getElementById('seeds'),sx=sc.getContext('2d');
+const fc=document.getElementById('flies'),fx=fc.getContext('2d');
+let W,H,mx=.5,my=.5,gust=0;function rs(){W=sc.width=fc.width=innerWidth;H=sc.height=fc.height=innerHeight}rs();addEventListener('resize',rs);
+addEventListener('mousemove',e=>{mx=e.clientX/W;my=e.clientY/H;gust=Math.min(1,gust+.06)});
+addEventListener('click',e=>{burst(e.clientX/W,e.clientY/H)});
+// emitters match photo heads (fractional coords)
+const EMIT=[{x:.565,y:.52,pink:false},{x:.365,y:.32,pink:true},{x:.875,y:.44,pink:false,gold:true}];
+const seeds=[];
+function spawn(fromBurst,bx,by){const e=fromBurst?{x:bx,y:by,pink:Math.random()<.35}:{...EMIT[Math.floor(Math.random()*EMIT.length)]};
+seeds.push({x:e.x+(Math.random()-.5)*.02,y:e.y+(Math.random()-.5)*.02,vx:(Math.random()-.5)*.0004,vy:-.0004-Math.random()*.0009,
+r:2.4+Math.random()*3.4,rot:Math.random()*7,vr:(Math.random()-.5)*.02,ph:Math.random()*7,life:1,pink:!!e.pink,gold:!!e.gold,sway:30+Math.random()*70});}
+for(let i=0;i<46;i++){spawn(false);seeds[i].y=Math.random();seeds[i].x=Math.random();}
+function burst(bx,by){for(let i=0;i<12;i++)spawn(true,bx,by);gust=1;}
+function drawSeed(px,py,r,rot,pink,gold,alpha){
+sx.save();sx.globalAlpha=alpha;sx.translate(px,py);sx.rotate(rot);
+const col=pink?'rgba(242,190,210,':'gold'?'rgba(228,190,100,':'rgba(255,255,255,';
+sx.strokeStyle=col+'0.92)';sx.lineWidth=1;
+// umbrella filaments with slight arc
+const N=11;for(let k=0;k<N;k++){const a=(k/(N-1)-.5)*2.1;sx.beginPath();sx.moveTo(0,0);
+sx.quadraticCurveTo(Math.sin(a)*r*1.7,-r*1.1,Math.sin(a)*r*2.6,-r*2.1);sx.stroke();
+// tiny tuft tip
+sx.fillStyle=col+'0.9)';sx.beginPath();sx.arc(Math.sin(a)*r*2.6,-r*2.1,1,0,7);sx.fill();}
+// stem down to seed
+sx.strokeStyle='rgba(146,106,62,0.95)';sx.lineWidth=1.2;sx.beginPath();sx.moveTo(0,0);sx.lineTo(2,r*3.4);sx.stroke();
+sx.fillStyle='rgba(107,74,38,0.95)';sx.beginPath();sx.ellipse(2,r*3.7,1.7,3.4,0,0,7);sx.fill();sx.restore();}
+// ---- realistic fireflies: random walk + double-blink envelope ----
+const flies=Array.from({length:22},()=>({x:Math.random(),y:.35+Math.random()*.6,depth:.3+Math.random()*.7,
+ph:Math.random()*10,sp:.6+Math.random()*1.4,wx:Math.random()*10,wy:Math.random()*10,px:0,py:0,first:true}));
+let t=0;
+(function loop(){t+=.016;gust*=.985;sx.clearRect(0,0,W,H);fx.clearRect(0,0,W,H);
+const breeze=(mx-.5)*130+gust*60;
+// seeds
+for(let i=seeds.length-1;i>=0;i--){const s=seeds[i];
+s.vy-=.0000006; // faint lift
+s.x+=s.vx+Math.sin(t*.8+s.ph)*.00035+(mx-.5)*.0011;s.y+=s.vy+Math.cos(t*.6+s.ph)*.00012;
+s.rot+=s.vr*.016;s.life-=.00012;
+if(s.y<-.06||s.life<=0){seeds.splice(i,1);spawn(false);continue;}
+const px=s.x*W+Math.sin(t*1.1+s.ph)*s.sway*(0.4+s.depth||.7)+breeze*s.y,py=s.y*H+Math.cos(t*.9+s.ph)*12;
+const tw=.55+.45*Math.sin(t*1.4+s.ph);
+drawSeed(px,py,s.r,s.rot,s.pink,s.gold,.5+.42*tw);}
+// fireflies
+for(const f of flies){
+f.wx+= (Math.random()-.5)*.02;f.wy+=(Math.random()-.5)*.02;f.wx*=.995;f.wy*=.995;
+f.x+=f.wx*.0016*f.depth;f.y+=f.wy*.0012*f.depth;
+if(f.x<0||f.x>1)f.wx*=-1;if(f.y<.3||f.y>1)f.wy*=-1;
+const px=f.x*W+Math.sin(t*.5+f.ph)*24,py=f.y*H+Math.cos(t*.4+f.ph)*18;
+// real double-blink: sharp pulses, mostly dark
+const b1=Math.pow(Math.max(0,Math.sin(t*f.sp+f.ph)),14);
+const b2=.6*Math.pow(Math.max(0,Math.sin(t*f.sp*1.0+f.ph+1.1)),18);
+const b=Math.min(1,b1+b2+.04);
+const R=(2.2+f.depth*3.5);
+if(f.first){f.px=px;f.py=py;f.first=false;}
+// trail
+fx.strokeStyle=`rgba(217,255,0,${.25*b})`;fx.lineWidth=1.2;fx.beginPath();fx.moveTo(f.px,f.py);fx.lineTo(px,py);fx.stroke();
+f.px=px;f.py=py;
+// halo
+const g=fx.createRadialGradient(px,py,0,px,py,R*9);
+g.addColorStop(0,`rgba(255,240,160,${.75*b})`);g.addColorStop(.25,`rgba(217,255,0,${.4*b})`);g.addColorStop(1,'rgba(217,255,0,0)');
+fx.fillStyle=g;fx.beginPath();fx.arc(px,py,R*9,0,7);fx.fill();
+// bokeh when near (large soft)
+if(f.depth>.75){const bokeh=fx.createRadialGradient(px,py,0,px,py,R*16);bokeh.addColorStop(0,`rgba(217,255,0,${.10*b})`);bokeh.addColorStop(1,'transparent');fx.fillStyle=bokeh;fx.beginPath();fx.arc(px,py,R*16,0,7);fx.fill();}
+// core
+fx.fillStyle=`rgba(255,252,220,${.35+.65*b})`;fx.beginPath();fx.arc(px,py,1.1+f.depth*1.1,0,7);fx.fill();}
+requestAnimationFrame(loop)})();
+</script></body></html>

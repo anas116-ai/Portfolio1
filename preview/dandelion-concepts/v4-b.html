@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V4-B Bottom Bed Hero Accurate</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070807;color:#F4F5EF;font-family:Outfit,'Segoe UI',system-ui,sans-serif;height:100vh;overflow:hidden}
+#bed{position:fixed;left:0;right:0;bottom:0;height:30vh;z-index:1;pointer-events:none;transform-origin:50% 100%;animation:sway 9s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-.5deg) translateX(-6px)}to{transform:rotate(.5deg) translateX(6px)}}
+#bed img{width:110%;height:100%;object-fit:cover;object-position:center 72%;margin-left:-5%}
+#bedfade{position:fixed;left:0;right:0;bottom:0;height:30vh;z-index:2;pointer-events:none;background:linear-gradient(180deg,#070807 0%,transparent 32%)}
+#air,#flies{position:fixed;inset:0;pointer-events:none}#air{z-index:3}#flies{z-index:3}
+nav{position:relative;z-index:6;display:flex;justify-content:space-between;padding:18px 40px;font-size:13px}
+nav b{letter-spacing:.24em}.nav-links{display:flex;gap:28px;color:#d8d8d8}
+.hero{position:relative;z-index:6;display:grid;grid-template-columns:1.15fr .85fr;max-width:1340px;margin:5vh auto 0;padding:0 40px;align-items:center}
+.eyebrow{font-family:monospace;font-size:11px;letter-spacing:.3em;color:#C5AA7A}
+h1{margin-top:22px;font-size:clamp(52px,7.2vw,116px);font-weight:800;letter-spacing:.04em;color:#D9FF00;line-height:.95}
+.sub1{margin-top:22px;font-size:15px;font-weight:600}.desc{margin-top:18px;color:#C8CAC2;font-size:14.5px;line-height:1.8;max-width:56ch}
+.cta{margin-top:26px;display:flex;gap:12px}.b1,.b2{border-radius:6px;padding:12px 22px;font-size:12.5px;border:1px solid rgba(217,255,0,.55);background:transparent;color:#fff}
+.avail{margin-top:26px;font-size:12.5px}.avail b{color:#E8FF45}
+.stage{position:relative;height:540px}.glow{position:absolute;right:6%;top:8%;width:420px;height:500px;background:radial-gradient(circle,rgba(217,255,0,.1),transparent 65%)}
+.person{position:absolute;right:10%;bottom:0;width:240px;height:470px;background:linear-gradient(#2b3a4a,#141a22);border-radius:120px 120px 24px 24px;opacity:.94}
+.tag{position:fixed;left:16px;bottom:14px;z-index:7;font-family:monospace;font-size:10.5px;color:#9a9a9a;background:rgba(0,0,0,.55);padding:5px 9px;border-radius:3px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}#bed{height:24vh}}
+</style></head>
+<body>
+<div id="bed"><img src="./assets/ref-dandelion.png"></div><div id="bedfade"></div>
+<canvas id="air"></canvas><canvas id="flies"></canvas>
+<nav><b><span style="color:#D9FF00">●</span> MASTAN VALI</b><div class="nav-links"><span>About</span><span>Experience</span><span>Disciplines</span><span>Work</span><span>Contact</span></div></nav>
+<div class="hero"><div>
+<div class="eyebrow">— // PORTFOLIO · ENTERPRISE DATA · PRODUCTS</div>
+<h1>MASTAN VALI</h1>
+<div class="sub1">— Data & Technology Professional</div>
+<p class="desc">Experienced in SAP BODS development, ETL processes, and enterprise production support, with a portfolio of digital applications spanning pharmacy management, workflow automation, and AI-powered document verification, built using LLMs and AI coding agents.</p>
+<div class="cta"><button class="b1">Explore Work ↓</button><button class="b2">Contact Me</button></div>
+<div class="avail">Immediate joiner / Open to relocation / <b>● Available for hire</b></div>
+</div><div class="stage"><div class="glow"></div><div class="person"></div></div></div>
+<div class="tag">V4-B BOTTOM BED 30VH ONLY · TOP 70% PURE OBSIDIAN · ZERO TEXT FIGHT</div>
+<script>
+const air=document.getElementById('air'),ax=air.getContext('2d');
+const fl=document.getElementById('flies'),fx=fl.getContext('2d');
+let W,H,mx=.5;function rs(){W=air.width=fl.width=innerWidth;H=air.height=fl.height=innerHeight}rs();addEventListener('resize',rs);
+addEventListener('mousemove',e=>mx=e.clientX/W);
+function hair(c,px,py,r,rot,col,a,tb){c.save();c.globalAlpha=a;c.translate(px,py);c.rotate(rot);c.scale(Math.cos(tb)*.4+.6,1);c.lineWidth=.6;c.lineCap='round';
+for(let k=0;k<17;k++){const an=(k/16-.5)*2.35,len=r*(2.1+Math.sin(k*2.3)*.35);
+c.strokeStyle=col.replace('A',(0.3+0.55*Math.abs(Math.sin(k*1.7+rot))).toFixed(2)+')');
+c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(Math.sin(an)*len*.55,-len*.6,Math.sin(an)*len,-len);c.stroke();
+c.strokeStyle=col.replace('A','0.5)');c.beginPath();c.moveTo(Math.sin(an)*len,-len);c.lineTo(Math.sin(an)*len-1.4,-len-1.6);c.moveTo(Math.sin(an)*len,-len);c.lineTo(Math.sin(an)*len+1.4,-len-1.6);c.stroke();}
+c.strokeStyle='rgba(140,100,60,.9)';c.lineWidth=.9;c.beginPath();c.moveTo(0,0);c.lineTo(1.5,r*2.6);c.stroke();
+c.fillStyle='rgba(96,64,32,.95)';c.beginPath();c.ellipse(1.5,r*2.9,1.2,2.6,0,0,7);c.fill();c.restore();}
+const COLS=['rgba(255,255,255,A)','rgba(243,183,205,A)','rgba(214,178,106,A)'];
+// seeds rise from bottom bed
+const S=Array.from({length:40},()=>({x:Math.random(),y:.7+Math.random()*.3,vy:-.0005-Math.random()*.0011,vx:(Math.random()-.5)*.0004,r:4+Math.random()*7,rot:Math.random()*7,vr:(Math.random()-.5)*.03,ph:Math.random()*7,col:COLS[Math.random()<.45?0:Math.random()<.55?1:2],dep:.4+Math.random()*.6}));
+const F=Array.from({length:26},()=>{const pal=['#E8FF45','#FFC86B','#C6FF7A','#FFB8D0','#9BE8FF'];const col=pal[Math.floor(Math.random()*pal.length)];
+return{x:Math.random(),y:.35+Math.random()*.6,d:.3+Math.random()*.7,ph:Math.random()*10,sp:.5+Math.random()*1.6,col,wx:0,wy:0,px:0,py:0,f:true}});
+let t=0;(function loop(){t+=.016;ax.clearRect(0,0,W,H);fx.clearRect(0,0,W,H);const br=(mx-.5)*110;
+for(const s of S){s.x+=s.vx+(mx-.5)*.001;s.y+=s.vy;if(s.y<-.05){s.y=1.0;s.x=Math.random();}s.rot+=s.vr*.016;
+hair(ax,s.x*W+Math.sin(t+s.ph)*40*s.dep+br*s.y,s.y*H,s.r,s.rot,s.col,(.35+.4*Math.abs(Math.sin(t*1.2+s.ph)))*(.5+.5*s.dep),t*.7+s.ph);}
+for(const f of F){f.wx+=(Math.random()-.5)*.024;f.wy+=(Math.random()-.5)*.024;f.wx*=.993;f.wy*=.993;f.x+=f.wx*.0016*f.d;f.y+=f.wy*.0011*f.d;
+if(f.x<0||f.x>1)f.wx*=-1;if(f.y<.3||f.y>1)f.wy*=-1;const px=f.x*W+Math.sin(t*.5+f.ph)*26,py=f.y*H;
+const b=Math.min(1,Math.pow(Math.max(0,Math.sin(t*f.sp+f.ph)),12)+.55*Math.pow(Math.max(0,Math.sin(t*f.sp+f.ph+1.2)),16)+.03);
+const R=2+f.d*3.4;if(f.f){f.px=px;f.py=py;f.f=false;}
+fx.strokeStyle=f.col+'44';fx.beginPath();fx.moveTo(f.px,f.py);fx.lineTo(px,py);fx.stroke();f.px=px;f.py=py;
+const g=fx.createRadialGradient(px,py,0,px,py,R*8);g.addColorStop(0,`rgba(255,255,240,${.8*b})`);g.addColorStop(1,'rgba(0,0,0,0)');fx.fillStyle=g;fx.beginPath();fx.arc(px,py,R*8,0,7);fx.fill();
+fx.fillStyle=`rgba(255,255,255,${.4+.6*b})`;fx.beginPath();fx.arc(px,py,1+f.d,0,7);fx.fill();}
+requestAnimationFrame(loop)})();</script></body></html>

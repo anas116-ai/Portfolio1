@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept C — Golden Breath Minimal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070807;color:#F4F5EF;font-family:'Segoe UI',system-ui,sans-serif;height:100vh;overflow:hidden}
+.bg{position:fixed;inset:0;background:radial-gradient(60% 45% at 50% 0%,rgba(244,245,239,.08),transparent 62%),#070807}
+#seeds{position:fixed;inset:0}
+.top{position:relative;z-index:5;text-align:center;padding:26px;font-size:12px;letter-spacing:.26em;color:#B6B9B0}
+.hero{position:relative;z-index:5;max-width:680px;margin:10vh auto 0;text-align:center;padding:0 24px}
+.eyebrow{font-family:monospace;font-size:11px;letter-spacing:.22em;color:#C5AA7A;margin-bottom:18px}
+h1{font-size:clamp(40px,6.4vw,76px);font-weight:250;letter-spacing:-.03em;line-height:1}
+h1 em{font-style:normal;background:linear-gradient(#F2FF70,#8AA500);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin:22px auto 0;max-width:48ch;color:#7D8178;font-size:15px;line-height:1.75}
+.cta{margin-top:32px;display:flex;gap:12px;justify-content:center}
+.btn1{background:#D9FF00;border:0;border-radius:3px;padding:15px 34px;font-weight:800;font-size:12px;letter-spacing:.14em;color:#10130F}
+.link{margin-top:18px;font-size:12px;letter-spacing:.16em;color:#B6B9B0;text-decoration:underline;text-underline-offset:6px}
+.flower{position:fixed;bottom:-18px;z-index:2;transform-origin:bottom;animation:sw 9s ease-in-out infinite alternate}
+@keyframes sw{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+.stem{width:4px;margin:0 auto;background:linear-gradient(#8a9a5b,#2c3520);border-radius:4px}
+.head{border-radius:50%;margin:0 auto}
+.h1{left:6%}.h1 .stem{height:280px}.h1 .head{width:120px;height:120px;background:radial-gradient(circle at 50% 42%,#fff,#e6e6e6 40%,transparent 72%);box-shadow:0 0 50px rgba(255,255,255,.12)}
+.h2{right:7%;animation-delay:-3s}.h2 .stem{height:260px;background:linear-gradient(#9a8a55,#3a3220)}.h2 .head{width:112px;height:112px;background:radial-gradient(circle at 50% 42%,#ffe9a8,#c79a2e 48%,transparent 74%);box-shadow:0 0 50px rgba(217,255,0,.1)}
+.h3{right:20%;animation-delay:-6s;opacity:.7}.h3 .stem{height:130px}.h3 .head{width:58px;height:58px;background:radial-gradient(circle,#fff,#bbb 50%,transparent 72%)}
+.vig{position:fixed;inset:0;z-index:4;pointer-events:none;background:radial-gradient(140% 115% at 50% 40%,transparent 64%,rgba(0,0,0,.6))}
+.tag{position:fixed;left:24px;bottom:18px;z-index:6;font-family:monospace;font-size:11px;letter-spacing:.2em;color:#7D8178}
+@media(max-width:700px){.h3{display:none}}
+</style>
+</head>
+<body>
+<div class="bg"></div><canvas id="seeds"></canvas>
+<div class="flower h1"><div class="head"></div><div class="stem"></div></div>
+<div class="flower h2"><div class="head"></div><div class="stem"></div></div>
+<div class="flower h3"><div class="head"></div><div class="stem"></div></div>
+<div class="top">MASTAN VALI — PORTFOLIO</div>
+<div class="hero">
+<div class="eyebrow">// MINIMAL — 3 FLOWERS ONLY</div>
+<h1>Less noise.<br><em>More luxury.</em></h1>
+<p class="sub">Concept C — Golden Breath. Only 3 flowers, maximum readability. 28 seeds only, ultra-slow drift. Fireflies 6 only. Best for phone + tab clarity.</p>
+<div class="cta"><button class="btn1">VIEW SELECTED WORK</button></div>
+<div class="link">SCROLL TO EXPLORE ↓</div>
+</div>
+<div class="vig"></div><div class="tag">CONCEPT C / 03 — GOLDEN BREATH MINIMAL</div>
+<script>
+const c=document.getElementById('seeds'),x=c.getContext('2d');let W,H,mx=.5;
+function rs(){W=c.width=innerWidth;H=c.height=innerHeight}rs();addEventListener('resize',rs);
+addEventListener('mousemove',e=>mx=e.clientX/W);
+const S=Array.from({length:28},()=>({x:Math.random(),y:Math.random(),r:1+Math.random()*1.8,ph:Math.random()*7,sp:.0004+Math.random()*.0009}));
+const F=Array.from({length:6},()=>({x:Math.random(),y:.5+Math.random()*.5,ph:Math.random()*7}));let t=0;
+(function l(){t+=.016;x.clearRect(0,0,W,H);const br=(mx-.5)*100;
+for(const s of S){s.y-=s.sp;if(s.y<-.05){s.y=1.05;s.x=Math.random()}
+const px=s.x*W+Math.sin(t*.6+s.ph)*34+br*s.y,py=s.y*H+Math.cos(t*.7+s.ph)*12;
+x.save();x.globalAlpha=.3+.4*Math.abs(Math.sin(t*.7+s.ph));x.strokeStyle='rgba(244,245,239,.85)';x.lineWidth=1;
+for(let k=0;k<6;k++){const a=k/6*6.28+t*.25;x.beginPath();x.moveTo(px,py);x.lineTo(px+Math.cos(a)*s.r*4.4,py+Math.sin(a)*s.r*4.4);x.stroke()}
+x.fillStyle='#fff';x.beginPath();x.arc(px,py,1.3,0,7);x.fill();x.restore()}
+for(const f of F){const px=f.x*W+Math.sin(t*.4+f.ph)*30,py=f.y*H,tw=.5+.5*Math.sin(t*2+f.ph);
+const g=x.createRadialGradient(px,py,0,px,py,24);g.addColorStop(0,`rgba(217,255,0,${.4*tw+.12})`);g.addColorStop(1,'transparent');
+x.fillStyle=g;x.beginPath();x.arc(px,py,24,0,7);x.fill();x.fillStyle='#E8FF45';x.beginPath();x.arc(px,py,1.6,0,7);x.fill()}
+requestAnimationFrame(l)})();
+</script>
+</body>
+</html>

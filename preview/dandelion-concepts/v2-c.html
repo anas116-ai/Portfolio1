@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V2-C Cinematic Dim Real Dandelion</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#070807;color:#F4F5EF;font-family:Outfit,'Segoe UI',system-ui,sans-serif;height:100vh;overflow:hidden}
+.photo{position:fixed;inset:0}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:center 62%;filter:brightness(.62) saturate(.92)}
+.scrim{position:fixed;inset:0;background:radial-gradient(90% 70% at 50% 42%,transparent 40%,rgba(7,8,7,.55) 100%),linear-gradient(180deg,rgba(7,8,7,.35),rgba(7,8,7,.25))}
+#fx{position:fixed;inset:0}
+.center{position:relative;z-index:5;max-width:760px;margin:0 auto;height:100vh;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:0 26px}
+.pill{align-self:center;font-family:monospace;font-size:11px;letter-spacing:.22em;border:1px solid rgba(217,255,0,.4);color:#E8FF45;padding:9px 18px;border-radius:100px;background:rgba(7,8,7,.6)}
+h1{margin-top:20px;font-size:clamp(42px,6.6vw,80px);font-weight:300;letter-spacing:-.035em;line-height:1;text-shadow:0 4px 40px rgba(0,0,0,.9)}
+h1 b{font-weight:600;color:#D9FF00}
+.sub{margin:18px auto 0;max-width:52ch;color:#d7d8d2;font-size:15px;line-height:1.75;text-shadow:0 2px 16px #000}
+.cta{margin-top:28px;display:flex;gap:12px;justify-content:center}
+.b1{background:#D9FF00;border:0;border-radius:3px;padding:15px 32px;font-weight:800;font-size:12px;letter-spacing:.12em}
+.b2{border:1px solid rgba(244,245,239,.25);color:#fff;background:rgba(7,8,7,.55);border-radius:3px;padding:15px 32px;font-size:12px;backdrop-filter:blur(20px)}
+.tag{position:fixed;left:22px;bottom:16px;z-index:6;font-family:monospace;font-size:11px;letter-spacing:.2em;color:#B6B9B0}
+</style></head>
+<body>
+<div class="photo"><img src="./assets/ref-dandelion.png"></div>
+<div class="scrim"></div><canvas id="fx"></canvas>
+<div class="center">
+<div class="pill">V2-C — CINEMATIC DIM · MOST READABLE</div>
+<h1>Float softly.<br><b>Shine luxury.</b></h1>
+<p class="sub">Same real meadow dimmed to 62% brightness. Every fluffy head, brown seed-tail, pink veil, golden dry head, rock moss still visible — but text floats calm on top. Best for all screens.</p>
+<div class="cta"><button class="b1">VIEW SELECTED WORK</button><button class="b2">GET IN TOUCH</button></div>
+</div>
+<div class="tag">V2-C / REAL PHOTO DIMMED CINEMATIC</div>
+<script>
+const c=document.getElementById('fx'),x=c.getContext('2d');let W,H,mx=.5;
+function rs(){W=c.width=innerWidth;H=c.height=innerHeight}rs();addEventListener('resize',rs);
+addEventListener('mousemove',e=>mx=e.clientX/W);
+const S=Array.from({length:52},()=>({x:Math.random(),y:Math.random(),r:1+Math.random()*2.4,ph:Math.random()*7,sp:.0006+Math.random()*.0013,pink:Math.random()<.28,gold:Math.random()<.14}));
+const F=Array.from({length:12},()=>({x:Math.random(),y:.4+Math.random()*.6,ph:Math.random()*7}));let t=0;
+(function l(){t+=.016;x.clearRect(0,0,W,H);const br=(mx-.5)*130;
+for(const s of S){s.y-=s.sp;s.x+=(mx-.5)*.0008;if(s.y<-.05){s.y=1.05;s.x=Math.random()}
+const px=s.x*W+Math.sin(t*.9+s.ph)*52+br*s.y,py=s.y*H+Math.cos(t+s.ph)*14;
+x.save();x.globalAlpha=.5+.4*Math.abs(Math.sin(t+s.ph));
+x.strokeStyle=s.pink?'rgba(242,190,210,.92)':s.gold?'rgba(225,185,95,.92)':'rgba(255,255,255,.92)';
+for(let k=0;k<8;k++){const a=k/8*6.283+t*.3;x.beginPath();x.moveTo(px,py);x.lineTo(px+Math.cos(a)*s.r*5.2,py+Math.sin(a)*s.r*5.2);x.stroke()}
+x.strokeStyle='rgba(140,100,60,.9)';x.beginPath();x.moveTo(px,py);x.lineTo(px-7,py+16);x.stroke();x.restore()}
+for(const f of F){const px=f.x*W+Math.sin(t*.5+f.ph)*34,py=f.y*H,tw=.5+.5*Math.sin(t*2.1+f.ph);
+const g=x.createRadialGradient(px,py,0,px,py,22);g.addColorStop(0,`rgba(217,255,0,${.5*tw+.18})`);g.addColorStop(1,'transparent');
+x.fillStyle=g;x.beginPath();x.arc(px,py,22,0,7);x.fill();x.fillStyle='#E8FF45';x.beginPath();x.arc(px,py,1.8,0,7);x.fill()}
+requestAnimationFrame(l)})();
+</script></body></html>
