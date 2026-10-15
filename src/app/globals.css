@@ -684,8 +684,29 @@ textarea:focus-visible {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   EDITORIAL PORTRAIT — one slow breathe, transform only
+   SCULPT HALO — conic studio light orbiting the hero core
+   Translate/rotate only. 46s loop, alpha never above 0.07.
    ───────────────────────────────────────────────────────────── */
+@keyframes sculpt-halo-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.sculpt-halo {
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(217, 255, 0, 0.07) 40deg,
+    transparent 90deg,
+    transparent 180deg,
+    rgba(197, 170, 122, 0.06) 230deg,
+    transparent 280deg
+  );
+  filter: blur(28px);
+  animation: sculpt-halo-spin 46s linear infinite;
+  will-change: transform;
+}
 @keyframes portrait-breathe {
   0%, 100% { transform: scale(1) translateY(0); }
   50%      { transform: scale(1.022) translateY(-4px); }

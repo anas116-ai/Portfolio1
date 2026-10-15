@@ -6,7 +6,7 @@ import { ArrowDown } from "lucide-react";
 
 import { ShaderIgnitionButton } from "@/components/ui/ShaderIgnitionButton";
 import { TextAnimationCollection } from "./TextAnimationCollection";
-import { EditorialPortrait } from "./EditorialPortrait";
+import { HeroSculpture } from "./HeroSculpture";
 
 export function HeroSection() {
   return (
@@ -113,15 +113,15 @@ export function HeroSection() {
               </FadeIn>
             </div>
 
-            {/* Portrait stage — editorial still + static ledger, no WebGL rig */}
+            {/* Sculpture stage — live 3D signal core + static ledger, no avatar */}
             <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-end relative">
               <div className="relative z-10 w-full sm:w-[320px] md:w-[350px] lg:w-[380px] xl:w-[400px]">
-                {/* Floor light — pure lemon pool grounding the frame */}
+                {/* Floor light — pure lemon pool grounding the core */}
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute left-1/2 -bottom-5 z-0 h-[64px] w-[300px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(217,255,0,0.14)_0%,transparent_70%)] blur-[24px]"
                 />
-                <EditorialPortrait className="relative z-10" />
+                <HeroSculpture className="relative z-10" />
                 {/* Static capability ledger — replaces floating skill pills */}
                 <div className="relative z-10 mt-4 grid w-full grid-cols-2 gap-4 border-t border-[rgba(244,245,239,0.09)] pt-3 font-[family-name:var(--font-geist-mono)] text-[10.5px] leading-[1.8] tracking-[0.04em] text-[#7D8178]">
                   <div>
