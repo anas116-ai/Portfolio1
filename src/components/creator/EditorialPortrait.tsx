@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 /**
- * Editorial portrait — replaces the AI 3D avatar rig.
- * Drop the real passport-derived photo at public/images/portrait.jpg
- * (any hi-res jpg). Until then a monogram plate renders — never the
- * old AI avatar. One slow breathe, no WebGL, no pills, no blasts.
+ * Monogram identity plate — hero visual with no photo dependency.
+ * If a real photo is ever dropped at public/images/portrait.jpg it
+ * renders in the same frame; otherwise the MV plate stands alone.
+ * One slow breathe, no WebGL, no pills, no blasts.
  */
 export function EditorialPortrait({ className = "" }: { className?: string }) {
   const [hasPhoto, setHasPhoto] = useState(false);
@@ -36,12 +36,18 @@ export function EditorialPortrait({ className = "" }: { className?: string }) {
             draggable={false}
           />
         ) : (
-          <div className="flex aspect-[4/5] w-full flex-col items-center justify-center gap-3 bg-[#0C0E0C]">
-            <span className="font-[family-name:var(--font-warpaint)] text-[3.2rem] leading-none tracking-[0.06em] text-[#E8FF45]">
+          <div className="flex aspect-[4/5] w-full flex-col items-center justify-center gap-4 bg-[#0C0E0C] px-6 text-center">
+            <span className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.28em] text-[#C5AA7A]">
+              Data · Agents · Web
+            </span>
+            <span className="font-[family-name:var(--font-warpaint)] text-[4.4rem] leading-none tracking-[0.06em] text-[#E8FF45]">
               MV
             </span>
-            <span className="font-[family-name:var(--font-geist-mono)] text-[10.5px] uppercase tracking-[0.24em] text-[#7D8178]">
-              Portrait — drop images/portrait.jpg
+            <span aria-hidden="true" className="h-px w-12 bg-[rgba(197,170,122,0.55)]" />
+            <span className="font-[family-name:var(--font-geist-mono)] text-[10.5px] uppercase leading-[2] tracking-[0.24em] text-[#7D8178]">
+              Mastan Vali
+              <br />
+              Hyderabad / 2026
             </span>
           </div>
         )}
@@ -52,7 +58,7 @@ export function EditorialPortrait({ className = "" }: { className?: string }) {
         />
       </div>
       <figcaption className="mt-3 flex items-baseline justify-between font-[family-name:var(--font-geist-mono)] text-[10.5px] uppercase tracking-[0.22em] text-[#6A6A66]">
-        <span>01 — Portrait</span>
+        <span>01 — Identity</span>
         <span>Studio / 2026</span>
       </figcaption>
     </figure>
