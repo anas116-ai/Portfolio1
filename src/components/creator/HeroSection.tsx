@@ -6,7 +6,6 @@ import { ArrowDown } from "lucide-react";
 
 import { ShaderIgnitionButton } from "@/components/ui/ShaderIgnitionButton";
 import { TextAnimationCollection } from "./TextAnimationCollection";
-import { HeroSculpture } from "./HeroSculpture";
 
 export function HeroSection() {
   return (
@@ -15,20 +14,21 @@ export function HeroSection() {
       className="relative min-h-[100dvh] w-full bg-transparent"
     >
       <div className="relative flex min-h-[100dvh] w-full flex-col justify-center overflow-hidden px-5 pb-14 pt-20 sm:px-8 sm:pb-16 sm:pt-24 md:px-12 lg:px-16">
-        {/* Stage lighting — key, fill, floor */}
+        {/* Stage lighting — one bone wash behind the copy so the type sits
+            in light, not on black. No character-side key: nothing floats
+            there anymore, and a sourceless glow is itself an AI tell. */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-          {/* Key — lemon, locked to the character side */}
-          <div className="absolute right-[-10%] sm:right-[2%] lg:right-[6%] top-[14%] sm:top-[20%] w-[520px] sm:w-[660px] h-[520px] sm:h-[660px] bg-[radial-gradient(circle,rgba(217,255,0,0.075)_0%,transparent_70%)]" />
           {/* Fill — a bone wash behind the copy so the type sits in light, not on black */}
           <div className="absolute left-[-14%] sm:left-[-2%] top-[8%] sm:top-[14%] w-[480px] sm:w-[600px] h-[480px] sm:h-[600px] bg-[radial-gradient(circle,rgba(244,245,239,0.05)_0%,transparent_72%)]" />
           {/* Floor — a low lemon wash grounding the whole frame */}
           <div className="absolute left-1/2 -translate-x-1/2 bottom-[-8%] w-[780px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(217,255,0,0.06)_0%,transparent_72%)]" />
         </div>
 
-        {/* Hero composition */}
+        {/* Hero composition — single editorial column. No object, no mascot:
+            top dev portfolios lead with type + hairlines, not figures. */}
         <div className="relative z-20 my-auto w-full max-w-7xl mx-auto">
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4 lg:gap-10 items-center py-4 sm:py-6">
-            <div className="lg:col-span-7 flex flex-col items-start justify-center space-y-3 sm:space-y-5 lg:space-y-7 z-20 py-2">
+          <div className="relative z-10 max-w-3xl py-4 sm:py-6">
+            <div className="flex flex-col items-start justify-center space-y-3 sm:space-y-5 lg:space-y-7 py-2">
               {/* Top eyebrow — completely clean, unboxed text (NO boxes, NO pills) */}
               <FadeIn y={12} delay={0.1} duration={0.7} className="w-full">
                 <div className="flex items-center gap-3 eyebrow" style={{ color: "#C5AA7A" }}>
@@ -113,27 +113,24 @@ export function HeroSection() {
               </FadeIn>
             </div>
 
-            {/* Sculpture stage — live 3D signal core + static ledger, no avatar */}
-            <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-end relative">
-              <div className="relative z-10 w-full sm:w-[320px] md:w-[350px] lg:w-[380px] xl:w-[400px]">
-                {/* Floor light — pure lemon pool grounding the core */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute left-1/2 -bottom-5 z-0 h-[64px] w-[300px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(217,255,0,0.14)_0%,transparent_70%)] blur-[24px]"
-                />
-                <HeroSculpture className="relative z-10" />
-                {/* Static capability ledger — replaces floating skill pills */}
-                <div className="relative z-10 mt-4 grid w-full grid-cols-2 gap-4 border-t border-[rgba(244,245,239,0.09)] pt-3 font-[family-name:var(--font-geist-mono)] text-[10.5px] leading-[1.8] tracking-[0.04em] text-[#7D8178]">
-                  <div>
-                    <div className="mb-1 text-[10px] uppercase tracking-[0.22em] text-[#C5AA7A]">Enterprise</div>
-                    SAP BODS / BW / SQL / S/4HANA
+            {/* Meta strip — the absent figure's replacement is information:
+                four mono cells on hairlines. No object, no glow. */}
+            <div className="mt-10 grid grid-cols-2 gap-px border border-[rgba(244,245,239,0.09)] bg-[rgba(244,245,239,0.09)] sm:grid-cols-4">
+              {[
+                { k: "Base", v: "Hyderabad, IN" },
+                { k: "Focus", v: "Data · Agents · Web" },
+                { k: "Stack", v: "BODS / Python / Next.js" },
+                { k: "Status", v: "Available for hire" },
+              ].map((c) => (
+                <div key={c.k} className="bg-[#070807] px-4 py-3.5">
+                  <div className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.24em] text-[#C5AA7A]">
+                    {c.k}
                   </div>
-                  <div>
-                    <div className="mb-1 text-[10px] uppercase tracking-[0.22em] text-[#C5AA7A]">Agentic</div>
-                    LLMs / RAG / MCP / Python
+                  <div className="mt-1.5 font-[family-name:var(--font-geist-mono)] text-[12px] tracking-[0.02em] text-[#B6B9B0]">
+                    {c.v}
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
