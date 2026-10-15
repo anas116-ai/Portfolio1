@@ -6,8 +6,7 @@ import { ArrowDown } from "lucide-react";
 
 import { ShaderIgnitionButton } from "@/components/ui/ShaderIgnitionButton";
 import { TextAnimationCollection } from "./TextAnimationCollection";
-import { InteractiveCharacter } from "./InteractiveCharacter";
-import { CharacterLaptopSkillStream } from "./CharacterLaptopSkillStream";
+import { EditorialPortrait } from "./EditorialPortrait";
 
 export function HeroSection() {
   return (
@@ -114,20 +113,25 @@ export function HeroSection() {
               </FadeIn>
             </div>
 
-            {/* Character stage */}
+            {/* Portrait stage — editorial still + static ledger, no WebGL rig */}
             <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-end relative">
-              <div className="relative z-10 w-full sm:w-[320px] md:w-[350px] lg:w-[380px] xl:w-[410px]">
-                {/* Floor light — pure lemon pool grounding the figure */}
+              <div className="relative z-10 w-full sm:w-[320px] md:w-[350px] lg:w-[380px] xl:w-[400px]">
+                {/* Floor light — pure lemon pool grounding the frame */}
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute left-1/2 -bottom-5 z-0 h-[64px] w-[300px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(217,255,0,0.18)_0%,transparent_70%)] blur-[24px]"
+                  className="pointer-events-none absolute left-1/2 -bottom-5 z-0 h-[64px] w-[300px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(217,255,0,0.14)_0%,transparent_70%)] blur-[24px]"
                 />
-                <InteractiveCharacter className="!h-[270px] sm:!h-[360px] md:!h-[420px] xl:!h-[520px]" />
-                {/* Character Laptop Skill Stream — badges emerge from laptop edges, sweep outward to flanks without crossing body, and blast at apex */}
-                <CharacterLaptopSkillStream className="absolute -left-12 sm:-left-16 md:-left-20 lg:-left-20 -right-12 sm:-right-16 md:-right-20 lg:-right-20 inset-y-0 w-[calc(100%+96px)] sm:w-[calc(100%+128px)] md:w-[calc(100%+160px)] lg:w-[calc(100%+160px)] !h-[270px] sm:!h-[360px] md:!h-[420px] xl:!h-[520px]" />
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[280px] h-[48px] pointer-events-none z-10">
-                  <div className="absolute inset-x-10 bottom-2 h-[24px] rounded-[100%] bg-black/60 blur-[14px]" />
-                  <div className="absolute inset-x-16 bottom-3 h-[14px] rounded-[100%] bg-black/50 blur-[8px]" />
+                <EditorialPortrait className="relative z-10" />
+                {/* Static capability ledger — replaces floating skill pills */}
+                <div className="relative z-10 mt-4 grid w-full grid-cols-2 gap-4 border-t border-[rgba(244,245,239,0.09)] pt-3 font-[family-name:var(--font-geist-mono)] text-[10.5px] leading-[1.8] tracking-[0.04em] text-[#7D8178]">
+                  <div>
+                    <div className="mb-1 text-[10px] uppercase tracking-[0.22em] text-[#C5AA7A]">Enterprise</div>
+                    SAP BODS / BW / SQL / S/4HANA
+                  </div>
+                  <div>
+                    <div className="mb-1 text-[10px] uppercase tracking-[0.22em] text-[#C5AA7A]">Agentic</div>
+                    LLMs / RAG / MCP / Python
+                  </div>
                 </div>
               </div>
             </div>

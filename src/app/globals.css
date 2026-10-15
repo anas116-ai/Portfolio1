@@ -683,6 +683,19 @@ textarea:focus-visible {
   will-change: transform, opacity;
 }
 
+/* ─────────────────────────────────────────────────────────────
+   EDITORIAL PORTRAIT — one slow breathe, transform only
+   ───────────────────────────────────────────────────────────── */
+@keyframes portrait-breathe {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50%      { transform: scale(1.022) translateY(-4px); }
+}
+
+.portrait-breathe {
+  animation: portrait-breathe 8s ease-in-out infinite;
+  will-change: transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
