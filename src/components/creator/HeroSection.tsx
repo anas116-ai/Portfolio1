@@ -6,7 +6,7 @@ import { ArrowDown } from "lucide-react";
 
 import { ShaderIgnitionButton } from "@/components/ui/ShaderIgnitionButton";
 import { TextAnimationCollection } from "./TextAnimationCollection";
-import { MonogramCharacter } from "./MonogramCharacter";
+import { GeometricCharacter } from "./GeometricCharacter";
 
 export function HeroSection() {
   return (
@@ -121,7 +121,7 @@ export function HeroSection() {
                   aria-hidden="true"
                   className="pointer-events-none absolute left-1/2 -bottom-5 z-0 h-[64px] w-[300px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(217,255,0,0.14)_0%,transparent_70%)] blur-[24px]"
                 />
-                <MonogramCharacter className="relative z-10" />
+                <GeometricCharacter className="relative z-10" />
                 <div className="relative z-10 mt-4 grid w-full grid-cols-2 gap-4 border-t border-[rgba(244,245,239,0.09)] pt-3 font-[family-name:var(--font-geist-mono)] text-[10.5px] leading-[1.8] tracking-[0.04em] text-[#7D8178]">
                   <div>
                     <div className="mb-1 text-[10px] uppercase tracking-[0.22em] text-[#C5AA7A]">Enterprise</div>

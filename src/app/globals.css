@@ -683,6 +683,37 @@ textarea:focus-visible {
   will-change: transform, opacity;
 }
 
+/* ── Geometric character life: bob, visor scan, LED (transform/opacity) ── */
+@keyframes geo-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-7px); }
+}
+
+.geo-bob {
+  animation: geo-bob 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.geo-scan {
+  animation: geo-scan 3.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: transform;
+}
+
+@keyframes geo-scan {
+  0%   { transform: translateX(-30px); }
+  55%  { transform: translateX(160px); }
+  100% { transform: translateX(160px); opacity: 0; }
+}
+
+.vec-led {
+  animation: vec-led 2.6s ease-in-out infinite;
+}
+
+@keyframes vec-led {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+
 /* ── Editorial plate breathe (kept for reuse) ── */
 @keyframes portrait-breathe {
   0%, 100% { transform: scale(1) translateY(0); }
