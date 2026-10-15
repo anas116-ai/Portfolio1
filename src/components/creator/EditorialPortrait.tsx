@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 /**
@@ -10,12 +10,20 @@ import Image from "next/image";
  * old AI avatar. One slow breathe, no WebGL, no pills, no blasts.
  */
 export function EditorialPortrait({ className = "" }: { className?: string }) {
-  const [imgOk, setImgOk] = useState(true);
+  const [hasPhoto, setHasPhoto] = useState(false);
+
+  useEffect(() => {
+    // ponytail: only attempt the photo when the file actually exists —
+    // monogram stays visible otherwise, never a broken image slot.
+    fetch("/images/portrait.jpg", { method: "HEAD" })
+      .then((r) => setHasPhoto(r.ok))
+      .catch(() => setHasPhoto(false));
+  }, []);
 
   return (
     <figure className={`relative w-full select-none ${className}`}>
       <div className="portrait-breathe relative overflow-hidden rounded-[8px] border border-[rgba(244,245,239,0.14)] bg-[#0C0E0C]">
-        {imgOk ? (
+        {hasPhoto ? (
           <Image
             src="/images/portrait.jpg"
             alt="Mastan Vali — portrait, studio 2026"
@@ -24,7 +32,7 @@ export function EditorialPortrait({ className = "" }: { className?: string }) {
             priority
             sizes="(max-width: 1024px) 70vw, 400px"
             className="h-auto w-full object-cover object-top grayscale-[18%] contrast-[1.04]"
-            onError={() => setImgOk(false)}
+            onError={() => setHasPhoto(false)}
             draggable={false}
           />
         ) : (
