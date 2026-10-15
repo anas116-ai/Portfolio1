@@ -1,12 +1,10 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FadeIn } from "./FadeIn";
-import { PremiumNightBackdrop } from "./PremiumNightBackdrop";
-import { Maximize2, X } from "lucide-react";
+import { Maximize2, X, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { ShaderIgnitionButton, IgnitionColorVariant } from "@/components/ui/ShaderIgnitionButton";
 
 interface ProjectItem {
   no: string;
@@ -120,16 +118,7 @@ const projectList: ProjectItem[] = [
   },
 ];
 
-/* Button pairings so each card's action carries its own accent. */
-const buttonVariants: IgnitionColorVariant[] = ["lemon", "lemonHi", "lemon", "lemonHi"];
-
-const cutCorner = {
-  backgroundImage:
-    "linear-gradient(225deg, transparent 18px, rgba(10,10,11,0.96) 18px), linear-gradient(180deg, rgba(10,10,11,0.96) 0%, rgba(10,10,11,0.96) 100%)",
-};
-
 export function ProjectsSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [modalImage, setModalImage] = useState<{ src: string; title: string } | null>(null);
 
   useEffect(() => {
@@ -143,44 +132,32 @@ export function ProjectsSection() {
   return (
     <section
       id="projects"
-      ref={containerRef}
       className="relative w-full bg-transparent pt-16 sm:pt-20 md:pt-22 pb-20 sm:pb-24 text-[#F5F2EB] z-20 select-none border-t border-[rgba(245,242,235,0.07)]"
     >
-      {/* Clean neutral atmosphere — zero heavy yellow blotches */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-1/3 -left-28 w-[720px] h-[720px] blur-[170px] opacity-[0.04] bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_70%)]" />
-        <div className="absolute top-1/2 -right-40 w-[600px] h-[600px] blur-[170px] opacity-[0.05] bg-[radial-gradient(circle,rgba(148,210,255,0.15)_0%,transparent_70%)]" />
-        {/* Premium night beams over the stacking cards */}
-        <PremiumNightBackdrop side="right" mood="calm" />
-      </div>
-
       <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 lg:px-16 relative z-20">
-        {/* Section heading. The caption is held on the left with the title, not
-            floated to the far right of the row. */}
-        <div className="flex flex-col gap-6 mb-14 sm:mb-16">
+        {/* Section heading — editorial index, quiet */}
+        <div className="flex flex-col gap-6 mb-10 sm:mb-12">
           <FadeIn y={20} delay={0.1} duration={0.8}>
             <div className="flex items-center gap-2.5 eyebrow">
-              <span className="h-[5px] w-[5px] rounded-full bg-[#C5AA7A] animate-pulse" />
-              // Production systems and products
+              <span className="h-[5px] w-[5px] rounded-full bg-[#C5AA7A]" />
+              // Selected work
             </div>
             <h2 className="stylish-header text-[2.1rem] sm:text-[2.6rem] lg:text-[3.1rem] text-[#F5F2EB] mt-3">
               My Projects
             </h2>
             <p className="stylish-sub text-xs sm:text-[13.5px] text-[#B0B2A8] max-w-2xl mt-4">
               Four working systems, each one built to a production bar and published to GitHub.
-              Every claim below is backed by a repository you can open.
             </p>
           </FadeIn>
         </div>
 
-        {/* Stacking cards, each settling behind the next */}
-        <div className="relative flex flex-col pb-16 sm:pb-24">
+        {/* Editorial index — hairline rows, no sticky hijack */}
+        <div className="relative flex flex-col border-t border-[rgba(244,245,239,0.09)]">
           {projectList.map((project, index) => (
-            <ProjectCard
+            <ProjectRow
               key={project.no}
               project={project}
               index={index}
-              total={projectList.length}
               onOpenModal={(src, title) => setModalImage({ src, title })}
             />
           ))}
@@ -233,192 +210,100 @@ export function ProjectsSection() {
   );
 }
 
-function ProjectCard({
+function ProjectRow({
   project,
   index,
-  total,
   onOpenModal,
 }: {
   project: ProjectItem;
   index: number;
-  total: number;
   onOpenModal: (src: string, title: string) => void;
 }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start start", "end start"],
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.955]);
-  const opacity = useTransform(scrollYProgress, [0, 0.75, 1], [1, 0.92, 0.7]);
-  const isLast = index === total - 1;
-
   return (
-    <div
-      ref={cardRef}
-      className="min-h-[85vh] h-auto lg:h-[90vh] flex items-start w-full sticky top-16 sm:top-20 md:top-24 mb-10 lg:mb-0"
-      style={{ zIndex: index + 10 }}
-    >
-      <motion.div
-        style={{
-          scale: isLast ? 1 : scale,
-          opacity: isLast ? 1 : opacity,
-          backgroundColor: "rgba(255, 255, 255, 0.012)",
-          backdropFilter: "blur(8px)",
-          WebkitBackdropFilter: "blur(8px)",
-          backgroundImage:
-            "linear-gradient(135deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.008) 35%, transparent 100%)",
-        }}
-        className="w-full rounded-[22px] border border-[rgba(244,245,239,0.12)] p-6 sm:p-9 md:p-11 relative overflow-hidden group transition-all duration-500 hover:border-[rgba(217,255,0,0.45)] shadow-[0_4px_24px_rgba(0,0,0,0.18)]"
-      >
-        {/* Accent cap, subtle cut plate marker */}
-        <span
-          aria-hidden
-          className="absolute top-0 left-0 h-[2px] w-16 transition-[width] duration-500 group-hover:w-28 z-20"
-          style={{ backgroundColor: "#D9FF00" }}
-        />
-        {/* Top edge specular bevel highlight */}
-        <span
-          aria-hidden
-          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent z-10"
-        />
-        {/* The milled recess the card sits in, one hairline in from the trim */}
-        <span
-          aria-hidden
-          className="absolute inset-[7px] rounded-[16px] border border-[rgba(244,245,239,0.05)] pointer-events-none"
-        />
-
-        {/* Liquid-glass top specular sheen - crisp and crystal clear */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/[0.025] to-transparent"
-        />
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10">
-          {/* Left column: identity, flow, meaning, implementation */}
-          <div className="lg:col-span-7 flex flex-col justify-between space-y-4 sm:space-y-5">
-            <div className="space-y-2">
-              <div className="flex items-center gap-3">
-                <span
-                  className="text-[12px] font-[family-name:var(--font-geist-mono)] tracking-[0.2em] font-medium"
-                  style={{ color: "#C5AA7A" }}
-                >
-                  {project.no}
-                </span>
-                <span className="text-[#777] font-mono text-xs">/</span>
-                <span
-                  className="text-[11px] font-[family-name:var(--font-geist-mono)] uppercase tracking-[0.22em] font-medium"
-                  style={{ color: "#C5AA7A" }}
-                >
-                  {project.category}
-                </span>
-              </div>
-
-              {/* Project Title highlighted strictly in clean crisp Lemon Yellow with NO glow and NO version box */}
-              <h3 className="text-2xl sm:text-3xl md:text-[2.2rem] font-[family-name:var(--font-outfit)] font-bold tracking-[-0.03em]">
-                <span className="text-[#D9FF00] selection:bg-[#D9FF00] selection:text-black">
-                  {project.name}
-                </span>
-              </h3>
-            </div>
-
-            {/* Flow, set as a ruled technical line in Eyebrow color (#C5AA7A) */}
-            <div
-              className="text-[11px] font-[family-name:var(--font-geist-mono)] tracking-[0.22em] uppercase font-medium"
-              style={{ color: "#C5AA7A" }}
-            >
-              End to end flow
-            </div>
-            <div className="-mt-2 pb-4 border-b border-[rgba(244,245,239,0.09)] text-[12.5px] sm:text-[13.5px] text-[#F4F5EF] font-[family-name:var(--font-geist-mono)] leading-[1.6]">
-              {project.flow}
-            </div>
-
-            <p className="stylish-sub text-xs sm:text-[13.5px] text-[#E4E6DF]">
-              {project.simpleMeaning}
-            </p>
-
-            <div className="space-y-3 pt-4 border-t border-[rgba(244,245,239,0.09)]">
-              <span className="eyebrow">What it implements</span>
-              <ul className="space-y-2.5">
-                {project.whatItDoes.slice(0, 3).map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <span
-                      aria-hidden
-                      className="shrink-0 mt-[7px] block h-px w-3.5"
-                      style={{ backgroundColor: "#C5AA7A", opacity: 0.9 }}
-                    />
-                    <span className="text-[12.5px] leading-[1.7] text-[#E0E2DA]">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="flex flex-wrap gap-x-2 gap-y-1.5 pt-1 text-[11px] font-[family-name:var(--font-geist-mono)] text-[#A2A49B]">
-              {project.tags.map((tag) => (
-                <span key={tag} className="hover:text-[#FFFFFF] transition-colors duration-300">
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <ShaderIgnitionButton
-                variant={buttonVariants[index % buttonVariants.length]}
-                href={project.repo}
-                target="_blank"
-                rel="noopener noreferrer"
-                ariaLabel={`View repository, ${project.name} on GitHub`}
-                size="sm"
-              >
-                View repository
-              </ShaderIgnitionButton>
-
-              <div className="flex items-center gap-3 text-[11px] font-[family-name:var(--font-geist-mono)] tracking-[0.14em] uppercase">
-                <span style={{ color: project.accent }}>{project.stat1}</span>
-                <span className="text-[#7A7A74]">/</span>
-                <span className="text-[#B4B6AC]">{project.stat2}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right column: the interface itself */}
-          <div className="lg:col-span-5 relative w-full flex flex-col items-center justify-center space-y-3">
-            <button
-              type="button"
-              onClick={() => onOpenModal(project.bannerImg, project.name)}
-              aria-label={`View full interface, ${project.name}`}
-              className="relative w-full max-w-[380px] sm:max-w-[420px] aspect-[3/4] overflow-hidden border border-[rgba(244,245,239,0.12)] hover:border-[rgba(217,255,0,0.45)] bg-white/[0.015] backdrop-blur-[6px] rounded-[14px] group/img cursor-zoom-in p-3.5 flex items-center justify-center transition-all duration-400 hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
-            >
-              <div className="relative w-full h-full">
-                <Image
-                  src={project.bannerImg}
-                  alt={project.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-contain object-center"
-                  priority
-                />
-              </div>
-
-              <div className="absolute inset-0 bg-[rgba(6,6,8,0.55)] opacity-0 group-hover/img:opacity-100 transition-opacity duration-400 flex items-center justify-center pointer-events-none">
-                <span className="px-3.5 py-2 bg-[rgba(12,12,15,0.70)] backdrop-blur-[10px] border border-[rgba(245,242,235,0.2)] text-[11px] font-[family-name:var(--font-geist-mono)] tracking-[0.16em] uppercase text-[#F5F2EB] flex items-center gap-2">
-                  <Maximize2 size={13} />
-                  View full interface
-                </span>
-              </div>
-            </button>
-
-            <div className="w-full max-w-[380px] sm:max-w-[420px] flex items-center justify-between px-1 text-[11px] font-[family-name:var(--font-geist-mono)] tracking-[0.16em] uppercase">
-              <span className="flex items-center gap-2 text-[#8C8C86]">
-                <span className="h-[5px] w-[5px] rounded-full" style={{ backgroundColor: "#C5AA7A" }} />
-                Verified build
-              </span>
-              <span style={{ color: "#C5AA7A" }}>{project.telemetry}</span>
-            </div>
-          </div>
+    <article className="group grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 py-8 sm:py-10 border-b border-[rgba(244,245,239,0.09)]">
+      {/* Left: index + identity */}
+      <div className="lg:col-span-7 flex flex-col gap-4">
+        <div className="flex items-center gap-3">
+          <span className="text-[12px] font-[family-name:var(--font-geist-mono)] tracking-[0.2em] text-[#C5AA7A]">
+            {project.no}
+          </span>
+          <span className="text-[#43433F] font-mono text-xs">/</span>
+          <span className="text-[11px] font-[family-name:var(--font-geist-mono)] uppercase tracking-[0.18em] text-[#7D8178]">
+            {project.category}
+          </span>
         </div>
-      </motion.div>
-    </div>
+
+        <h3 className="text-2xl sm:text-3xl font-[family-name:var(--font-outfit)] font-semibold tracking-[-0.02em] text-[#F4F5EF]">
+          {project.name}
+        </h3>
+
+        <p className="text-[11px] font-[family-name:var(--font-geist-mono)] leading-[1.7] tracking-[0.04em] text-[#8C8C86]">
+          {project.flow}
+        </p>
+
+        <p className="stylish-sub text-xs sm:text-[13.5px] text-[#B6B9B0] max-w-xl">
+          {project.simpleMeaning}
+        </p>
+
+        <ul className="flex flex-col border-t border-[rgba(244,245,239,0.09)] pt-4">
+          {project.whatItDoes.slice(0, 3).map((item, idx) => (
+            <li key={idx} className="flex items-start gap-3 py-2">
+              <span
+                aria-hidden
+                className="shrink-0 mt-[9px] block h-px w-3.5 bg-[#C5AA7A]"
+              />
+              <span className="text-[12.5px] leading-[1.7] text-[#B6B9B0]">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-[11px] font-[family-name:var(--font-geist-mono)] text-[#7D8178]">
+          {project.tags.map((tag, i) => (
+            <span key={tag} className="flex items-center gap-2">
+              <span>{tag}</span>
+              {i < project.tags.length - 1 && <span className="text-[#43433F]">/</span>}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1">
+          <a
+            href={project.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View repository, ${project.name} on GitHub`}
+            className="inline-flex items-center gap-1.5 text-[12px] font-[family-name:var(--font-geist-mono)] tracking-[0.08em] uppercase text-[#E8FF45] underline decoration-[rgba(232,255,69,0.35)] underline-offset-4 hover:decoration-[#E8FF45] transition-colors duration-300"
+          >
+            View repository
+            <ArrowUpRight size={14} />
+          </a>
+          <span className="text-[11px] font-[family-name:var(--font-geist-mono)] tracking-[0.1em] uppercase text-[#6A6A66]">
+            {project.stat1} / {project.stat2}
+          </span>
+        </div>
+      </div>
+
+      {/* Right: single still thumbnail */}
+      <div className="lg:col-span-5 flex flex-col gap-2">
+        <button
+          type="button"
+          onClick={() => onOpenModal(project.bannerImg, project.name)}
+          aria-label={`View full interface, ${project.name}`}
+          className="relative w-full aspect-[4/3] overflow-hidden border border-[rgba(244,245,239,0.12)] hover:border-[rgba(232,255,69,0.4)] bg-[rgba(255,255,255,0.015)] rounded-[8px] cursor-zoom-in transition-colors duration-300"
+        >
+          <Image
+            src={project.bannerImg}
+            alt={project.name}
+            fill
+            sizes="(max-width: 768px) 100vw, 40vw"
+            className="object-cover object-top"
+          />
+        </button>
+        <div className="flex items-center justify-between text-[11px] font-[family-name:var(--font-geist-mono)] tracking-[0.12em] uppercase">
+          <span className="text-[#6A6A66]">{String(index + 1).padStart(2, "0")} / 04</span>
+          <span className="text-[#7D8178]">{project.telemetry}</span>
+        </div>
+      </div>
+    </article>
   );
 }
