@@ -6,7 +6,7 @@ import React, { useEffect, useRef } from "react";
 const GRAIN_SVG =
   "data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E";
 
-// ── Multi-Color Luxury Spectrum Palette (Lemon, Champagne Gold, Amethyst, Bone White, Emerald, Coral) ──
+// ── Restrained Luxury Palette (Lemon + Bone + Brass only — no violet/emerald/coral) ──
 interface RGBColor {
   r: number;
   g: number;
@@ -15,15 +15,8 @@ interface RGBColor {
 
 const MULTI_LUXURY_PALETTE: RGBColor[] = [
   { r: 217, g: 255, b: 0   }, // Radiant Lemon (#D9FF00) — signature
-  { r: 168, g: 85,  b: 247 }, // Amethyst Violet (#A855F7)
-  { r: 16,  g: 185, b: 129 }, // Emerald Jade (#10B981)
-  { r: 245, g: 158, b: 11  }, // Warm Champagne Amber (#F59E0B)
-  { r: 251, g: 146, b: 60  }, // Sunset Coral (#FB923C)
-  { r: 244, g: 63,  b: 94  }, // Electric Rose (#F43F5E)
-  { r: 255, g: 255, b: 255 }, // Crisp Starlight White (#FFFFFF)
-  { r: 192, g: 132, b: 252 }, // Soft Lilac (#C084FC)
-  { r: 52,  g: 211, b: 153 }, // Spring Mint (#34D399)
-  { r: 251, g: 191, b: 36  }, // Golden Topaz (#FBBF24)
+  { r: 244, g: 245, b: 239 }, // Bone (#F4F5EF) — starlight
+  { r: 197, g: 170, b: 122 }, // Warm Brass (#C5AA7A) — eyebrow hairline
 ];
 
 function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
@@ -167,11 +160,11 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // ── Reduced Count (110 Particles), UNIFORM SIZE & SHAPE FOR ALL PARTICLES ──
-    const PARTICLE_COUNT = 110;
+    // ── Restrained Count (28 Particles), UNIFORM SIZE & SHAPE FOR ALL PARTICLES ──
+    const PARTICLE_COUNT = 28;
     const NOISE_SCALE = 0.0016;
-    const UNIFORM_TAIL_LENGTH = 14; // Exactly 14px tail for every single particle
-    const UNIFORM_HEAD_RADIUS = 1.35; // Exactly 1.35px head ball for every single particle
+    const UNIFORM_TAIL_LENGTH = 7; // Short 7px tail — quiet drift, not comet
+    const UNIFORM_HEAD_RADIUS = 1.1; // Small 1.1px head — no glow ball
 
     interface UniformCometParticle {
       x: number;
@@ -191,7 +184,7 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const col = MULTI_LUXURY_PALETTE[Math.floor(Math.random() * MULTI_LUXURY_PALETTE.length)];
       const depth = Math.random();
-      const baseAlpha = 0.24 + depth * 0.18;
+      const baseAlpha = 0.10 + depth * 0.08;
 
       particles.push({
         x: Math.random() * window.innerWidth,
@@ -227,7 +220,7 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
       const originX = ce.detail.x;
       const originY = ce.detail.y;
 
-      for (let i = 0; i < 14; i++) {
+      for (let i = 0; i < 6; i++) {
         const angle = Math.random() * Math.PI * 2;
         const speed = 0.42 + Math.random() * 1.4;
         const col = MULTI_LUXURY_PALETTE[Math.floor(Math.random() * MULTI_LUXURY_PALETTE.length)];
@@ -236,7 +229,7 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
           y: originY + (Math.random() - 0.5) * 8,
           vx: Math.cos(angle) * speed * 0.55,
           vy: Math.abs(Math.sin(angle)) * speed + 0.42,
-          alpha: 0.85,
+          alpha: 0.4,
           decay: 0.003 + Math.random() * 0.003,
           color: col,
         });
@@ -257,9 +250,9 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
       mouse.vy *= 0.93;
       mouse.speed *= 0.93;
 
-      const mouseRadius = 220;
+      const mouseRadius = 160;
 
-      // ── 1. RENDER UNIFORM MULTI-COLORED COMET PARTICLES (LINE ATTACHED TO HEAD BALL) ──
+      // ── 1. RENDER RESTRAINED DRIFT PARTICLES (LINE ATTACHED TO HEAD BALL) ──
       for (let i = 0; i < PARTICLE_COUNT; i++) {
         const p = particles[i];
 
@@ -285,25 +278,25 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
           if (dist < mouseRadius && dist > 1) {
             const proximityFactor = 1 - dist / mouseRadius;
 
-            // Tangential swirl
+            // Tangential swirl — restrained, no vortex spin
             const tangentX = -dy / dist;
             const tangentY = dx / dist;
-            const swirlStrength = proximityFactor * 2.2 * (1 + mouse.speed * 0.12);
+            const swirlStrength = proximityFactor * 0.6 * (1 + mouse.speed * 0.04);
 
             targetVx += tangentX * swirlStrength;
             targetVy += tangentY * swirlStrength;
 
-            // Kinetic wake transfer
-            targetVx += mouse.vx * proximityFactor * 0.28;
-            targetVy += mouse.vy * proximityFactor * 0.28;
+            // Kinetic wake transfer — subtle
+            targetVx += mouse.vx * proximityFactor * 0.10;
+            targetVy += mouse.vy * proximityFactor * 0.10;
 
-            // Gentle repulsive push
-            const pushFactor = proximityFactor * 0.65;
+            // Gentle repulsive push — subtle
+            const pushFactor = proximityFactor * 0.25;
             targetVx += (dx / dist) * pushFactor;
             targetVy += (dy / dist) * pushFactor;
 
-            // Gentle illumination on proximity
-            p.alpha = Math.min(0.85, p.baseAlpha + proximityFactor * 0.45);
+            // Gentle illumination on proximity — restrained
+            p.alpha = Math.min(0.32, p.baseAlpha + proximityFactor * 0.18);
           } else {
             p.alpha += (p.baseAlpha - p.alpha) * 0.05;
           }
@@ -331,7 +324,7 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
         if (p.y < -margin) p.y = H + margin;
         if (p.y > H + margin) p.y = -margin;
 
-        // ── UNIFORM COMET TAIL: CLEARLY VISIBLE LINE ATTACHED TO HEAD BALL FOR EVERY PARTICLE ──
+        // ── UNIFORM COMET TAIL: SHORT QUIET LINE ATTACHED TO HEAD FOR EVERY PARTICLE ──
         const dirX = Math.cos(p.angle);
         const dirY = Math.sin(p.angle);
 
@@ -340,27 +333,27 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
 
         const tailGrad = targetCtx.createLinearGradient(tailStartX, tailStartY, p.x, p.y);
         tailGrad.addColorStop(0, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0)`);
-        tailGrad.addColorStop(0.35, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${(p.alpha * 0.35).toFixed(3)})`);
-        tailGrad.addColorStop(1, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${(p.alpha * 0.85).toFixed(3)})`);
+        tailGrad.addColorStop(0.35, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${(p.alpha * 0.22).toFixed(3)})`);
+        tailGrad.addColorStop(1, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${(p.alpha * 0.55).toFixed(3)})`);
 
         targetCtx.beginPath();
         targetCtx.moveTo(tailStartX, tailStartY);
         targetCtx.lineTo(p.x, p.y);
         targetCtx.strokeStyle = tailGrad;
-        targetCtx.lineWidth = 1.15; // Uniform stroke width for all particles
+        targetCtx.lineWidth = 1; // Hairline for all particles
         targetCtx.lineCap = "round";
         targetCtx.stroke();
 
-        // ── UNIFORM HEAD BALL: GLOWING ROUND BALL ATTACHED AT THE LEADING TIP ──
+        // ── HEAD DOT: SMALL FLAT DOT, NO AURA BLOOM ──
         targetCtx.beginPath();
         targetCtx.arc(p.x, p.y, UNIFORM_HEAD_RADIUS, 0, Math.PI * 2);
         targetCtx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.alpha.toFixed(3)})`;
         targetCtx.fill();
 
-        // Delicate soft glowing aura around the head ball
+        // Delicate faint halo — barely visible
         targetCtx.beginPath();
-        targetCtx.arc(p.x, p.y, UNIFORM_HEAD_RADIUS * 1.8, 0, Math.PI * 2);
-        targetCtx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${(p.alpha * 0.16).toFixed(3)})`;
+        targetCtx.arc(p.x, p.y, UNIFORM_HEAD_RADIUS * 1.5, 0, Math.PI * 2);
+        targetCtx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${(p.alpha * 0.08).toFixed(3)})`;
         targetCtx.fill();
       }
 
@@ -477,8 +470,8 @@ function useInertialMouseGlow(divRef: React.RefObject<HTMLDivElement | null>) {
       if (divRef.current) {
         divRef.current.style.background = `
           radial-gradient(circle 520px at ${nx}% ${ny}%,
-            rgba(244, 245, 239, 0.015) 0%,
-            rgba(217, 255, 0, 0.018) 38%,
+            rgba(244, 245, 239, 0.010) 0%,
+            rgba(217, 255, 0, 0.012) 38%,
             transparent 75%
           )
         `;
@@ -529,10 +522,10 @@ export function AmbientBackgroundLayers() {
         }}
       />
 
-      {/* LAYER 4 — Analog Film Grain */}
+      {/* LAYER 4 — Analog Film Grain — faint, never milky */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 opacity-[0.24] pointer-events-none"
+        className="absolute inset-0 opacity-[0.06] pointer-events-none"
         style={{
           zIndex: 4,
           backgroundImage: `url("${GRAIN_SVG}")`,
