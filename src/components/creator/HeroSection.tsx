@@ -135,53 +135,6 @@ export function HeroSection() {
               </div>
             </div>
           </div>
-
-            {/* Meta strip — the absent figure's replacement is information:
-                four mono cells on hairlines. No object, no glow. */}
-            <div className="mt-10 grid grid-cols-2 gap-px border border-[rgba(244,245,239,0.09)] bg-[rgba(244,245,239,0.09)] sm:grid-cols-4">
-              {[
-                { k: "Base", v: "Hyderabad, IN" },
-                { k: "Focus", v: "Data · Agents · Web" },
-                { k: "Stack", v: "BODS / Python / Next.js" },
-                { k: "Status", v: "Available for hire" },
-              ].map((c) => (
-                <div key={c.k} className="bg-[#070807] px-4 py-3.5">
-                  <div className="font-[family-name:var(--font-geist-mono)] text-[10px] uppercase tracking-[0.24em] text-[#C5AA7A]">
-                    {c.k}
-                  </div>
-                  <div className="mt-1.5 font-[family-name:var(--font-geist-mono)] text-[12px] tracking-[0.02em] text-[#B6B9B0]">
-                    {c.v}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Selected work — the portfolio reads as a portfolio in 6 seconds:
-                four numbered rows, each a real anchor into the work section. */}
-            <nav aria-label="Selected work" className="mt-8 border-t border-[rgba(244,245,239,0.09)]">
-              {[
-                { no: "01", name: "AnPharmacy", cat: "Healthcare ERP" },
-                { no: "02", name: "Anasify", cat: "ATS matcher" },
-                { no: "03", name: "AnsiQ", cat: "Multi-agent AI" },
-                { no: "04", name: "CodeSync", cat: "Fork sync" },
-              ].map((p) => (
-                <a
-                  key={p.no}
-                  href="#projects"
-                  className="group flex items-baseline gap-4 border-b border-[rgba(244,245,239,0.09)] py-2.5 transition-colors duration-200 hover:bg-[rgba(255,255,255,0.015)]"
-                >
-                  <span className="font-[family-name:var(--font-geist-mono)] text-[11px] tracking-[0.18em] text-[#C5AA7A]">
-                    {p.no}
-                  </span>
-                  <span className="font-[family-name:var(--font-outfit)] text-[15px] font-medium tracking-[-0.01em] text-[#F4F5EF]">
-                    {p.name}
-                  </span>
-                  <span className="ml-auto font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.14em] text-[#6A6A66] transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-[#B6B9B0]">
-                    {p.cat} →
-                  </span>
-                </a>
-              ))}
-            </nav>
           </div>
         </div>
 
