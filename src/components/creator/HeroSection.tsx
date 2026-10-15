@@ -52,22 +52,21 @@ export function HeroSection() {
                 </div>
               </FadeIn>
 
-              {/* Discipline line — single clean lemon line */}
+              {/* Discipline line — specific positioning, not a vague title */}
               <FadeIn y={16} delay={0.25} duration={0.7}>
                 <div className="flex items-center gap-x-3 text-[13px] sm:text-[15px] md:text-[17px] font-[family-name:var(--font-geist-sans)] font-medium tracking-[-0.01em] text-[#F4F5EF]">
                   <span aria-hidden="true" className="h-px w-6 shrink-0 bg-[#D9FF00]" />
-                  <span>Data & Technology Professional</span>
+                  <span>Enterprise ETL engineer · Agentic AI builder</span>
                 </div>
               </FadeIn>
 
-              {/* Narrative */}
+              {/* Narrative — one breath, proof-first */}
               <FadeIn y={16} delay={0.35} duration={0.8}>
                 <div className="max-w-2xl">
                   <p className="text-balance text-[#C8CAC2] text-[13px] sm:text-[15px] leading-[1.75] font-[family-name:var(--font-geist-sans)] font-normal">
-                    Experienced in SAP BODS development, ETL processes, and enterprise production
-                    support, with a portfolio of digital applications spanning pharmacy management,
-                    workflow automation, and AI-powered document verification, built using LLMs and
-                    AI coding agents.
+                    SAP BODS engineer turned systems builder. Four shipped systems
+                    across ERP, hiring-tech, multi-agent AI, and devtools — all
+                    on GitHub.
                   </p>
                 </div>
               </FadeIn>
@@ -132,6 +131,33 @@ export function HeroSection() {
                 </div>
               ))}
             </div>
+
+            {/* Selected work — the portfolio reads as a portfolio in 6 seconds:
+                four numbered rows, each a real anchor into the work section. */}
+            <nav aria-label="Selected work" className="mt-8 border-t border-[rgba(244,245,239,0.09)]">
+              {[
+                { no: "01", name: "AnPharmacy", cat: "Healthcare ERP" },
+                { no: "02", name: "Anasify", cat: "ATS matcher" },
+                { no: "03", name: "AnsiQ", cat: "Multi-agent AI" },
+                { no: "04", name: "CodeSync", cat: "Fork sync" },
+              ].map((p) => (
+                <a
+                  key={p.no}
+                  href="#projects"
+                  className="group flex items-baseline gap-4 border-b border-[rgba(244,245,239,0.09)] py-2.5 transition-colors duration-200 hover:bg-[rgba(255,255,255,0.015)]"
+                >
+                  <span className="font-[family-name:var(--font-geist-mono)] text-[11px] tracking-[0.18em] text-[#C5AA7A]">
+                    {p.no}
+                  </span>
+                  <span className="font-[family-name:var(--font-outfit)] text-[15px] font-medium tracking-[-0.01em] text-[#F4F5EF]">
+                    {p.name}
+                  </span>
+                  <span className="ml-auto font-[family-name:var(--font-geist-mono)] text-[11px] uppercase tracking-[0.14em] text-[#6A6A66] transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-[#B6B9B0]">
+                    {p.cat} →
+                  </span>
+                </a>
+              ))}
+            </nav>
           </div>
         </div>
 
