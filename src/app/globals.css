@@ -665,8 +665,8 @@ textarea:focus-visible {
    Trail = 34px faint bone, click = 56px lemon. No glow, no blur.
    ───────────────────────────────────────────────────────────── */
 @keyframes cursor-ripple {
-  0%   { transform: translate(-50%, -50%) scale(0.25); opacity: 0.7; }
-  100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+  0%   { transform: translate(-50%, -50%) scale(0.25); opacity: 0.75; }
+  100% { transform: translate(-50%, -50%) scale(1.7); opacity: 0; }
 }
 
 .cursor-ripple {
@@ -678,8 +678,8 @@ textarea:focus-visible {
   border-style: solid;
   pointer-events: none;
   transform: translate(-50%, -50%) scale(0.25);
-  opacity: 0.7;
-  animation: cursor-ripple 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0.75;
+  animation: cursor-ripple 1.05s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   will-change: transform, opacity;
 }
 

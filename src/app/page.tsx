@@ -12,6 +12,7 @@ import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { SiteHeader } from "@/components/navigation/SiteHeader";
 import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 import { LuxuryMagneticCursor } from "@/components/motion/LuxuryMagneticCursor";
+import { PointerSpotlight } from "@/components/motion/PointerSpotlight";
 
 export default function Home() {
   return (
@@ -22,6 +23,9 @@ export default function Home() {
       >
         {/* Luxury Fluid Magnetic Cursor */}
         <LuxuryMagneticCursor />
+
+        {/* Pointer light pool + touch ring (drives spotlight CSS) */}
+        <PointerSpotlight />
 
         {/* Top Scroll Progress Indicator */}
         <ScrollProgressBar />

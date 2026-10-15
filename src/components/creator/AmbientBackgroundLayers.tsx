@@ -160,11 +160,11 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // ── Restrained Count (28 Particles), UNIFORM SIZE & SHAPE FOR ALL PARTICLES ──
-    const PARTICLE_COUNT = 28;
+    // ── Visible Count (44 Particles), UNIFORM SIZE & SHAPE FOR ALL PARTICLES ──
+    const PARTICLE_COUNT = 44;
     const NOISE_SCALE = 0.0016;
-    const UNIFORM_TAIL_LENGTH = 7; // Short 7px tail — quiet drift, not comet
-    const UNIFORM_HEAD_RADIUS = 1.1; // Small 1.1px head — no glow ball
+    const UNIFORM_TAIL_LENGTH = 9; // Readable 9px drift line, not comet
+    const UNIFORM_HEAD_RADIUS = 1.2; // Small 1.2px head — no glow ball
 
     interface UniformCometParticle {
       x: number;
@@ -184,7 +184,7 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const col = MULTI_LUXURY_PALETTE[Math.floor(Math.random() * MULTI_LUXURY_PALETTE.length)];
       const depth = Math.random();
-      const baseAlpha = 0.10 + depth * 0.08;
+      const baseAlpha = 0.14 + depth * 0.1;
 
       particles.push({
         x: Math.random() * window.innerWidth,
@@ -250,9 +250,9 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
       mouse.vy *= 0.93;
       mouse.speed *= 0.93;
 
-      const mouseRadius = 160;
+      const mouseRadius = 180;
 
-      // ── 1. RENDER RESTRAINED DRIFT PARTICLES (LINE ATTACHED TO HEAD BALL) ──
+      // ── 1. RENDER VISIBLE DRIFT PARTICLES (LINE ATTACHED TO HEAD BALL) ──
       for (let i = 0; i < PARTICLE_COUNT; i++) {
         const p = particles[i];
 
@@ -278,25 +278,25 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
           if (dist < mouseRadius && dist > 1) {
             const proximityFactor = 1 - dist / mouseRadius;
 
-            // Tangential swirl — restrained, no vortex spin
+            // Tangential swirl — felt but calm, no vortex spin
             const tangentX = -dy / dist;
             const tangentY = dx / dist;
-            const swirlStrength = proximityFactor * 0.6 * (1 + mouse.speed * 0.04);
+            const swirlStrength = proximityFactor * 0.9 * (1 + mouse.speed * 0.05);
 
             targetVx += tangentX * swirlStrength;
             targetVy += tangentY * swirlStrength;
 
-            // Kinetic wake transfer — subtle
-            targetVx += mouse.vx * proximityFactor * 0.10;
-            targetVy += mouse.vy * proximityFactor * 0.10;
+            // Kinetic wake transfer — felt
+            targetVx += mouse.vx * proximityFactor * 0.14;
+            targetVy += mouse.vy * proximityFactor * 0.14;
 
-            // Gentle repulsive push — subtle
-            const pushFactor = proximityFactor * 0.25;
+            // Gentle repulsive push — felt
+            const pushFactor = proximityFactor * 0.32;
             targetVx += (dx / dist) * pushFactor;
             targetVy += (dy / dist) * pushFactor;
 
-            // Gentle illumination on proximity — restrained
-            p.alpha = Math.min(0.32, p.baseAlpha + proximityFactor * 0.18);
+            // Gentle illumination on proximity — visible
+            p.alpha = Math.min(0.45, p.baseAlpha + proximityFactor * 0.24);
           } else {
             p.alpha += (p.baseAlpha - p.alpha) * 0.05;
           }
@@ -352,8 +352,8 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
 
         // Delicate faint halo — barely visible
         targetCtx.beginPath();
-        targetCtx.arc(p.x, p.y, UNIFORM_HEAD_RADIUS * 1.5, 0, Math.PI * 2);
-        targetCtx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${(p.alpha * 0.08).toFixed(3)})`;
+        targetCtx.arc(p.x, p.y, UNIFORM_HEAD_RADIUS * 1.6, 0, Math.PI * 2);
+        targetCtx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${(p.alpha * 0.1).toFixed(3)})`;
         targetCtx.fill();
       }
 
