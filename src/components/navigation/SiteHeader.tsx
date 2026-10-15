@@ -44,22 +44,26 @@ export function SiteHeader() {
 
   const social = {
     className:
-      "h-10 w-10 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-white/[0.08] hover:text-[#E8FF45] text-[#B6B9B0] cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8FF45]",
+      "h-10 w-10 rounded-full flex items-center justify-center transition-colors duration-200 hover:text-[#F4F5EF] text-[#7D8178] cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8FF45]",
   };
 
   return (
     <header
-      className="fixed top-0 inset-x-0 z-50 transition-all duration-300 pointer-events-none"
+      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 pointer-events-none ${
+        pastHero
+          ? "bg-[rgba(7,8,7,0.72)] backdrop-blur-[12px] border-b border-[rgba(244,245,239,0.08)]"
+          : "bg-transparent border-b border-transparent"
+      }`}
     >
       <div className="px-5 sm:px-8 md:px-12 lg:px-16 pointer-events-auto">
-        <div className="max-w-7xl mx-auto h-16 sm:h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto h-16 sm:h-[72px] flex items-center justify-between">
           <a
             href="#top"
-            className="group inline-flex items-center cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
+            className="group inline-flex items-center cursor-pointer"
             aria-label="Mastan Vali, back to top"
           >
-            <span className="font-header-dynamic text-[16px] sm:text-[18px] font-semibold uppercase tracking-[0.16em] text-white select-none flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#E8FF45] shadow-[0_0_8px_#E8FF45]" />
+            <span className="font-header-dynamic text-[15px] sm:text-[16px] font-semibold uppercase tracking-[0.16em] text-white select-none flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E8FF45]" />
               MASTAN VALI
             </span>
           </a>
