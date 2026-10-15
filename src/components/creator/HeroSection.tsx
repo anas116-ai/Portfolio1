@@ -6,7 +6,6 @@ import { ArrowDown } from "lucide-react";
 
 import { ShaderIgnitionButton } from "@/components/ui/ShaderIgnitionButton";
 import { TextAnimationCollection } from "./TextAnimationCollection";
-import { VectorCharacter } from "./VectorCharacter";
 
 export function HeroSection() {
   return (
@@ -28,9 +27,8 @@ export function HeroSection() {
         {/* Hero composition — single editorial column. No object, no mascot:
             top dev portfolios lead with type + hairlines, not figures. */}
         <div className="relative z-20 my-auto w-full max-w-7xl mx-auto">
-          <div className="relative z-10 py-4 sm:py-6">
-          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
-            <div className="flex flex-col items-start justify-center space-y-3 sm:space-y-5 lg:space-y-7 py-2 lg:col-span-7">
+          <div className="relative z-10 max-w-3xl py-4 sm:py-6">
+            <div className="flex flex-col items-start justify-center space-y-3 sm:space-y-5 lg:space-y-7 py-2">
               {/* Top eyebrow — completely clean, unboxed text (NO boxes, NO pills) */}
               <FadeIn y={12} delay={0.1} duration={0.7} className="w-full">
                 <div className="flex items-center gap-3 eyebrow" style={{ color: "#C5AA7A" }}>
@@ -113,28 +111,6 @@ export function HeroSection() {
                 </div>
               </FadeIn>
             </div>
-
-            {/* Character stage — vector study + static ledger */}
-            <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-end relative">
-              <div className="relative z-10 w-full sm:w-[320px] md:w-[350px] lg:w-[380px] xl:w-[400px]">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute left-1/2 -bottom-5 z-0 h-[64px] w-[300px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(217,255,0,0.14)_0%,transparent_70%)] blur-[24px]"
-                />
-                <VectorCharacter className="relative z-10" />
-                <div className="relative z-10 mt-4 grid w-full grid-cols-2 gap-4 border-t border-[rgba(244,245,239,0.09)] pt-3 font-[family-name:var(--font-geist-mono)] text-[10.5px] leading-[1.8] tracking-[0.04em] text-[#7D8178]">
-                  <div>
-                    <div className="mb-1 text-[10px] uppercase tracking-[0.22em] text-[#C5AA7A]">Enterprise</div>
-                    SAP BODS / BW / SQL / S/4HANA
-                  </div>
-                  <div>
-                    <div className="mb-1 text-[10px] uppercase tracking-[0.22em] text-[#C5AA7A]">Agentic</div>
-                    LLMs / RAG / MCP / Python
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
             {/* Meta strip — the absent figure's replacement is information:
                 four mono cells on hairlines. No object, no glow. */}

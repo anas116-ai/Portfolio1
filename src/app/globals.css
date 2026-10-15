@@ -683,39 +683,7 @@ textarea:focus-visible {
   will-change: transform, opacity;
 }
 
-/* ── Vector character life: breathe, blink, LED (transform/opacity only) ── */
-@keyframes vec-bob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
-}
-
-.vec-bob {
-  animation: vec-bob 6s ease-in-out infinite;
-  will-change: transform;
-}
-
-.vec-eyes {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: vec-blink 4.8s ease-in-out infinite;
-}
-
-@keyframes vec-blink {
-  0%, 92%, 100% { transform: scaleY(1); }
-  94.5%        { transform: scaleY(0.08); }
-  97%          { transform: scaleY(1); }
-}
-
-.vec-led {
-  animation: vec-led 2.6s ease-in-out infinite;
-}
-
-@keyframes vec-led {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.35; }
-}
-
-/* ── Editorial plate breathe (kept for reuse while hero is typographic) ── */
+/* ── Editorial plate breathe (kept for reuse) ── */
 @keyframes portrait-breathe {
   0%, 100% { transform: scale(1) translateY(0); }
   50%      { transform: scale(1.022) translateY(-4px); }
