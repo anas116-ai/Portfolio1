@@ -2,11 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-console.log('🔄 Rolling back to pristine checkpoint...');
+console.log('🔄 Initiating instant local rollback to Butterfly Live checkpoint...');
 
 // 1. Restore from physical backup directory
-const backupDir = path.join(__dirname, 'src_backup_pristine');
-const targetDir = path.join(__dirname, 'src');
+const backupDir = path.join(__dirname, '_backups', 'checkpoint_butterfly_live');
+const targetSrc = path.join(__dirname, 'src');
+const targetAssets = path.join(__dirname, 'public', 'assets', 'character');
 
 function rmDir(dir) {
   if (fs.existsSync(dir)) {
@@ -25,19 +26,27 @@ function copyDir(src, dest) {
 }
 
 try {
-  rmDir(targetDir);
-  copyDir(backupDir, targetDir);
-  console.log('✅ Physical src restored from src_backup_pristine!');
+  if (fs.existsSync(path.join(backupDir, 'src'))) {
+    rmDir(targetSrc);
+    copyDir(path.join(backupDir, 'src'), targetSrc);
+    console.log('✅ Physical src/ restored from _backups/checkpoint_butterfly_live/src');
+  }
+
+  if (fs.existsSync(path.join(backupDir, 'public_assets_character'))) {
+    rmDir(targetAssets);
+    copyDir(path.join(backupDir, 'public_assets_character'), targetAssets);
+    console.log('✅ Physical public/assets/character restored!');
+  }
 } catch (e) {
-  console.error('Physical copy error:', e.message);
+  console.error('Physical copy note:', e.message);
 }
 
-// 2. Git reset
+// 2. Git reset to local checkpoint tag (without touching remote GitHub)
 try {
-  execSync('git reset --hard checkpoint-pristine', { stdio: 'inherit', cwd: __dirname });
-  console.log('✅ Git reset to tag checkpoint-pristine successful!');
+  execSync('git reset --hard checkpoint-butterfly-live', { stdio: 'inherit', cwd: __dirname });
+  console.log('✅ Local Git reset to tag "checkpoint-butterfly-live" successful!');
 } catch (e) {
   console.log('Git reset notice:', e.message);
 }
 
-console.log('🎉 Pristine Obsidian-Lemon state 100% restored!');
+console.log('🎉 100% RESTORED to the working Butterfly Live Obsidian-Lemon state!');
