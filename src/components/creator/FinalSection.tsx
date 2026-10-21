@@ -13,15 +13,17 @@ export function FinalSection() {
       className="relative w-full bg-transparent text-[#F4F5EF] border-t border-[rgba(244,245,239,0.07)] pt-14 sm:pt-16 pb-10 px-5 sm:px-8 md:px-12 lg:px-16 select-none"
     >
       <div className="mx-auto max-w-7xl relative z-10">
-        <FadeIn y={16} duration={0.7}>
-          <div className="flex items-center gap-2.5 eyebrow">
-            <span className="h-[5px] w-[5px] rounded-full bg-[#C5AA7A]" />
-            // Contact
-          </div>
-          <h2 className="stylish-header text-[2rem] sm:text-[2.5rem] text-[#F4F5EF] mt-3">
-            Contact
-          </h2>
-        </FadeIn>
+        <div className="flex flex-col sm:flex-row sm:items-end gap-6 sm:gap-10">
+          <FadeIn y={16} duration={0.7} className="flex-1">
+            <div className="flex items-center gap-2.5 eyebrow">
+              <span className="h-[5px] w-[5px] rounded-full bg-[#C5AA7A]" />
+              // Contact
+            </div>
+            <h2 className="stylish-header text-[2rem] sm:text-[2.5rem] text-[#F4F5EF] mt-3">
+              Contact
+            </h2>
+          </FadeIn>
+        </div>
 
         {/* Colophon grid — left aligned, no slogan, no glow, no shader button */}
         <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3">

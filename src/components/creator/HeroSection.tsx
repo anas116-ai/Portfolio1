@@ -6,6 +6,7 @@ import { ArrowDown } from "lucide-react";
 
 import { ShaderIgnitionButton } from "@/components/ui/ShaderIgnitionButton";
 import { TextAnimationCollection } from "./TextAnimationCollection";
+import { AnimatedCharacter } from "@/components/character/AnimatedCharacter";
 
 export function HeroSection() {
   return (
@@ -21,12 +22,18 @@ export function HeroSection() {
           {/* Fill — a bone wash behind the copy so the type sits in light, not on black */}
           <div className="absolute left-[-14%] sm:left-[-2%] top-[8%] sm:top-[14%] w-[480px] sm:w-[600px] h-[480px] sm:h-[600px] bg-[radial-gradient(circle,rgba(244,245,239,0.05)_0%,transparent_72%)]" />
           {/* Floor — a low lemon wash grounding the whole frame */}
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-[-8%] w-[780px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(217,255,0,0.06)_0%,transparent_72%)]" />
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-[-8%] w-[780px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(217,255,0,0.04)_0%,transparent_72%)]" />
         </div>
 
-        {/* Hero composition — single editorial column. No object, no mascot:
-            top dev portfolios lead with type + hairlines, not figures. */}
-        <div className="relative z-20 my-auto w-full max-w-7xl mx-auto">
+        {/* The figure. Smooth cinematic animated presence with monarch butterflies,
+            responsive interactive micro-parallax, and feathered obsidian edge blending. */}
+        <div className="pointer-events-none absolute inset-0 z-10">
+          <AnimatedCharacter />
+        </div>
+
+        {/* Copy — held in the light on the left, clear of the figure. On a
+            phone it sits at the top and the figure takes the space under it. */}
+        <div className="relative z-20 w-full max-w-7xl mx-auto mb-auto lg:my-auto">
           <div className="relative z-10 max-w-3xl py-4 sm:py-6">
             <div className="flex flex-col items-start justify-center space-y-3 sm:space-y-5 lg:space-y-7 py-2">
               {/* Top eyebrow — completely clean, unboxed text (NO boxes, NO pills) */}

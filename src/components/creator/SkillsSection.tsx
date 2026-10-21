@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FadeIn } from "./FadeIn";
+import { Tilt3D } from "@/components/motion/Tilt3D";
+import { Parallax } from "@/components/motion/Parallax";
 
 interface Discipline {
   id: string;
@@ -143,9 +145,9 @@ export function SkillsSection() {
           glass: without light behind them there is nothing to refract and the
           whole section reads as flat plates. */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-[38%] -left-32 w-[720px] h-[560px] blur-[130px] bg-[radial-gradient(circle,rgba(217,255,0,0.085)_0%,transparent_72%)]" />
-        <div className="absolute top-[58%] -right-36 w-[680px] h-[540px] blur-[130px] bg-[radial-gradient(circle,rgba(244,245,239,0.07)_0%,transparent_74%)]" />
-        <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-[900px] h-[380px] blur-[120px] bg-[radial-gradient(ellipse_at_center,rgba(232,255,69,0.055)_0%,transparent_74%)]" />
+        <Parallax speed={50} className="absolute top-[38%] -left-32 w-[720px] h-[560px] blur-[130px] bg-[radial-gradient(circle,rgba(217,255,0,0.085)_0%,transparent_72%)]" />
+        <Parallax speed={30} className="absolute top-[58%] -right-36 w-[680px] h-[540px] blur-[130px] bg-[radial-gradient(circle,rgba(244,245,239,0.07)_0%,transparent_74%)]" />
+        <Parallax speed={-22} className="absolute bottom-[-40px] left-[calc(50%-450px)] w-[900px] h-[380px] blur-[120px] bg-[radial-gradient(ellipse_at_center,rgba(232,255,69,0.055)_0%,transparent_74%)]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-16 space-y-14 relative z-20">
@@ -153,7 +155,7 @@ export function SkillsSection() {
             so the section opens quietly, and the supporting line holds the left
             column with it. Nothing here is right aligned. */}
         <div className="flex flex-col gap-6">
-          <FadeIn y={15} delay={0.1} duration={0.7}>
+          <FadeIn y={15} delay={0.1} duration={0.7} depth={6}>
             <div className="flex items-center gap-2.5 eyebrow">
               <span className="h-[5px] w-[5px] rounded-full bg-[#C5AA7A] animate-pulse" />
               // Core disciplines
@@ -173,9 +175,9 @@ export function SkillsSection() {
             hairline — no drop shadow, no scaling. */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
           {disciplines.map((d, idx) => (
+            <Tilt3D key={d.id} className="h-full flex" max={6} perspective={1100}>
             <motion.button
               type="button"
-              key={d.id}
               onClick={() => setOpenIdx(idx)}
               aria-label={`Open ${d.title}, opens the full spread`}
               className="group relative cursor-pointer text-left w-full min-h-[300px] sm:min-h-[320px] flex flex-col overflow-hidden rounded-[18px] glass border border-[rgba(217,255,0,0.22)] hover:border-[#D9FF00] shadow-[0_4px_24px_rgba(0,0,0,0.48)] hover:shadow-[0_8px_32px_rgba(217,255,0,0.15)] transition-all duration-700 ease-[cubic-bezier(0.165,0.84,0.44,1)] hover:-translate-y-1"
@@ -271,6 +273,7 @@ export function SkillsSection() {
                 </span>
               </span>
             </motion.button>
+            </Tilt3D>
           ))}
         </div>
       </div>

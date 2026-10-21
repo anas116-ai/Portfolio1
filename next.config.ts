@@ -3,6 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Dev-server asset requests are only served to origins listed here. Without
+  // this, opening the site as 127.0.0.1:3000 or from the LAN IP instead of
+  // localhost logs a cross-origin warning and, in newer Next versions, fails
+  // the /_next/* chunk requests outright — which reads as "the site is broken".
+  allowedDevOrigins: ["localhost", "127.0.0.1", "192.168.0.109"],
   eslint: {
     ignoreDuringBuilds: true,
   },

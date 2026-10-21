@@ -10,6 +10,9 @@ interface FadeInProps {
   duration?: number;
   y?: number;
   x?: number;
+  /** Optional entrance depth in degrees: the subject tips forward out of the
+   *  page plane and settles. Off by default so protected surfaces stay flat. */
+  depth?: number;
   className?: string;
 }
 
@@ -30,6 +33,7 @@ export function FadeIn({
   duration = 0.5,
   y = 40,
   x = 0,
+  depth = 0,
   className,
 }: FadeInProps) {
   const ref = useRef(null);
@@ -38,8 +42,9 @@ export function FadeIn({
     <motion.div
       ref={ref}
       className={className}
-      initial={reduceMotion ? false : { opacity: 0, y, x }}
-      whileInView={{ opacity: 1, y: 0, x: 0 }}
+      style={depth && !reduceMotion ? { transformPerspective: 1100 } : undefined}
+      initial={reduceMotion ? false : { opacity: 0, y, x, rotateX: depth }}
+      whileInView={{ opacity: 1, y: 0, x: 0, rotateX: 0 }}
       /* Fires slightly before the subject reaches the fold so the element is
          already settled by the time it is read, never mid arrival. */
       viewport={{ once: true, margin: "-12% 0px -12% 0px" }}

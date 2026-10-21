@@ -49,19 +49,30 @@ export function V2CharacterRig({ className = "" }: V2CharacterRigProps) {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  // Track normalized mouse coordinates (-1 to 1)
+  // Track normalized pointer coordinates (-1 to 1). Mouse + touch share one path
+  // so the figure feels alive on phones as well as desktops.
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const setFromClient = (clientX: number, clientY: number) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
 
-      const normX = (e.clientX - centerX) / (rect.width / 2);
-      const normY = -(e.clientY - centerY) / (rect.height / 2);
+      const normX = (clientX - centerX) / (rect.width / 2);
+      const normY = -(clientY - centerY) / (rect.height / 2);
 
       mousePosition.current.x = Math.max(-1, Math.min(1, normX));
       mousePosition.current.y = Math.max(-1, Math.min(1, normY));
+    };
+
+    const handleMouseMove = (e: MouseEvent) => setFromClient(e.clientX, e.clientY);
+    const handleTouch = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (t) setFromClient(t.clientX, t.clientY);
+    };
+    const handleTouchEnd = () => {
+      mousePosition.current.x = 0;
+      mousePosition.current.y = 0;
     };
 
     const handleMouseLeave = () => {
@@ -70,10 +81,14 @@ export function V2CharacterRig({ className = "" }: V2CharacterRigProps) {
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("touchmove", handleTouch, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouch);
+      window.removeEventListener("touchend", handleTouchEnd);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);

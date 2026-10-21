@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 
 // ── Film grain filter ─────────────────────────────────────────────────────────
 const GRAIN_SVG =
@@ -147,6 +148,11 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    const handleTouchMove = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (t) handleMouseMove({ clientX: t.clientX, clientY: t.clientY } as MouseEvent);
+    };
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
     document.documentElement.addEventListener("mouseleave", handleMouseLeave);
 
     // Scroll tracking
@@ -408,6 +414,7 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
     return () => {
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
       document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("character-skill-burst", onSkillBurst);
@@ -418,27 +425,40 @@ function useDeterministicFlowFieldCanvas(canvasRef: React.RefObject<HTMLCanvasEl
 }
 
 // ── Soft Atmospheric Ambient Depth Pools ─────────────────────────────────────
+// Three planes at different depths: as the document scrolls, the far plane
+// drifts least and the near plane most, so the field gains real depth behind
+// the fixed viewport instead of sitting flat. Page-scroll driven (the layer is
+// position:fixed, so element-relative progress would never move).
 function AtmosphericDepthPools() {
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+  const farY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const midY = useTransform(scrollYProgress, [0, 1], [0, 260]);
+  const nearY = useTransform(scrollYProgress, [0, 1], [0, 380]);
+
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-      {/* 1. Neutral smoked starlight wash — top left */}
-      <div
+      {/* 1. Neutral smoked starlight wash — top left (far plane) */}
+      <motion.div
         className="absolute -top-32 -left-36 w-[680px] h-[680px] rounded-full blur-[220px]"
-        style={{
+        style={reduce ? { background: "radial-gradient(circle, rgba(244, 245, 239, 0.016) 0%, transparent 70%)" } : {
+          y: farY,
           background: "radial-gradient(circle, rgba(244, 245, 239, 0.016) 0%, transparent 70%)",
         }}
       />
-      {/* 2. Soft Warm Champagne wash — mid right */}
-      <div
+      {/* 2. Soft Warm Brass wash — mid right (mid plane) */}
+      <motion.div
         className="absolute top-[35%] -right-32 w-[720px] h-[720px] rounded-full blur-[230px]"
-        style={{
-          background: "radial-gradient(circle, rgba(229, 169, 60, 0.016) 0%, transparent 68%)",
+        style={reduce ? { background: "radial-gradient(circle, rgba(197, 170, 122, 0.016) 0%, transparent 68%)" } : {
+          y: midY,
+          background: "radial-gradient(circle, rgba(197, 170, 122, 0.016) 0%, transparent 68%)",
         }}
       />
-      {/* 3. Refined Lemon glow — hero stage grounding */}
-      <div
+      {/* 3. Refined Lemon glow — hero stage grounding (near plane) */}
+      <motion.div
         className="absolute top-[8%] right-[10%] w-[560px] h-[560px] rounded-full blur-[200px]"
-        style={{
+        style={reduce ? { background: "radial-gradient(circle, rgba(217, 255, 0, 0.030) 0%, transparent 72%)" } : {
+          y: nearY,
           background: "radial-gradient(circle, rgba(217, 255, 0, 0.030) 0%, transparent 72%)",
         }}
       />

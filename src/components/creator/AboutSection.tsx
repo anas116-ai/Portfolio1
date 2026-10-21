@@ -1,6 +1,7 @@
 "use client";
 
 import { FadeIn } from "./FadeIn";
+import { Parallax } from "@/components/motion/Parallax";
 import { Database, Bot, MonitorSmartphone } from "lucide-react";
 import { ZenKoiPondCard, type CapabilityArea } from "./ZenKoiPondCard";
 
@@ -68,14 +69,14 @@ export function AboutSection() {
       {/* Two low, cool light sources. Lemon on one side, bone on the other,
           both held far below the threshold where they read as a glow. */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-[22%] left-[28%] w-[680px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(245,242,235,0.05)_0%,transparent_70%)] blur-[90px]" />
-        <div className="absolute top-[34%] right-[20%] w-[600px] h-[360px] bg-[radial-gradient(ellipse_at_center,rgba(245,242,235,0.04)_0%,transparent_70%)] blur-[90px]" />
+        <Parallax speed={46} className="absolute top-[22%] left-[28%] w-[680px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(245,242,235,0.05)_0%,transparent_70%)] blur-[90px]" />
+        <Parallax speed={28} className="absolute top-[34%] right-[20%] w-[600px] h-[360px] bg-[radial-gradient(ellipse_at_center,rgba(245,242,235,0.04)_0%,transparent_70%)] blur-[90px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-16 space-y-12 sm:space-y-14 relative z-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="flex flex-col items-start space-y-4 max-w-3xl">
-            <FadeIn y={18} delay={0.1} duration={0.8}>
+            <FadeIn y={18} delay={0.1} duration={0.8} depth={6}>
               <div className="flex items-center gap-2.5 eyebrow">
                 <span className="h-[5px] w-[5px] rounded-full bg-[#C5AA7A] animate-pulse" />
                 // ABOUT ME · ARCHITECTURAL FOUNDATION

@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { FadeIn } from "./FadeIn";
+import { Parallax } from "@/components/motion/Parallax";
 import { PremiumNightBackdrop } from "./PremiumNightBackdrop";
 import { Maximize2, X } from "lucide-react";
 import Image from "next/image";
@@ -148,8 +149,8 @@ export function ProjectsSection() {
     >
       {/* Clean neutral atmosphere — zero heavy yellow blotches */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-1/3 -left-28 w-[720px] h-[720px] blur-[170px] opacity-[0.04] bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_70%)]" />
-        <div className="absolute top-1/2 -right-40 w-[600px] h-[600px] blur-[170px] opacity-[0.05] bg-[radial-gradient(circle,rgba(148,210,255,0.15)_0%,transparent_70%)]" />
+        <Parallax speed={54} className="absolute top-1/3 -left-28 w-[720px] h-[720px] blur-[170px] opacity-[0.04] bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_70%)]" />
+        <Parallax speed={34} className="absolute top-1/2 -right-40 w-[600px] h-[600px] blur-[170px] opacity-[0.05] bg-[radial-gradient(circle,rgba(244,245,239,0.12)_0%,transparent_70%)]" />
         {/* Premium night beams over the stacking cards */}
         <PremiumNightBackdrop side="right" mood="calm" />
       </div>
@@ -158,7 +159,7 @@ export function ProjectsSection() {
         {/* Section heading. The caption is held on the left with the title, not
             floated to the far right of the row. */}
         <div className="flex flex-col gap-6 mb-14 sm:mb-16">
-          <FadeIn y={20} delay={0.1} duration={0.8}>
+          <FadeIn y={20} delay={0.1} duration={0.8} depth={6}>
             <div className="flex items-center gap-2.5 eyebrow">
               <span className="h-[5px] w-[5px] rounded-full bg-[#C5AA7A] animate-pulse" />
               // Production systems and products
@@ -245,6 +246,7 @@ function ProjectCard({
   onOpenModal: (src: string, title: string) => void;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
   const { scrollYProgress } = useScroll({
     target: cardRef,
     offset: ["start start", "end start"],
@@ -382,13 +384,23 @@ function ProjectCard({
             </div>
           </div>
 
-          {/* Right column: the interface itself */}
-          <div className="lg:col-span-5 relative w-full flex flex-col items-center justify-center space-y-3">
+          {/* Right column: the interface itself. Fine pointers get a slow 3D tilt, max 5deg. Touch stays flat. */}
+          <div className="lg:col-span-5 relative w-full flex flex-col items-center justify-center space-y-3" style={{ perspective: 1000 }}>
             <button
               type="button"
               onClick={() => onOpenModal(project.bannerImg, project.name)}
+              onPointerMove={(e) => {
+                if (e.pointerType !== "mouse") return;
+                if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+                const r = e.currentTarget.getBoundingClientRect();
+                const px = (e.clientX - r.left) / r.width - 0.5;
+                const py = (e.clientY - r.top) / r.height - 0.5;
+                setTilt({ rx: -py * 5, ry: px * 5 });
+              }}
+              onPointerLeave={() => setTilt({ rx: 0, ry: 0 })}
               aria-label={`View full interface, ${project.name}`}
-              className="relative w-full max-w-[380px] sm:max-w-[420px] aspect-[3/4] overflow-hidden border border-[rgba(244,245,239,0.12)] hover:border-[rgba(217,255,0,0.45)] bg-white/[0.015] backdrop-blur-[6px] rounded-[14px] group/img cursor-zoom-in p-3.5 flex items-center justify-center transition-all duration-400 hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+              className="relative w-full max-w-[380px] sm:max-w-[420px] aspect-[3/4] overflow-hidden border border-[rgba(244,245,239,0.12)] hover:border-[rgba(217,255,0,0.45)] bg-white/[0.015] backdrop-blur-[6px] rounded-[14px] group/img cursor-zoom-in p-3.5 flex items-center justify-center transition-[border-color,box-shadow] duration-500 hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)] will-change-transform"
+              style={{ transform: `rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`, transition: "transform 0.5s cubic-bezier(0.165,0.84,0.44,1)" }}
             >
               <div className="relative w-full h-full">
                 <Image
@@ -396,7 +408,7 @@ function ProjectCard({
                   alt={project.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-contain object-center"
+                  className="object-contain object-center transition-transform duration-700 ease-[cubic-bezier(0.165,0.84,0.44,1)] group-hover/img:scale-[1.03]"
                   priority
                 />
               </div>
