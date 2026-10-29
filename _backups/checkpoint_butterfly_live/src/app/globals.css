@@ -1,0 +1,834 @@
+@import "tailwindcss";
+/* threeui.css was imported here. It held 122 class rules (42KB) styling lab
+   pages that no longer exist, plus a @font-face for "ThreeUI Fragment Mono"
+   that only threeui.css itself consumed. Every selector was class-scoped and
+   none of the 122 appeared anywhere in src, so the import was pure weight. */
+
+/* ═══════════════════════════════════════════════════════════════
+   FONTS
+   Warpaint   → hero wordmark (signature display face)
+   Allerta    → stencil accents used in dossier seals
+   Geist      → UI / body / navigation  (SF-Pro-grade neo-grotesque)
+   Geist Mono → eyebrows, tags, technical metadata
+   Outfit     → section display headings (tight negative tracking)
+   ═══════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: "Warpaint";
+  src: url("/fonts/Warpaint.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Allerta Stencil";
+  src: url("/fonts/AllertaStencil-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — "Obsidian & Lemon Liquid Glass"
+   60 / 30 / 10 discipline. One hue family for accents, five colours total.
+
+   60%  FOUNDATION   obsidian black, smoked green-black, never pure black
+   30%  SURFACES     raised glass plate, cut not rounded
+   10%  ACCENT       lemon, the only chroma on the page
+
+   Ground obsidian against lemon light is a unified palette, which gives
+   a cohesive liquid-glass luxury feel. Lemon sits on obsidian ground
+   with refined glass surfaces. Surfaces separate by hairline, never by
+   shadow, so the near 1.08:1 fill ratio stays intentional.
+   ═══════════════════════════════════════════════════════════════ */
+
+@theme {
+  --font-stencil: "Allerta Stencil", sans-serif;
+
+  /* ── 60% FOUNDATION ─────────────────────────────────────────── */
+  --color-bg-primary:   #070807;
+  --color-bg-secondary: #0B0D0A;
+  --color-bg-deep:      #060607;
+  --color-bg-warm:      #10130F;
+
+  /* ── 30% SURFACES (raised glass plate) ───────────────────── */
+  --color-surface:           rgba(18, 22, 17, 0.72);
+  --color-surface-elevated:  rgba(22, 27, 20, 0.82);
+  --color-surface-high:      rgba(26, 30, 23, 0.88);
+  --color-surface-document:  #070807;
+  --color-surface-subtle:    rgba(244, 245, 239, 0.045);
+
+  /* Hairline structure — cut edges, never glowy */
+  --color-border-hairline: rgba(244, 245, 239, 0.13);
+  --color-border-subtle:   rgba(244, 245, 239, 0.075);
+  --color-border-default:  rgba(244, 245, 239, 0.11);
+  --color-border-strong:   rgba(244, 245, 239, 0.24);
+  --color-border-accent:   rgba(244, 245, 239, 0.3);
+
+  /* ── TEXT (bone, no pure white, no slate blue) ───────────────── */
+  --color-text-primary:   #F4F5EF;
+  --color-text-secondary: #B6B9B0;
+  --color-text-muted:     #7D8178;
+  --color-text-dim:       #6A6A66;
+  --color-text-faint:     #43433F;
+
+  /* ── 10% ACCENT (one hue, lightness varied) ─────────────────── */
+  --color-accent-lemon:     #D9FF00;
+  --color-accent-lemon-hi:  #E8FF45;
+  --color-accent-lemon-deep:#A8C900;
+  --color-accent-lemon-dim: #566000;
+  /* Darker member of the same hue, for use on deep black surfaces. */
+  --color-accent-ink:       #262B00;
+
+  /* Legacy-compatible aliases, all resolved to the lemon family */
+  --color-accent:        #D9FF00;
+  --color-accent-hi:     #E8FF45;
+  --color-accent-deep:   #A8C900;
+  --color-accent-dim:    #566000;
+  --color-accent-glow:   rgba(217, 255, 0, 0.22);
+  --color-accent-amber:  #D9FF00;
+
+  /* Fonts */
+  --font-sans:    var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body:    var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: var(--font-outfit), "Geist", sans-serif;
+  --font-heading: var(--font-outfit), "Geist", sans-serif;
+  --font-mono:    var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+  --font-warpaint: "Warpaint", "Allerta Stencil", sans-serif;
+}
+
+:root {
+  /* ── 60% Foundation ────────────────────────────── */
+  --bg-primary:   #070807;
+  --bg-secondary: #0B0D0A;
+  --bg-deep:      #060607;
+  --bg-warm:      #10130F;
+
+  /* ── 30% Surfaces ───────────────────────────────── */
+  --surface:          rgba(18, 22, 17, 0.72);
+  --surface-elevated: rgba(22, 27, 20, 0.82);
+  --surface-high:     rgba(26, 30, 23, 0.88);
+  --surface-document: #070807;
+  --surface-subtle:   rgba(244, 245, 239, 0.045);
+
+  /* ── Hairline structure ─────────────────────────── */
+  --border-hairline: rgba(244, 245, 239, 0.13);
+  --border-subtle:   rgba(244, 245, 239, 0.075);
+  --border-default:  rgba(244, 245, 239, 0.11);
+  --border-strong:   rgba(244, 245, 239, 0.24);
+  --border-accent:   rgba(244, 245, 239, 0.42);
+
+  /* ── Typography ─────────────────────────────────── */
+  --text-primary:   #F4F5EF;
+  --text-secondary: #B6B9B0;
+  --text-muted:     #7D8178;
+  --text-dim:       #6A6A66;
+  --text-faint:     #43433F;
+
+  /* ── Accent: one hue, five lightness stops ───────── */
+  --accent:         #D9FF00;
+  --accent-hi:      #E8FF45;
+  --accent-deep:    #A8C900;
+  --accent-dim:     #566000;
+  --accent-ink:     #262B00;
+  --accent-glow:    rgba(244, 245, 239, 0.35);
+
+  /* ── Plasma rim — ice is light only, never surfaces or text.
+     Keeps the lemon identity intact while giving the Apple-plasma
+     edge: a bone rim opposite the deep key. */
+  --plasma-ice:      rgba(244, 245, 239, 0.10);
+  --plasma-ice-hi:   rgba(244, 245, 239, 0.16);
+
+  /* ── Shiny black liquid crystal glass ───────────────────
+     A glossy transparent panes of black glass, not a flat tint:
+     a deep diffusing blur so what passes behind melts into the
+     sheet, a saturate lift, a bright lit top edge, and a 1px
+     inner rim that catches light the way a polished black sheet
+     does. Transparency is deliberately high and the tint is true
+     black, so the pane reads as clear shiny glass over the
+     obsidian field. Depth comes from what passes behind the
+     sheet, never from a drop shadow. */
+  --glass-tint:        rgba(7, 9, 7, 0.42);
+  --glass-tint-strong: rgba(7, 9, 7, 0.66);
+  --glass-blur:        32px;
+  --glass-sat:         1.75;
+  --glass-line:        rgba(244, 245, 239, 0.16);
+  --glass-line-strong: rgba(244, 245, 239, 0.26);
+  --glass-specular:    linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.40) 0%,
+    rgba(255, 255, 255, 0.28) 1px,
+    rgba(244, 245, 239, 0.10) 14%,
+    rgba(244, 245, 239, 0.03) 34%,
+    transparent 58%
+  );
+  /* Inner rim: bright along the top and upper corners, falling off
+     down the sides, faint lift along the bottom edge. This is the
+     light the sheet catches, drawn inside the sheet. */
+  --glass-rim: inset 0 1px 0 rgba(255, 255, 255, 0.30),
+               inset 1px 0 0 rgba(244, 245, 239, 0.12),
+               inset -1px 0 0 rgba(244, 245, 239, 0.12),
+               inset 0 -1px 0 rgba(244, 245, 239, 0.09);
+
+  /* ── Frost tier — feature panels only (hero stage, project cards).
+     Shiny black glass: a more transparent tint and a deeper 54px
+     blur so the field behind goes fully liquid, over a strong top
+     specular. Frost is invisible over flat black, so it always
+     ships with ambient washes behind it — glass needs something to
+     refract. */
+  --glass-frost-tint: rgba(9, 10, 12, 0.40);
+  --glass-frost-blur: 54px;
+  --glass-frost-sat:  1.85;
+  --glass-frost-spec: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.48) 0%,
+    rgba(255, 255, 255, 0.30) 1px,
+    rgba(244, 245, 239, 0.12) 18%,
+    rgba(244, 245, 239, 0.04) 42%,
+    transparent 62%
+  );
+  --glass-frost-rim: inset 0 1px 0 rgba(255, 255, 255, 0.34),
+                     inset 1px 0 0 rgba(244, 245, 239, 0.13),
+                     inset -1px 0 0 rgba(244, 245, 239, 0.13),
+                     inset 0 -1px 0 rgba(244, 245, 239, 0.10);
+
+  /* Dynamic font hooks — section headers ride Cabinet Grotesk (the simple
+     luxury grotesk), sub-heads stay on Geist. */
+  --font-header-dynamic: var(--font-cabinet), "Cabinet Grotesk", sans-serif;
+  --font-subheader-dynamic: var(--font-geist-sans), sans-serif;
+
+  /* Motion language — one shared easing curve, slow and expensive */
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-glide: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  color-scheme: dark;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: clip;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SCROLL
+   Native wheel scrolling is left alone on purpose. Intercepting
+   wheel events to synthesise momentum makes the page feel heavier
+   than the browser already does and breaks trackpad precision,
+   which is the opposite of luxurious. What is fixed here is the
+   thing the browser owns badly: anchor travel. Long jumps are
+   eased over a real duration with a deceleration curve, so
+   arriving at a section settles rather than stopping dead.
+   ───────────────────────────────────────────────────────────── */
+
+html {
+  scroll-padding-top: 6rem;
+  scroll-behavior: smooth;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TYPE UTILITIES
+   ───────────────────────────────────────────────────────────── */
+
+.font-header-dynamic {
+  font-family: var(--font-header-dynamic) !important;
+}
+
+.font-subheader-dynamic {
+  font-family: var(--font-subheader-dynamic) !important;
+}
+
+/* Editorial section heading — Cabinet Grotesk Medium: simple luxury, sentence
+   case, tight tracking, no shouting. The face carries the weight, not bold. */
+.stylish-header {
+  font-family: var(--font-header-dynamic, var(--font-cabinet), sans-serif);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  text-transform: none;
+}
+
+.stylish-sub {
+  font-family: var(--font-subheader-dynamic, var(--font-geist-sans), sans-serif);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.65;
+}
+
+/* Small technical eyebrow — mono, wide, dim, uppercase — Option 5: Warm Brass Ochre */
+.eyebrow {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #C5AA7A;
+}
+
+::selection {
+  background-color: rgba(244, 245, 239, 0.30);
+  color: #070807;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SURFACE UTILITIES
+   Cut plate, not soft pillow. Depth via layering, never drop shadow.
+   ───────────────────────────────────────────────────────────── */
+
+.plate {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border-hairline);
+}
+
+.plate-elevated {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-hairline);
+}
+
+/* ── Crystal glass — super liquid crystal ───────────────
+   A liquid pane: deep 26px diffusion so the field behind it
+   turns milky, a 1.6 saturate lift, a lit top edge, and an
+   inner rim that catches light along all four sides. Depth
+   comes from what passes behind the sheet, never from a drop
+   shadow. Border and radius stay on the component's own
+   utilities so `.edge-lit` plates can keep their engraved
+   line instead of a specular sheet. */
+.glass,
+.glass-strong,
+.glass-bar {
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  box-shadow: var(--glass-rim);
+}
+.glass        { background-color: var(--glass-tint); }
+.glass-strong { background-color: var(--glass-tint-strong); }
+.glass-bar    { background-color: var(--glass-tint); }
+
+.glass::before,
+.glass-strong::before,
+.glass-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--glass-specular);
+  pointer-events: none;
+}
+
+/* Fine engraved top light-line — replaces the glassmorphic inset glow */
+.edge-lit {
+  position: relative;
+}
+.edge-lit::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(244, 245, 239, 0.22) 22%,
+    rgba(244, 245, 239, 0.22) 78%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* ── Frost tier — feature panels only ───────────────
+   A shiny black liquid slab: transparent sheet with 54px
+   diffusion, saturate lift, strong top specular, and a lit
+   inner rim. Crisp `.glass` stays for chips, bars, and machined
+   details; frost is reserved for the hero stage and project
+   cards. Never over flat black — ambient washes must sit behind
+   it, or there is nothing to refract. */
+.glass-frost {
+  background-color: var(--glass-frost-tint);
+  -webkit-backdrop-filter: blur(var(--glass-frost-blur)) saturate(var(--glass-frost-sat));
+  backdrop-filter: blur(var(--glass-frost-blur)) saturate(var(--glass-frost-sat));
+  box-shadow: var(--glass-frost-rim);
+}
+
+.glass-frost::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--glass-frost-spec);
+  pointer-events: none;
+}
+
+/* Soft ambient float — the one exception to the no-shadow rule,
+   feature panels only. Settles the sheet instead of lifting it:
+   no hard offset, no sharp edge, just depth. Carries the frost
+   rim as well, since the outer shadow replaces the inset one. */
+.float-soft {
+  box-shadow: var(--glass-frost-rim),
+    0 30px 90px rgba(0, 0, 0, 0.5), 0 6px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* Vertical hairline rule used between inline metadata */
+.rule-dot::before {
+  content: "·";
+  margin-inline: 0.75em;
+  color: var(--text-faint);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SPOTLIGHT CURSOR — a light pool that follows the pointer
+   Purely additive, never intercepts input.
+   ───────────────────────────────────────────────────────────── */
+
+.spotlight-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  contain: strict;
+}
+
+.spotlight-pool {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 340px;
+  height: 340px;
+  margin: -170px 0 0 -170px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle closest-side,
+    rgba(244, 245, 239, 0.085) 0%,
+    rgba(244, 245, 239, 0.048) 34%,
+    rgba(244, 245, 239, 0.020) 60%,
+    transparent 78%
+  );
+  opacity: 0;
+  transition: opacity 520ms var(--ease-glide);
+  will-change: transform;
+}
+
+.spotlight-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  border-radius: 50%;
+  border: 1px solid rgba(244, 245, 239, 0.30);
+  box-shadow: 0 0 22px rgba(244, 245, 239, 0.10);
+  opacity: 0;
+  transition: opacity 420ms var(--ease-glide), width 380ms var(--ease-settle),
+    height 380ms var(--ease-settle), margin 380ms var(--ease-settle);
+  will-change: transform;
+}
+
+.spotlight-layer[data-active="true"] .spotlight-pool,
+.spotlight-layer[data-active="true"] .spotlight-ring {
+  opacity: 1;
+}
+
+/* Pointer over an interactive element: ring dilates into a soft halo */
+.spotlight-layer[data-hover="true"] .spotlight-ring {
+  width: 92px;
+  height: 92px;
+  margin: -46px 0 0 -46px;
+  border-color: rgba(244, 245, 239, 0.48);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   HERO WORDMARK — MASTAN VALI
+   One colour. The wordmark is a single vivid lemon ramp with depth
+   inside that one hue, so the letterform keeps its dimension without
+   ever reading as multi-coloured. No bone sheen, no white stop.
+   The grunge mask is light on purpose: sparse pits, every letter whole.
+   Glyphs carry a 1.07 horizontal widening (applied in the animation
+   tick) so caps read broad and settled rather than stretched tall.
+   ───────────────────────────────────────────────────────────── */
+
+.threeui-intro-wordmark {
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  line-height: 0.9;
+  /* 0.10em keeps the stencil caps free of each other now that every glyph
+     carries a 1.07 horizontal widening. At 0.06em the Warpaint letterforms
+     sat edge-to-edge and read glued together. */
+  letter-spacing: 0.10em;
+}
+
+.threeui-intro-line {
+  display: inline;
+  position: relative;
+}
+
+.threeui-intro-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* The ink is built from two clipped layers. Layer one paints the light
+   wear streaks (additive, never cuts ink); layer two is the vivid lemon
+   ramp with depth. Both are background-clipped to the glyph so colour
+   only ever lives where there is ink. `--sx` walks the plate horizontally
+   per letter, so the same worn plate slides behind the wordmark instead
+   of repeating identically inside every glyph. The ramp is lemon only:
+   no bone sheen, no white stop, so the name reads as one lemon hue. */
+.threeui-intro-letter,
+.threeui-intro-char {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity, filter;
+  background-image: var(--scratch-layer),
+    linear-gradient(
+      178deg,
+      #E8FF45 0%,
+      #D9FF00 30%,
+      #D9FF00 58%,
+      #A8C900 82%,
+      #8AA500 100%
+    );
+  /* The tile is measured in em so it tracks the type at every breakpoint:
+     at 96px it renders the tile at its authored 173px width. */
+  background-size: 1.8em 0.9em, auto;
+  background-position: var(--sx, 0) 0, 0 0;
+  background-repeat: repeat, no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #D9FF00;
+  /* Subtractive grunge: fractal-noise pits knock ink out, so the
+     distress reads like the reference (dark pits in the letterform)
+     instead of faint light streaks. Tile is white with black holes in
+     BOTH luminance and alpha, so it cuts under either mask-mode.
+     stitchTiles keeps the repeat seamless; --sx walks it per letter. */
+  -webkit-mask-image: var(--grunge-mask);
+  mask-image: var(--grunge-mask);
+  -webkit-mask-size: 1.8em 0.9em;
+  mask-size: 1.8em 0.9em;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  -webkit-mask-position: var(--sx, 0) 0;
+  mask-position: var(--sx, 0) 0;
+}
+
+/* Light wear streaks, additive — not a cut mask.
+
+   The previous approach masked the wordmark with an SVG tile. The mask was
+   inert (mask-mode falls back to alpha for images, and the tile was fully
+   opaque, so nothing was ever cut — verified by pixel diff) and, where such
+   a mask would have worked, a full-width cut would have removed bands from
+   the letters. Scratches must be seen and the letters must stay whole, so
+   the scratch is now painted ABOVE the ink as light wear: a nearly-bone
+   streak clipped to the glyphs. Ink removal stays 0%; the letter is
+   never damaged.
+
+   The tile is sized to the type (1.8em x 0.9em above) and repeats on a
+   prime-ish 173px so nicks never line up into a visible grid. Every glyph
+   stays whole: the longest nick is under a tenth of the narrowest letter. */
+.scratch-face {
+  /* Fine small scratches (original small scratch scale, no big patches), balanced 50% clean space / 50% scratches */
+  --scratch-tile: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20173%2086%22%3E%3Cg%20stroke%3D%22%23E8FF45%22%20stroke-opacity%3D%220.50%22%20stroke-linecap%3D%22round%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M14%2018%20L24%2022%22%20stroke-width%3D%221.2%22%2F%3E%3Cpath%20d%3D%22M55%209%20L62%2016%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M100%2028%20L112%2032%22%20stroke-width%3D%221.3%22%2F%3E%3Cpath%20d%3D%22M138%2012%20L146%2018%22%20stroke-width%3D%221.0%22%2F%3E%3Cpath%20d%3D%22M28%2052%20L36%2047%22%20stroke-width%3D%221.2%22%2F%3E%3Cpath%20d%3D%22M70%2040%20L78%2044%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M118%2062%20L128%2066%22%20stroke-width%3D%221.3%22%2F%3E%3Cpath%20d%3D%22M150%2070%20L158%2064%22%20stroke-width%3D%221.0%22%2F%3E%3Cpath%20d%3D%22M44%2076%20L52%2070%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M92%2054%20L97%2061%22%20stroke-width%3D%221.0%22%2F%3E%3Cpath%20d%3D%22M160%2034%20L166%2040%22%20stroke-width%3D%221.1%22%2F%3E%3Cpath%20d%3D%22M8%2062%20L15%2058%22%20stroke-width%3D%221.0%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  --scratch-layer: var(--scratch-tile);
+  /* High-frequency fine scratch noise (baseFrequency 0.48) with calibrated 50% clean space / 50% distress threshold */
+  --grunge-tile: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22180%22%20height%3D%2290%22%3E%3Cfilter%20id%3D%22gr%22%20x%3D%220%22%20y%3D%220%22%20width%3D%22100%25%22%20height%3D%22100%25%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.48%22%20numOctaves%3D%224%22%20seed%3D%2211%22%20stitchTiles%3D%22stitch%22%20result%3D%22n%22%2F%3E%3CfeColorMatrix%20in%3D%22n%22%20type%3D%22matrix%22%20values%3D%223.2%203.2%203.2%200%20-3.35%203.2%203.2%203.2%200%20-3.35%203.2%203.2%203.2%200%20-3.35%203.2%203.2%203.2%200%20-3.35%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22180%22%20height%3D%2290%22%20filter%3D%22url(%23gr)%22%2F%3E%3C%2Fsvg%3E");
+  --grunge-mask: var(--grunge-tile);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   NAV DOCK HOVER — bounce into lemon
+   On hover the label bounces once (rise, overshoot, settle) and lands
+   in lemon yellow. The bounce lives on the inner text span because the
+   physics loop owns the anchor's own transform. The loop keeps writing
+   the white to lemon colour ramp inline; this rule only adds motion.
+   ───────────────────────────────────────────────────────────── */
+
+@keyframes dock-bounce {
+  0%   { transform: translateY(0); }
+  35%  { transform: translateY(-4px); }
+  62%  { transform: translateY(1.5px); }
+  100% { transform: translateY(0); }
+}
+
+.dock-link:hover .dock-text {
+  animation: dock-bounce 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SHEET FOLD — the resume turns like a real leaf
+   The wrapper folds away around the vertical axis and back while the
+   sheet swaps underneath it, so pagination reads as turning a page
+   rather than reloading a frame. Runs once per click, 0.8s.
+   ───────────────────────────────────────────────────────────── */
+
+@keyframes sheet-fold {
+  0%   { transform: perspective(1400px) rotateY(0deg); }
+  45%  { transform: perspective(1400px) rotateY(-58deg); }
+  100% { transform: perspective(1400px) rotateY(0deg); }
+}
+
+.sheet-folding {
+  animation: sheet-fold 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  will-change: transform;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SCROLL CUE
+   A hairline that fills downward and carries one slow light body.
+   Both run on the same 3.4s cycle and both respect reduced motion
+   through the media query at the foot of this file.
+   ───────────────────────────────────────────────────────────── */
+
+@keyframes cue-fill {
+  0%   { transform: scaleY(0); }
+  55%  { transform: scaleY(1); }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+@keyframes cue-travel {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  12%  { opacity: 1; }
+  55%  { transform: translateY(520%); opacity: 1; }
+  72%  { opacity: 0; }
+  100% { transform: translateY(520%); opacity: 0; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   ACCESSIBILITY
+   ───────────────────────────────────────────────────────────── */
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(244, 245, 239, 0.85);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Liquid field drift: three ambient pools breathe very slowly so the
+     background reads as liquid rather than as a painted gradient. Transform
+     only — the blur rasterizes once and the layer simply moves. The global
+     reduced-motion rule below freezes these to their first frame. ── */
+@keyframes liquid-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3.5%, -2.5%, 0) scale(1.05);
+  }
+}
+
+/* HERO PANE — one slow studio light crossing the sheet
+   Wide, soft, alpha never above 0.055: light catching glass, not sparkle.
+   Holds off-stage between passes; reduced motion freezes to the first
+   frame via the global rule below. */
+
+@keyframes pane-sweep {
+  0%   { transform: translateX(-130%); }
+  34%  { transform: translateX(530%); }
+  100% { transform: translateX(530%); }
+}
+
+.pane-sweep {
+  animation: pane-sweep 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+/* HERO scroll cue — horizontal twin of the ScrollCue rule: a fill wiping
+   left to right while one light body rides ahead of it. */
+
+@keyframes cue-hfill {
+  0%   { transform: scaleX(0); opacity: 1; }
+  55%  { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
+@keyframes cue-htravel {
+  0%   { transform: translateX(-100%); opacity: 0; }
+  12%  { opacity: 1; }
+  55%  { transform: translateX(430%); opacity: 1; }
+  72%  { opacity: 0; }
+  100% { transform: translateX(430%); opacity: 0; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   WATER RIPPLE CURSOR — finger-on-water rings
+   Hairline circle expands + fades. Transform + opacity only.
+   Trail = 34px faint bone, click = 56px lemon. No glow, no blur.
+   ───────────────────────────────────────────────────────────── */
+@keyframes cursor-ripple {
+  0%   { transform: translate(-50%, -50%) scale(0.25); opacity: 0.75; }
+  100% { transform: translate(-50%, -50%) scale(1.7); opacity: 0; }
+}
+
+.cursor-ripple {
+  position: fixed;
+  translate: 0 0;
+  margin: 0;
+  border-radius: 9999px;
+  border-width: 1px;
+  border-style: solid;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.25);
+  opacity: 0.75;
+  animation: cursor-ripple 1.05s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+/* ── Editorial plate breathe (kept for reuse) ── */
+@keyframes portrait-breathe {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50%      { transform: scale(1.03) translateY(-7px); }
+}
+
+.portrait-breathe {
+  animation: portrait-breathe 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   LIGHT PORTRAIT — a photograph read as light on obsidian
+   The studio shots are lit on a near-black ground. Crushing the
+   blacks collapses that ground to true black, and `screen` blending
+   then makes it stop existing against the page: the figure resolves
+   out of the dark with a real skin, beard and fabric surface and no
+   cutout rim. The vignette mask dissolves the plate's own edges so
+   the rectangle never shows. Nothing here redraws the face.
+   ───────────────────────────────────────────────────────────── */
+
+/* The matte already removed the plate, so the photograph itself is shown.
+   Only a light grade to seat it in the room, and a slow fade at the hem so
+   the figure dissolves into the ground instead of stopping at a line. */
+.light-portrait-img {
+  filter: contrast(1.06) brightness(1.02) saturate(1.04);
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, rgba(0, 0, 0, 0.55) 88%, rgba(0, 0, 0, 0.12) 97%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 72%, rgba(0, 0, 0, 0.55) 88%, rgba(0, 0, 0, 0.12) 97%, transparent 100%);
+}
+
+/* One studio light crossing the plate per cycle. Masked by the matte in the
+   component, so it only ever falls on skin and cloth, never on the air. */
+.light-portrait-sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+    102deg,
+    transparent 40%,
+    rgba(244, 245, 239, 0.33) 50%,
+    transparent 60%
+  );
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  animation: portrait-sweep 7.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes portrait-sweep {
+  0%   { background-position: 150% 0; }
+  38%  { background-position: -50% 0; }
+  100% { background-position: -50% 0; }
+}
+
+/* Dot-matrix resolve: ground-coloured dots sit over the plate on first
+   paint, then give way to the photograph. Invisible against the field,
+   readable across the figure. */
+.dot-matrix {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #070807 1.15px, transparent 1.25px);
+  background-size: 5px 5px;
+  opacity: 1;
+  transition: opacity 1600ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.dot-matrix--off {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-pulse,
+  .animate-ping,
+  .cursor-ripple,
+  .spotlight-layer {
+    display: none !important;
+    animation: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   LIVING PLATE — the portrait as a photograph that keeps moving
+   A still frame can still be alive. The plate drifts on a slow
+   dolly, sways on its own axis, breathes, and is crossed by one
+   studio light per cycle, while light motes lift in front of it.
+   Every move is transform or opacity only, so the compositor
+   carries all of it. The reduced motion block above stops the lot.
+   ───────────────────────────────────────────────────────────── */
+
+@keyframes plate-drift {
+  0%   { transform: scale(1.03) translate3d(-0.6%, 0.4%, 0); }
+  50%  { transform: scale(1.1) translate3d(1.6%, -1.4%, 0); }
+  100% { transform: scale(1.03) translate3d(-0.6%, 0.4%, 0); }
+}
+
+.plate-drift {
+  animation: plate-drift 26s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: transform;
+}
+
+@keyframes plate-sway {
+  0%, 100% { transform: rotate(-0.6deg); }
+  50%      { transform: rotate(0.6deg); }
+}
+
+.plate-sway {
+  animation: plate-sway 23s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes rim-pulse {
+  0%, 100% { opacity: 0.48; }
+  50%      { opacity: 1; }
+}
+
+.rim-pulse {
+  animation: rim-pulse 9.5s ease-in-out infinite;
+}
+
+@keyframes mote-rise {
+  0%   { transform: translate3d(0, 10px, 0) scale(0.6); opacity: 0; }
+  16%  { opacity: 0.85; }
+  80%  { opacity: 0.45; }
+  100% { transform: translate3d(16px, -72px, 0) scale(1.2); opacity: 0; }
+}
+
+.portrait-mote {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(244, 245, 239, 0.95) 0%,
+    rgba(217, 255, 0, 0.45) 45%,
+    transparent 72%
+  );
+  animation-name: mote-rise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
